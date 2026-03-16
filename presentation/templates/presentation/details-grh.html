@@ -1,0 +1,469 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">Module GRH</h1>
+          <p class="mb-0">
+            Centralisez la gestion de vos ressources humaines dans un espace unique : dossiers du personnel,
+            contrats, affectations, congés, absences, documents RH et suivi des effectifs. Fincompta ERP vous aide
+            à structurer votre organisation et à mieux piloter vos équipes au quotidien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'presentation:accueil' %}">Accueil</a></li>
+        <li><a href="{% url 'presentation:accueil' %}#modules">Modules</a></li>
+        <li class="current">GRH</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<!-- Service Details Section -->
+<section id="service-details" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row">
+
+      <!-- MAIN CONTENT -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="service-content">
+
+          <div class="content-header mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-meta d-flex align-items-center gap-3 mb-3 flex-wrap">
+              <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">FINCOMPTA • GRH</span>
+              <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Entreprise / Association</span>
+              <div class="divider"></div>
+              
+            </div>
+
+            <h1 class="service-title mb-3">Une gestion RH structurée, claire et sécurisée</h1>
+            <p class="service-subtitle">
+              Suivez vos salariés de l’embauche à la sortie, centralisez les informations essentielles,
+              gardez la maîtrise des contrats et des mouvements du personnel, et anticipez les échéances RH
+              grâce à des alertes, tableaux de bord et outils de suivi adaptés à votre structure.
+            </p>
+          </div>
+
+          <!-- Visual / Demo 
+          <div class="visual-showcase mb-5" data-aos="zoom-in" data-aos-delay="200">
+            <div class="image-container position-relative">
+              <img src="assets/img/services/module-grh.webp" alt="Module GRH" class="img-fluid">
+              <div class="image-overlay">
+                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox">
+                  <div class="play-button">
+                    <i class="bi bi-play-fill"></i>
+                  </div>
+                </a>
+                
+              </div>
+            </div>
+          </div>
+          -->
+          
+          <!-- Process / Implementation -->
+          <div class="process-section mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Mise en place du module</h3>
+
+            <div class="process-steps">
+              <div class="step-item" data-aos="fade-right" data-aos-delay="150">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                  <h4 class="step-title">Paramétrage de la structure RH</h4>
+                  <p>
+                    Configuration des services, départements, postes, catégories, sites, types de contrats,
+                    unités organisationnelles et règles internes de gestion du personnel.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="250">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                  <h4 class="step-title">Création des dossiers du personnel</h4>
+                  <p>
+                    Enregistrement des salariés, informations administratives, coordonnées, pièces justificatives,
+                    historique professionnel, affectations et données contractuelles.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="350">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                  <h4 class="step-title">Gestion des événements RH</h4>
+                  <p>
+                    Suivi des embauches, mutations, promotions, renouvellements de contrats, congés, absences,
+                    changements de poste et mouvements internes.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="450">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Suivi, alertes et reporting</h4>
+                  <p>
+                    Tableaux de bord RH, alertes sur les contrats arrivant à échéance, documents à renouveler,
+                    suivi des effectifs et production de listes et états utiles à la gestion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Tabs -->
+          <div class="features-showcase mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Fonctionnalités clés</h3>
+
+            <div class="features-tabs" data-aos="fade-up" data-aos-delay="200">
+              <nav class="nav nav-pills justify-content-center mb-4" role="tablist">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#service-details-personnel" role="tab">
+                  Personnel & Dossiers
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-gestion" role="tab">
+                  Contrats & Gestion RH
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-pilotage" role="tab">
+                  Pilotage & Contrôles
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <!-- TAB 1 -->
+                <div class="tab-pane fade show active" id="service-details-personnel" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-people"></i>
+                        </div>
+                        <h5>Dossiers du personnel</h5>
+                        <p>Centralisez toutes les informations utiles de chaque salarié dans une fiche claire, complète et facile à mettre à jour.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-folder2-open"></i>
+                        </div>
+                        <h5>Documents RH</h5>
+                        <p>Archivez contrats, pièces administratives, CV, attestations, diplômes et autres documents dans un espace organisé.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h5>Affectations & organisation</h5>
+                        <p>Rattachez chaque collaborateur à un service, un site, une équipe, une fonction ou une structure précise.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-file-earmark-arrow-up"></i>
+                        </div>
+                        <h5>Imports Excel/CSV</h5>
+                        <p>Importez rapidement vos salariés et certaines données RH pour accélérer le démarrage et limiter les ressaisies.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane fade" id="service-details-gestion" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h5>Gestion des contrats</h5>
+                        <p>Suivez les dates d’embauche, périodes d’essai, échéances, renouvellements, types de contrats et historiques contractuels.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <h5>Congés & absences</h5>
+                        <p>Enregistrez congés, permissions, absences et indisponibilités pour une vision claire de la situation du personnel.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-arrow-left-right"></i>
+                        </div>
+                        <h5>Mouvements du personnel</h5>
+                        <p>Gérez les promotions, mutations, changements de poste, affectations et sorties du personnel avec historique.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-person-badge"></i>
+                        </div>
+                        <h5>Postes, fonctions & catégories</h5>
+                        <p>Structurez votre organisation autour des emplois, fonctions, catégories et niveaux utiles à la gestion RH.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 3 -->
+                <div class="tab-pane fade" id="service-details-pilotage" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bell"></i>
+                        </div>
+                        <h5>Alertes & échéances</h5>
+                        <p>Anticipez les fins de contrat, documents expirants, périodes d’essai et autres échéances importantes.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h5>Tableaux de bord RH</h5>
+                        <p>Suivez vos effectifs, entrées, sorties, répartition par service, contrats et principaux indicateurs RH.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5>Droits d’accès & traçabilité</h5>
+                        <p>Contrôlez les accès selon les rôles et conservez l’historique des opérations sensibles sur les données RH.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-filetype-pdf"></i>
+                        </div>
+                        <h5>Exports & états RH</h5>
+                        <p>Exportez vos listes, synthèses et états RH en PDF ou Excel pour archivage, partage ou suivi administratif.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div><!-- /tab-content -->
+            </div><!-- /features-tabs -->
+          </div>
+
+          <!-- Client success / testimonial 
+          <div class="client-success mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="success-card">
+              <div class="success-header d-flex align-items-center mb-4">
+                <img src="assets/img/person/person-w-2.webp" alt="Client" class="client-avatar">
+                <div class="client-info ms-3">
+                  <h5 class="client-name mb-1">Nadia B.</h5>
+                  <span class="client-role">Responsable RH • PME</span>
+                </div>
+                <div class="ms-auto">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <blockquote class="success-quote mb-4">
+                "Avec Fincompta ERP, nous avons enfin une vision claire de nos dossiers salariés, de nos contrats
+                et des échéances RH. Les alertes et les tableaux de bord nous permettent de mieux anticiper."
+              </blockquote>
+
+              <div class="success-metrics row text-center">
+                <div class="col-4">
+                  <div class="metric-value">-50%</div>
+                  <div class="metric-label">Temps administratif</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">100%</div>
+                  <div class="metric-label">Dossiers centralisés</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">+Clair</div>
+                  <div class="metric-label">Pilotage RH</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div><!-- /service-content -->
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar" data-aos="fade-left" data-aos-delay="200">
+          <!--
+          <div class="service-card mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Aperçu du module</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="overview-list">
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Déploiement</span>
+                  </div>
+                  <span class="item-value">1 à 3 semaines</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>Inclus</span>
+                  </div>
+                  <span class="item-value">Selon votre abonnement</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-diagram-2"></i>
+                    <span>Périmètre</span>
+                  </div>
+                  <span class="item-value">Personnel • Contrats • Congés</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-lock"></i>
+                    <span>Sécurité</span>
+                  </div>
+                  <span class="item-value">Rôles + traçabilité</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-headset"></i>
+                    <span>Support</span>
+                  </div>
+                  <span class="item-value">Accompagnement + FAQ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="contact-card">
+            <div class="card-header">
+              {% if messages %}
+                <div class="mb-3">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}  
+                  <h4 class="card-title">Demander une démo gratuite chez vous</h4>
+                  <p class="card-subtitle">Expliquez votre besoin RH, votre effectif et vos priorités de gestion.</p>
+              {% endif %}
+
+              </div>
+
+            <div class="card-body">
+              <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" name="name" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="votre.email@exemple.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-telephone input-icon"></i>
+                    <input type="tel" name="phone" placeholder="+225 XX XX XX XX XX">
+                  </div>
+                </div>
+
+                <input type="hidden" name="subject" value="Demande Démo - Module GRH">
+
+                <div class="form-group mb-4">
+                  <textarea name="message" rows="4" placeholder="Décrivez : nombre de salariés, types de contrats, organisation par service, congés, absences, documents RH, alertes, états souhaités..." required></textarea>
+                </div>
+
+                <input type="text" name="website" style="display:none">
+                <button type="submit" class="submit-btn w-100">
+                  <span>Envoyer la demande</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /row -->
+
+    <!-- ACTION BUTTONS 
+    <div class="action-section text-center mt-5 pt-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="action-buttons d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#service-details" class="action-btn primary">
+          <i class="bi bi-play-circle"></i>
+          <span>Voir la démo</span>
+        </a>
+        <a href="portfolio-grh.html" class="action-btn secondary">
+          <i class="bi bi-images"></i>
+          <span>Voir les captures</span>
+        </a>
+        <a href="assets/docs/fiche-module-grh.pdf" class="action-btn secondary">
+          <i class="bi bi-download"></i>
+          <span>Télécharger la fiche</span>
+        </a>
+      </div>
+    </div>
+    -->
+  </div><!-- /container -->
+</section>
+<!-- /Service Details Section -->
+
+{% endblock %}

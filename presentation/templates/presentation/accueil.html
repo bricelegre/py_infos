@@ -1,0 +1,769 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+
+  <div class="hero-background">
+    <img src="{% static 'assets/img/bg/bg-12.webp' %}" alt="Fincompta ERP" data-aos="zoom-out" data-aos-duration="1000">
+    <div class="overlay"></div>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="200">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="hero-content">
+          <span class="hero-badge" data-aos="fade-right" data-aos-delay="300">Fincompta</span>
+
+          <h2 data-aos="fade-right" data-aos-delay="400">
+            L’ERP de gestion qui transforme vos opérations en pilotage
+          </h2>
+
+          <p data-aos="fade-right" data-aos-delay="500">
+            Comptabilité, trésorerie, facturation, CRM, GRH &amp; Paie, états financiers…
+            Fincompta centralise votre gestion, fiabilise vos données et vous donne des indicateurs clairs pour décider.
+          </p>
+
+          <div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
+            <a href="#modules" class="btn-primary">Explorer les modules</a>
+            <a href="#pricing" class="btn-secondary ms-2">Voir les offres</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                <i class="bi bi-shield-check"></i>
+                <span>Sécurisé &amp; fiable</span>
+              </div>
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="700">
+                <i class="bi bi-lightning-charge"></i>
+                <span>Saisie rapide</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                <i class="bi bi-speedometer2"></i>
+                <span>Tableaux de bord</span>
+              </div>
+              <div class="feature-card" data-aos="fade-up" data-aos-delay="800">
+                <i class="bi bi-people"></i>
+                <span>Accompagnement</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<!-- /Hero Section -->
+
+<!-- About Section -->
+<section id="pourquoi-fincompta" class="about section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Pourquoi Fincompta ?</h2>
+    <p>Moins d’Excel dispersés, plus de fiabilité, et un pilotage clair au quotidien.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6 mb-4 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+        <img src="{% static 'assets/img/about/about-21.webp' %}" class="img-fluid rounded shadow" alt="Fincompta - gestion centralisée">
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+        <div class="about-content">
+          <h2 class="mb-3">Une gestion centralisée, orientée décision</h2>
+          <p class="lead mb-3">
+            Fincompta regroupe comptabilité, trésorerie, facturation/CRM et GRH/Paie dans une même solution.
+          </p>
+
+          <div class="mt-3">
+            <div class="d-flex gap-2 align-items-start mb-2">
+              <i class="bi bi-check-circle-fill text-primary"></i>
+              <div><strong>Fiabilisation automatique</strong> : contrôles métiers intégrés (équilibre, cohérence, suppression sécurisée).</div>
+            </div>
+            <div class="d-flex gap-2 align-items-start mb-2">
+              <i class="bi bi-check-circle-fill text-primary"></i>
+              <div><strong>États disponibles</strong> : balances, détails comptes/tiers, compte d’exploitation, analyses.</div>
+            </div>
+            <div class="d-flex gap-2 align-items-start mb-2">
+              <i class="bi bi-check-circle-fill text-primary"></i>
+              <div><strong>Multi-exercices</strong> : comparaisons N, N-1, N-2 pour comprendre l’évolution.</div>
+            </div>
+          </div>
+
+          <a href="#pricing" class="btn btn-primary mt-3">
+            Découvrir les offres
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <article class="about-card h-100">
+          <div class="icon-wrap mb-3"><i class="bi bi-shield-lock"></i></div>
+          <h5 class="mb-2">Sécurité &amp; traçabilité</h5>
+          <p>Accès par rôles, données isolées par client, journalisation des opérations clés.</p>
+        </article>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <article class="about-card h-100">
+          <div class="icon-wrap mb-3"><i class="bi bi-diagram-3"></i></div>
+          <h5 class="mb-2">ERP modulaire</h5>
+          <p>Activez seulement les modules dont vous avez besoin : compta, trésorerie, paie, CRM, facturation, analyses financières.</p>
+        </article>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <article class="about-card h-100">
+          <div class="icon-wrap mb-3"><i class="bi bi-rocket-takeoff"></i></div>
+          <h5 class="mb-2">Mise en route rapide</h5>
+          <p>Pré-Paramétrage Syscohada Revisé/Syscebnl, accompagnement, import possible, et prise en main facile, même pour les non-comptables.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services / Modules Section -->
+<section id="modules" class="services section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Modules</h2>
+    <p>L’essentiel pour gérer, contrôler et piloter votre organisation.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-4">
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-journal-text"></i></div>
+          <h3>Comptabilité</h3>
+          <p>Plan comptable, journaux, écritures, tiers, contrôles et traçabilité pour une comptabilité fiable.</p>
+          <div class="card-links"><a href="{% url 'presentation:details-comptabilite' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-cash-coin"></i></div>
+          <h3>Paie</h3>
+          <p>La gestion de la paie de vos salariés avec prise en charge des salaires de base. Gestion des prèts, des avances, nombre de jours travaillés etc.</p>
+          <div class="card-links"><a href="{% url 'presentation:details_paies' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-receipt"></i></div>
+          <h3>Facturation </h3>
+          <p>Devis, factures, suivi des encaissements et intégration progressive avec la comptabilité.</p>
+          <div class="card-links"><a href="{% url 'presentation:detail_facturation_crm' %}" class="link-item">Decouvrir les points forts<i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-people"></i></div>
+          <h3>CRM</h3>
+          <p>Pipeline, opportunités, activités, relances et historique : une vision claire du commercial.</p>
+          <div class="card-links"><a href="{% url 'presentation:detail_crm' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-person-badge"></i></div>
+          <h3>GRH</h3>
+          <p>Dossiers salariés, contrats, congés, éléments de paie et synthèses par mois / exercice.</p>
+          <div class="card-links"><a href="{% url 'presentation:details_grh' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-item">
+          <div class="icon"><i class="bi bi-graph-up"></i></div>
+          <h3>États &amp; Analyses</h3>
+          <p>Balances, détails comptes/tiers, compte d’exploitation, indicateurs et analyses (FR, BFR, trésorerie nette…).</p>
+          <div class="card-links"><a href="{% url 'presentation:details_etats_financiers' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /Services Section -->
+
+<!-- Features Section (Points forts) -->
+<section id="features" class="features section">
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center">
+      <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
+        <div class="features-intro">
+          <div class="intro-badge"><i class="bi bi-stars"></i><span>Points forts</span></div>
+          <h2>Fiabilité, rapidité, pilotage</h2>            
+          <p>
+            Fincompta est pensé pour les usages réels : saisie simple, contrôles automatiques,
+            états disponibles et décisions plus rapides.
+          </p>
+          <div class="metrics-display">
+            <div class="metric-card">
+              <div class="metric-value"><i class="bi bi-check2"></i></div>
+              <div class="metric-label">Contrôles métiers</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value"><i class="bi bi-calendar2-week"></i></div>
+              <div class="metric-label">Multi-exercices</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-value"><i class="bi bi-file-earmark-pdf"></i></div>
+              <div class="metric-label">Exports &amp; PDF</div>
+            </div>
+          </div>
+
+          <a href="#pricing" class="link-explore">Comparer les offres <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
+        <div class="features-collection">
+
+          <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-header">
+              <div class="feature-icon-wrapper"><i class="bi bi-arrow-left-right"></i></div>
+              <div class="feature-meta">
+                <h3>Équilibre automatique</h3>
+                <span class="feature-tag active">Active</span>
+              </div>
+            </div>
+            <p>Contrôle des écritures : total débit = total crédit, cohérence des pièces et des paramètres.</p>
+          </div>
+
+          <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-header">
+              <div class="feature-icon-wrapper"><i class="bi bi-journals"></i></div>
+              <div class="feature-meta">
+                <h3>États disponibles</h3>
+                <span class="feature-tag active">Active</span>
+              </div>
+            </div>
+            <p>Balance générale, détails compte/tiers, compte d’exploitation et vues par période.</p>
+          </div>
+
+          <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-header">
+              <div class="feature-icon-wrapper"><i class="bi bi-arrow-repeat"></i></div>
+              <div class="feature-meta">
+                <h3>Abonnements / récurrences</h3>
+                <span class="feature-tag active">Active</span>
+              </div>
+            </div>
+            <p>Modèles d’écritures pour les charges récurrentes (loyer, internet, assurance…), gain de temps et fiabilité.</p>
+          </div>
+
+          <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="feature-header">
+              <div class="feature-icon-wrapper"><i class="bi bi-graph-up-arrow"></i></div>
+              <div class="feature-meta">
+                <h3>Pilotage multi-exercices</h3>
+                <span class="feature-tag beta">Advanced</span>
+              </div>
+            </div>
+            <p>Comparaison N / N-1 / N-2 et indicateurs (BFR, FR, trésorerie nette…) pour comprendre l’évolution.</p>
+          </div>
+
+          <div class="feature-item" data-aos="fade-up" data-aos-delay="500">
+            <div class="feature-header">
+              <div class="feature-icon-wrapper"><i class="bi bi-shield-lock"></i></div>
+              <div class="feature-meta">
+                <h3>Multi-clients &amp; permissions</h3>
+                <span class="feature-tag active">Active</span>
+              </div>
+            </div>
+            <p>Chaque organisation possède son espace. Accès contrôlés par utilisateur/permission.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Features Section -->
+
+<!-- Call To Action Section -->
+<section id="call-to-action" class="call-to-action section light-background">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center g-4">
+
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+        <div class="content-wrapper">
+          <div class="section-label">Prêt à démarrer ?</div>
+          <h2>Passez d’une gestion “opérationnelle” à un pilotage clair</h2>
+          <p>
+            Fincompta est idéal si vous voulez : réduire les erreurs, gagner du temps,
+            sortir vos états plus vite et suivre votre trésorerie au quotidien.
+          </p>
+
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <a href="#pricing" class="btn-primary">Choisir une formule</a>
+            <a href="#contact" class="btn-secondary">Demander une démo</a>
+          </div>
+
+          <div class="small text-muted mt-3">
+            Mise en route : paramétrage, import si nécessaire, formation et support.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+        <div class="cta-box">
+          <div class="cta-header">
+            <h3>Ce que vous obtenez</h3>
+            <p>Selon la formule choisie</p>
+          </div>
+
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="bi bi-check2-circle"></i></div>
+              <div class="benefit-content">
+                <h4>Compta &amp; Trésorerie</h4>
+                <p>Saisie rapide, contrôles, soldes et états.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="bi bi-receipt"></i></div>
+              <div class="benefit-content">
+                <h4>Facturation &amp; CRM</h4>
+                <p>Suivi client, pipeline et relances.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="bi bi-person-badge"></i></div>
+              <div class="benefit-content">
+                <h4>GRH &amp; Paie</h4>
+                <p>Contrats, congés, bulletins et synthèses.</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-icon"><i class="bi bi-graph-up"></i></div>
+              <div class="benefit-content">
+                <h4>Analyses &amp; reporting</h4>
+                <p>Comparaisons et indicateurs de gestion.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-area">
+            <a href="#pricing" class="btn-primary">Je m’abonne</a>
+            <a href="#contact" class="btn-secondary">Être rappelé</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /Call To Action Section -->
+
+
+
+<!-- Pricing Section -->
+<section id="pricing" class="pricing section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Offres &amp; Abonnements</h2>
+    <p>Choisissez la formule adaptée à votre structure. Upgrade possible à tout moment.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-4">
+
+       <!-- Association -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
+        <div class="pricing-card featured">
+          <div class="popular-badge">Association/ONG</div>
+          <div class="plan-header">
+            <p class="plan-subtitle">Conforme au Syscebnl</p>
+          </div>
+          <div class="plan-pricing">
+            <p class="billing-info">10 000 Fcfa / Mois</p>
+          </div>
+
+          <div class="plan-features">
+            <ul class="features-list">
+            <ul class="features-list">
+              <li><i class="bi bi-check-circle-fill"></i><span> 10 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span> 200 Salariés </span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
+            </ul>
+              
+            </ul>
+          </div>
+
+          <div class="plan-action">
+            <a href="{% url 'asso:ajouter_asso' %}" class="btn-plan">Je démarre</a>
+            <p class="trial-info">Systeme Syscebnl</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Essentiel -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
+        <div class="pricing-card featured">
+          <div class="popular-badge">Starter</div>
+          <div class="plan-header">
+            <p class="plan-subtitle">Conforme Syscohada Revisé</p>
+          </div>
+
+          <div class="plan-pricing">
+            <p class="billing-info">7 500 Fcfa / Mois</p>
+          </div>
+
+          <div class="plan-features">
+            <ul class="features-list">
+                <li><i class="bi bi-check-circle-fill"></i><span> 2 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span> 20 Salariés </span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
+            </ul>
+          </div>
+
+          <div class="plan-action">
+            <a href="{% url 'clients:ajouter_client' 'Starter' %}" class="btn-plan">Je démarre</a>
+            <p class="trial-info">Idéal pour TPE </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="pricing-card featured">
+          <div class="popular-badge">Premium</div>
+          <div class="plan-header">
+            <p class="plan-subtitle">Conforme Syscohada Revisé</p>
+          </div>
+          <div class="plan-pricing">
+            <p class="billing-info">20 000 Fcfa/ mois</p>
+          </div>
+          
+          <div class="plan-features">
+            <ul class="features-list">
+              <li><i class="bi bi-check-circle-fill"></i><span> 10 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span> 200 Salariés </span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support prioritaire</span></li>
+            </ul>
+          </div>
+
+          <div class="plan-action">
+            <a href="{% url 'clients:ajouter_client' 'Premium' %}" class="btn-plan">Je choisis Premium</a>
+            <p class="trial-info">Idéal PME en croissance</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entreprise -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
+        <div class="pricing-card featured">
+          <div class="popular-badge">Professionnel</div>
+          <div class="plan-header">
+            <p class="plan-subtitle">Pour besoins avancés &amp; accompagnement</p>
+          </div>
+
+          <div class="plan-pricing">
+            <div class="price-wrapper custom">
+              <span class="custom-text">Sur devis</span>
+            </div>
+            <p class="billing-info">Contrat + SLA possible</p>
+          </div>
+
+          <div class="plan-features">
+            <ul class="features-list">
+
+              <li><i class="bi bi-check-circle-fill"></i><span>Multi-Compte</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Crée-modifier-supprimer des comptes</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Formation &amp; accompagnement</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support dédié</span></li>
+            </ul>
+          </div>
+
+          <div class="plan-action">
+            <a href="#contact" class="btn-plan">Parler à un conseiller</a>
+            <p class="trial-info">Grandes structures &amp; multi-sites / Cabinet Comptable / CGA</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pricing-footer" data-aos="fade-up" data-aos-delay="300">
+      <p class="footer-text">
+        Toutes les formules incluent : sécurité, sauvegarde, évolutivité et assistance.
+      </p>
+      <div class="footer-links">
+        <a href="#faq">Voir la FAQ</a>
+        <span class="divider">|</span>
+        <a href="#contact">Contacter l’équipe</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- /Pricing Section -->
+
+
+<!-- Faq Section -->
+<section id="faq" class="faq section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>FAQ</h2>
+    <p>Les réponses aux questions les plus fréquentes.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="faq-wrapper">
+
+          <div class="faq-item faq-active" data-aos="fade-up" data-aos-delay="150">
+            <div class="faq-header">
+              <h4>Fincompta est-il adapté aux associations (SYCEBNL) ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Oui. Fincompta peut être configuré pour une gestion associative (SYCEBNL) avec suivi, états et reporting adaptés.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="faq-header">
+              <h4>Puis-je commencer avec un module puis évoluer ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Oui. L’ERP est modulaire : vous pouvez démarrer (compta/trésorerie) puis activer facturation, CRM, GRH/Paie et analyses.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="faq-header">
+              <h4>Comment se passe la mise en route ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Nous vous accompagnons sur le paramétrage (plan comptable, journaux, tiers), l’import si nécessaire, et la formation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="faq-header">
+              <h4>Mes données sont-elles sécurisées ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Les accès sont gérés par utilisateurs/permissions et les données sont isolées par organisation. Des sauvegardes sont prévues.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="350">
+            <div class="faq-header">
+              <h4>Puis-je résilier ou changer de formule ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Oui. Vous pouvez upgrader/downgrader selon votre besoin. L’équipe vous guide pour un changement sans perte de données.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="faq-header">
+              <h4>Proposez-vous une démo ?</h4>
+              <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
+            </div>
+            <div class="faq-content">
+              <div class="content-inner">
+                <p>Oui. Contactez-nous pour une démonstration orientée sur vos besoins (compta, trésorerie, paie, facturation…).</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- /Faq Section -->
+
+
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Contact</h2>
+    <p>Parlez-nous de votre organisation : nous vous orientons vers la meilleure formule.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-4">
+
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="quick-contact-wrapper">
+
+          <div class="contact-card">
+            <div class="icon-wrapper"><i class="bi bi-telephone"></i></div>
+            <h4>Téléphone</h4>
+            <p class="contact-detail">0708218574</p>
+            <span class="availability">Lun–Ven, 9h–18h</span>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-wrapper"><i class="bi bi-envelope-paper"></i></div>
+            <h4>Email</h4>
+            <p class="contact-detail">infos@erpmfr.net</p>
+            <span class="availability">Réponse sous 24h ouvrées</span>
+          </div>
+
+          <div class="contact-card">
+            <div class="icon-wrapper"><i class="bi bi-pin-map"></i></div>
+            <h4>Adresse</h4>
+            <p class="contact-detail">Deux Plateaux Mobil</p>
+            <span class="availability">Abidjan</span>
+          </div>
+
+          <div class="trust-indicators">
+            <div class="indicator-item">
+              <div class="indicator-icon"><i class="bi bi-shield-check"></i></div>
+              <div class="indicator-text">
+                <strong>Accompagnement</strong>
+                <span>Paramétrage + formation</span>
+              </div>
+            </div>
+            <div class="indicator-item">
+              <div class="indicator-icon"><i class="bi bi-clock-history"></i></div>
+              <div class="indicator-text">
+                <strong>Support</strong>
+                <span>Assistance réactive</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <div class="main-form-container">
+          <div class="form-intro">
+            <div class="intro-badge"><i class="bi bi-stars"></i><span>Démarrer</span></div>
+
+              {% if messages %}
+                <div class="mb-3">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %} 
+                <h4 class="card-title">Demander une démo gratuite / devis </h4>
+                  <p class="card-subtitle">Expliquez votre besoin (entreprise / association) et vos objectifs.</p>
+              {% endif %}
+          </div>
+
+          {# Remplace action par ta vue Django (ex: {% url 'website:contact' %}) #}
+          <form method="post" class="modern-form">
+
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="name" placeholder="Nom complet" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" name="email" placeholder="Email" required>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="phone" placeholder="Téléphone">
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" name="need" required>
+                  <option value="">Votre besoin</option>
+                  <option value="RDV">RDV pour demo</option>
+                  <option value="Formation">Formation à l'application </option>                  
+                  <option value="Appel">Etre Rappeler</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-6">
+                <select class="form-select" name="plan">
+                  <option value="">Formule souhaitée (optionnel)</option>
+                  <option value="Association">Association</option>
+                  <option value="Starter">Starter</option>
+                  <option value="Professionnel">Professionnel</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <select class="form-select" name="org_type">
+                  <option value="">Type d’organisation</option>
+                  <option value="entreprise">Entreprise</option>
+                  <option value="association">Association / ONG</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <textarea class="form-control" name="message" placeholder="Décrivez brièvement votre contexte (taille, activités, priorité…)" rows="6" required></textarea>
+            </div>
+            <input type="hidden" name="subject" value="Fincompta - message fiche contact">
+            <input type="text" name="website" style="display:none">
+            <button type="submit" class="btn-submit mt-3">
+              <span>Envoyer</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+
+            <div class="form-footer-note mt-2">
+              <i class="bi bi-info-circle"></i>
+              <span>Nous répondons généralement sous 24h ouvrées.</span>
+            </div>
+          </form>
+
+          <div class="small text-muted mt-3">
+            <strong>Management &amp; Funding Research</strong> — 0708218574 — infos@erpmfr.net
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /Contact Section -->
+
+{% endblock %}

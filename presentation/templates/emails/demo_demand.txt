@@ -1,0 +1,13 @@
+Bonjour ,
+
+Sujet :  {{ subject }}
+
+Nom : {{ name }}
+Email : {{ email }}
+Téléphone : {{ phone }}
+
+Message :
+{{ message }}
+
+Cordialement,
+L’équipe Fincompta

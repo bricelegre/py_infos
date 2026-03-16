@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Compte créé - Fincompta</title>
+  </head>
+
+  <body style="margin:0; padding:0; background:#f5f7fb; font-family: Arial, Helvetica, sans-serif; color:#1f2937;">
+    <!-- Wrapper -->
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f5f7fb; padding:24px 0;">
+      <tr>
+        <td align="center" style="padding:0 12px;">
+
+          <!-- Container -->
+          <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="width:600px; max-width:600px; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,0.06);">
+            
+            <!-- Header -->
+            <tr>
+              <td style="background:#0b5ed7; padding:18px 24px;">
+                <div style="font-size:18px; font-weight:700; color:#ffffff;">
+                  Fincompta
+                </div>
+                <div style="font-size:13px; color:rgba(255,255,255,0.9); margin-top:4px;">
+                  Création de compte
+                </div>
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="padding:24px;">
+
+                <h1 style="margin:0 0 12px 0; font-size:18px; line-height:1.4; color:#111827;">
+                  Bonjour {{ company_name }},
+                </h1>
+
+                <p style="margin:0 0 16px 0; font-size:14px; line-height:1.6;">
+                  Votre compte a été créé avec succès.
+                </p>
+
+                <!-- Credentials box -->
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px;">
+                  <tr>
+                    <td style="padding:16px;">
+                      <div style="font-size:14px; font-weight:700; margin:0 0 10px 0; color:#111827;">
+                        Vos informations de connexion
+                      </div>
+
+                      <div style="font-size:14px; line-height:1.7;">
+                        <div><strong>Identifiant (pseudo) :</strong> {{ user_pseudo }}</div>
+                        <div><strong>Email :</strong> {{ email }}</div>
+                        <div><strong>Mot de passe :</strong> {{ password }}</div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Button -->
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:20px 0 12px 0;">
+                  <tr>
+                    <td align="left">
+                      <a href="{{ login_url }}"
+                         style="display:inline-block; background:#0b5ed7; color:#ffffff; text-decoration:none; padding:12px 16px; border-radius:10px; font-size:14px; font-weight:700;">
+                        Se connecter à Fincompta
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin:0 0 14px 0; font-size:13px; line-height:1.6; color:#374151;">
+                  Si le bouton ne fonctionne pas, copiez-collez ce lien dans votre navigateur :
+                  <br />
+                  <a href="{{ login_url }}" style="color:#0b5ed7; word-break:break-word;">{{ login_url }}</a>
+                </p>
+
+                <!-- Tip -->
+                <p style="margin:0; font-size:13px; line-height:1.6; color:#6b7280;">
+                  <strong>Conseil :</strong> changez votre mot de passe après la première connexion.
+                </p>
+
+                <hr style="border:none; border-top:1px solid #e5e7eb; margin:20px 0;" />
+
+                <p style="margin:0; font-size:14px; line-height:1.6;">
+                  Cordialement,<br />
+                  <strong>L’équipe Fincompta</strong>
+                </p>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td style="padding:16px 24px; background:#f9fafb; border-top:1px solid #e5e7eb;">
+                <p style="margin:0; font-size:12px; line-height:1.6; color:#6b7280;">
+                  Cet email vous a été envoyé suite à la création de votre compte.
+                  Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer ce message.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+          <!-- /Container -->
+
+        </td>
+      </tr>
+    </table>
+    <!-- /Wrapper -->
+  </body>
+</html>

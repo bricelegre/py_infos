@@ -1,0 +1,130 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Services Section
+--------------------------------------------------------------*/
+.services {
+  .service-item {
+    height: 100%;
+    padding: 2rem;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background-color: var(--accent-color);
+      transition: height 0.3s ease-in-out;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px -5px rgba(0, 0, 0, 0.08);
+
+      &::before {
+        height: 100%;
+      }
+
+      .icon {
+        i {
+          transform: scale(1.1) rotate(5deg);
+          color: var(--accent-color);
+        }
+      }
+
+      .link-item {
+        i {
+          transform: translateX(5px);
+        }
+      }
+    }
+
+    .icon {
+      margin-bottom: 1.5rem;
+
+      i {
+        font-size: 2.5rem;
+        color: color-mix(in srgb, var(--accent-color), transparent 15%);
+        transition: all 0.3s ease-in-out;
+      }
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: var(--heading-color);
+      font-family: var(--heading-font);
+    }
+
+    p {
+      color: color-mix(in srgb, var(--default-color), transparent 25%);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-links {
+      margin-top: auto;
+
+      .link-item {
+        display: inline-flex;
+        align-items: center;
+        color: var(--accent-color);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+
+        i {
+          margin-left: 0.5rem;
+          font-size: 1.1rem;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover {
+          color: color-mix(in srgb, var(--accent-color), transparent 25%);
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 991px) {
+    .card-item {
+      padding: 1.75rem;
+
+      h3 {
+        font-size: 1.35rem;
+      }
+
+      .icon i {
+        font-size: 2.25rem;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .card-item {
+      padding: 1.5rem;
+
+      h3 {
+        font-size: 1.25rem;
+      }
+
+      .icon i {
+        font-size: 2rem;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+  }
+}

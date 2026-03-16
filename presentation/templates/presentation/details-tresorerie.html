@@ -1,0 +1,463 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">Module Trésorerie</h1>
+          <p class="mb-0">
+            Suivez vos comptes banque/caisse en temps réel, sécurisez vos encaissements et décaissements,
+            automatisez le rapprochement bancaire et pilotez votre cashflow (prévisionnel, alertes, tableaux de bord).
+            Connecté au module Comptabilité pour limiter la ressaisie, avec une approche simple, sécurisée et traçable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="modules.html">Modules</a></li>
+        <li class="current">Trésorerie</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<!-- Service Details Section -->
+<section id="service-details" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row">
+      <!-- MAIN CONTENT -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="service-content">
+
+          <div class="content-header mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-meta d-flex align-items-center gap-3 mb-3 flex-wrap">
+              <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">FINCOMPTA • Trésorerie</span>
+              <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Rapprochement • Cashflow • Alertes</span>
+              <div class="divider"></div>
+              <span class="text-muted small">Mise en place : ~1 semaine (selon sources & volume)</span>
+            </div>
+
+            <h1 class="service-title mb-3">Pilotage complet banque / caisse & prévisions de trésorerie</h1>
+            <p class="service-subtitle">
+              Centralisez vos mouvements, suivez vos soldes, pointez vos relevés et anticipez vos besoins de liquidité.
+              Visualisez vos entrées/sorties, votre trésorerie glissante, et sécurisez les validations (workflow) selon les rôles.
+            </p>
+          </div>
+
+          <!-- Visual / Demo -->
+          <div class="visual-showcase mb-5" data-aos="zoom-in" data-aos-delay="200">
+            <div class="image-container position-relative">
+              <img src="assets/img/services/module-tresorerie.webp" alt="Module Trésorerie" class="img-fluid">
+              <div class="image-overlay">
+                <!-- Remplacez le lien YouTube par votre vidéo démo -->
+                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox">
+                  <div class="play-button">
+                    <i class="bi bi-play-fill"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Process / Implementation -->
+          <div class="process-section mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Mise en place du module</h3>
+
+            <div class="process-steps">
+              <div class="step-item" data-aos="fade-right" data-aos-delay="150">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                  <h4 class="step-title">Paramétrage (banques, caisses & règles)</h4>
+                  <p>
+                    Création des comptes de trésorerie (banques, caisses), définition des libellés types,
+                    catégories (encaissement/décaissement), droits par rôle et règles de validation.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="250">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                  <h4 class="step-title">Solde initial & import des relevés</h4>
+                  <p>
+                    Reprise des soldes (départ), import des mouvements (CSV/Excel selon vos formats),
+                    structuration des références et préparation au rapprochement bancaire.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="350">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                  <h4 class="step-title">Rapprochement & suivi quotidien</h4>
+                  <p>
+                    Pointage des opérations, rapprochement (automatique/assisté), gestion des écarts,
+                    suivi des paiements/encaissements, pièces justificatives et traçabilité.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="450">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Comptabilisation automatique</h4>
+                  <p>
+                    Systeme de Comptabilisation automatique des opérations de tresorerie.
+                  </p>
+                </div>
+              </div>
+              <!-- 
+              <div class="step-item" data-aos="fade-right" data-aos-delay="450">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Cashflow, alertes & reporting</h4>
+                  <p>
+                    Prévisions (trésorerie glissante), scénarios, alertes (seuils, retards, anomalies),
+                    tableaux de bord et exports PDF/Excel pour le pilotage et les comités.
+                  </p>
+                </div>
+              </div>
+              -->
+            </div>
+          </div>
+
+          <!-- Features Tabs -->
+          <div class="features-showcase mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Fonctionnalités clés</h3>
+
+            <div class="features-tabs" data-aos="fade-up" data-aos-delay="200">
+              <nav class="nav nav-pills justify-content-center mb-4" role="tablist">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#service-details-banque" role="tab">
+                  Banque & Caisse
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-cashflow" role="tab">
+                  Cashflow & Prévisions
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-integration" role="tab">
+                  Intégrations & Contrôles
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <!-- TAB 1 -->
+                <div class="tab-pane fade show active" id="service-details-banque" role="tabpanel">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bank"></i>
+                        </div>
+                        <h5>Comptes bancaires & caisses</h5>
+                        <p>Multi-comptes, multi-devises si besoin, soldes et historiques, pièces jointes par opération.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-arrow-left-right"></i>
+                        </div>
+                        <h5>Rapprochement bancaire assisté</h5>
+                        <p>Pointage des relevés, rapprochement par montant/date/référence, gestion des écarts.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <h5>Encaissements & décaissements</h5>
+                        <p>Suivi des flux (clients, dons, subventions, fournisseurs, charges), statut & justificatifs.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-file-earmark-arrow-up"></i>
+                        </div>
+                        <h5>Import relevés (Excel/CSV)</h5>
+                        <p>Import des mouvements bancaires et caisses avec contrôles de cohérence (doublons, formats).</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane fade" id="service-details-cashflow" role="tabpanel">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h5>Prévisionnel de trésorerie</h5>
+                        <p>Trésorerie glissante, prévisions par semaine/mois, scénarios (optimiste/prudent/réel).</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-calendar2-week"></i>
+                        </div>
+                        <h5>Planning des paiements</h5>
+                        <p>Échéanciers, priorisation, suivi des retards, vue calendrier des sorties/entrées à venir.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bell"></i>
+                        </div>
+                        <h5>Alertes & seuils</h5>
+                        <p>Seuil de solde, anomalies, opérations non rapprochées, encaissements attendus en retard.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h5>Tableaux de bord</h5>
+                        <p>Évolution des soldes, top entrées/sorties, tendances mensuelles, comparatifs multi-exercices.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 3 -->
+                <div class="tab-pane fade" id="service-details-integration" role="tabpanel">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5>Workflow & validations</h5>
+                        <p>Validation par rôle (préparation → contrôle → validation), traçabilité et historique des actions.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-link-45deg"></i>
+                        </div>
+                        <h5>Intégration Comptabilité / Facturation</h5>
+                        <p>Réduction de la ressaisie : liens avec écritures, règlements, factures, tiers et pièces.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-search"></i>
+                        </div>
+                        <h5>Contrôles & rapprochement intelligent</h5>
+                        <p>Détection doublons, incohérences, opérations orphelines, aide au lettrage/pointage.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-filetype-pdf"></i>
+                        </div>
+                        <h5>Exports & archivage</h5>
+                        <p>Exports PDF/Excel, archivage des relevés et justificatifs, états de pointage et de contrôle.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- /tab-content -->
+            </div><!-- /features-tabs -->
+          </div>
+
+          <!-- Client success / testimonial -->
+          <div class="client-success mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="success-card">
+              <div class="success-header d-flex align-items-center mb-4">
+                <img src="assets/img/person/person-m-2.webp" alt="Client" class="client-avatar">
+                <div class="client-info ms-3">
+                  <h5 class="client-name mb-1">Kouamé S.</h5>
+                  <span class="client-role">Responsable Financier • PME</span>
+                </div>
+                <div class="ms-auto">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <blockquote class="success-quote mb-4">
+                "Nous voyons nos soldes et notre cashflow en un coup d'œil. Le rapprochement bancaire a réduit les erreurs
+                et nos validations sont maintenant tracées et sécurisées."
+              </blockquote>
+
+              <div class="success-metrics row text-center">
+                <div class="col-4">
+                  <div class="metric-value">-30%</div>
+                  <div class="metric-label">Temps de pointage</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">+1</div>
+                  <div class="metric-label">Visibilité quotidienne</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">100%</div>
+                  <div class="metric-label">Traçabilité validations</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /service-content -->
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar" data-aos="fade-left" data-aos-delay="200">
+
+          <div class="service-card mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Aperçu du module</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="overview-list">
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Déploiement</span>
+                  </div>
+                  <span class="item-value">~1 semaine</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>Inclus</span>
+                  </div>
+                  <span class="item-value">Selon votre abonnement</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-diagram-2"></i>
+                    <span>Périmètre</span>
+                  </div>
+                  <span class="item-value">Banque • Caisse • Cashflow</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-lock"></i>
+                    <span>Sécurité</span>
+                  </div>
+                  <span class="item-value">Rôles + validations</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-headset"></i>
+                    <span>Support</span>
+                  </div>
+                  <span class="item-value">Accompagnement + FAQ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="card-header">
+              <h4 class="card-title">Demander une démo</h4>
+              <p class="card-subtitle">Expliquez vos banques, vos flux et vos objectifs de pilotage.</p>
+            </div>
+
+            <div class="card-body">
+              <!-- Remplacez action par votre endpoint Django si besoin -->
+              <form action="forms/get-a-quote.php" method="post" class="php-email-form contact-form">
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" name="name" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="votre.email@exemple.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-telephone input-icon"></i>
+                    <input type="tel" name="phone" placeholder="+225 XX XX XX XX XX">
+                  </div>
+                </div>
+
+                <input type="hidden" name="subject" value="Demande Démo - Module Trésorerie">
+
+                <div class="form-group mb-4">
+                  <textarea name="message" rows="4" placeholder="Décrivez : banques/caisses, volume de mouvements, besoins de rapprochement, prévisions cashflow, alertes, exports..." required></textarea>
+                </div>
+
+                <div class="loading">Envoi…</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Votre demande a été envoyée. Merci !</div>
+
+                <button type="submit" class="submit-btn w-100">
+                  <span>Envoyer la demande</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /row -->
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-section text-center mt-5 pt-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="action-buttons d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#service-details" class="action-btn primary">
+          <i class="bi bi-play-circle"></i>
+          <span>Voir la démo</span>
+        </a>
+        <a href="portfolio-tresorerie.html" class="action-btn secondary">
+          <i class="bi bi-images"></i>
+          <span>Voir les captures</span>
+        </a>
+        <a href="assets/docs/fiche-module-tresorerie.pdf" class="action-btn secondary">
+          <i class="bi bi-download"></i>
+          <span>Télécharger la fiche</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</section>
+<!-- /Service Details Section -->
+
+{% endblock %}

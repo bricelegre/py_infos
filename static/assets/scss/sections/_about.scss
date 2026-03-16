@@ -1,0 +1,112 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about {
+  .about-content {
+    h2 {
+      font-size: 2.25rem;
+      font-family: var(--heading-font);
+      color: var(--heading-color);
+      font-weight: 700;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+      color: color-mix(in srgb, var(--default-color), transparent 20%);
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
+      border: none;
+      color: var(--contrast-color);
+      font-weight: 600;
+      padding: 0.75rem 2.2rem;
+      border-radius: 2rem;
+      box-shadow: 0 2px 12px color-mix(in srgb, var(--accent-color) 30%, transparent 85%);
+      transition: background 0.3s, box-shadow 0.3s;
+
+      &:hover,
+      &:focus {
+        background: color-mix(in srgb, var(--accent-color), #000 12%);
+        box-shadow: 0 4px 18px color-mix(in srgb, var(--accent-color), #212529 30%);
+        color: var(--contrast-color);
+      }
+    }
+  }
+
+  .about-card {
+    background: var(--surface-color);
+    border-radius: 1.25rem;
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    box-shadow: 0 2px 20px 0 color-mix(in srgb, var(--accent-color) 9%, transparent 95%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: box-shadow 0.3s, transform 0.3s;
+
+    .icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 3px 10px 0 color-mix(in srgb, var(--accent-color) 15%, transparent 90%);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    h5 {
+      font-size: 1.22rem;
+      font-family: var(--heading-font);
+      color: var(--heading-color);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: color-mix(in srgb, var(--default-color), transparent 30%);
+      font-size: 1rem;
+      margin-bottom: 0;
+    }
+
+    &:hover,
+    &:focus-within {
+      box-shadow: 0 8px 28px 0 color-mix(in srgb, var(--accent-color) 23%, transparent 80%);
+      transform: translateY(-5px) scale(1.03);
+
+      .icon-wrap {
+        background: var(--accent-color);
+        color: var(--contrast-color);
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .about-content {
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .about-card {
+      padding: 1.5rem 1rem 1rem 1rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-content {
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    .about-card {
+      padding: 1rem;
+    }
+  }
+}

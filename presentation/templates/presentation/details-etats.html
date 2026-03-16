@@ -1,0 +1,468 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">Module États Financiers</h1>
+          <p class="mb-0">
+            Produisez vos états financiers à partir de vos écritures comptables, avec contrôles de cohérence,
+            comparatifs multi-exercices et éditions professionnelles. Fincompta ERP vous aide à transformer vos
+            données comptables en états lisibles, exploitables et prêts à être partagés.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+         <li><a href="{% url 'presentation:accueil' %}">Accueil</a></li>
+        <li><a href="{% url 'presentation:accueil' %}#modules">Modules</a></li>
+        <li class="current">États Financiers</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<!-- Service Details Section -->
+<section id="service-details" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row">
+
+      <!-- MAIN CONTENT -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="service-content">
+
+          <div class="content-header mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-meta d-flex align-items-center gap-3 mb-3 flex-wrap">
+              <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">FINCOMPTA • États Financiers</span>
+              <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Entreprise / Association</span>
+              <div class="divider"></div>
+              
+            </div>
+
+            <h1 class="service-title mb-3">Des états financiers fiables, lisibles et comparables</h1>
+            <p class="service-subtitle">
+              Générez automatiquement vos états à partir de la comptabilité, visualisez les variations d’un exercice à
+              l’autre et sécurisez vos productions grâce à des règles de cohérence, regroupements par postes et contrôles
+              sur les soldes comptables.
+            </p>
+          </div>
+
+          <!-- Visual / Demo 
+          <div class="visual-showcase mb-5" data-aos="zoom-in" data-aos-delay="200">
+            <div class="image-container position-relative">
+              <img src="assets/img/services/module-etats-financiers.webp" alt="Module États Financiers" class="img-fluid">
+              <div class="image-overlay">
+                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox">
+                  <div class="play-button">
+                    <i class="bi bi-play-fill"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          -->
+          <!-- Process / Implementation -->
+          <div class="process-section mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Mise en place du module</h3>
+
+            <div class="process-steps">
+              <div class="step-item" data-aos="fade-right" data-aos-delay="150">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                  <h4 class="step-title">Paramétrage des postes d’états financiers</h4>
+                  <p>
+                    Organisation des comptes comptables par rubriques, postes, sous-postes et regroupements pour
+                    alimenter automatiquement le bilan, le compte de résultat ou les états adaptés à votre référentiel.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="250">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                  <h4 class="step-title">Connexion aux données comptables</h4>
+                  <p>
+                    Récupération des soldes, balances, journaux et mouvements comptables de l’exercice pour produire
+                    des états fondés sur vos données réelles, sans ressaisie.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="350">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                  <h4 class="step-title">Contrôles de cohérence et comparatifs</h4>
+                  <p>
+                    Vérification des équilibres, contrôle des totaux, cohérence des agrégats et affichage des comparatifs
+                    N / N-1 / N-2 pour faciliter la lecture et l’analyse.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="450">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Édition, export et présentation</h4>
+                  <p>
+                    Génération d’états financiers propres, exportables en PDF ou Excel, prêts à être imprimés,
+                    archivés ou partagés avec la direction, les partenaires ou les organes de gouvernance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Tabs -->
+          <div class="features-showcase mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Fonctionnalités clés</h3>
+
+            <div class="features-tabs" data-aos="fade-up" data-aos-delay="200">
+              <nav class="nav nav-pills justify-content-center mb-4" role="tablist">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#service-details-production" role="tab">
+                  Production des états
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-analyse" role="tab">
+                  Analyse & Comparatifs
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-controles" role="tab">
+                  Contrôles & Exports
+                </button>
+              </nav>
+
+              <div class="tab-content">
+
+                <!-- TAB 1 -->
+                <div class="tab-pane fade show active" id="service-details-production" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-building"></i>
+                        </div>
+                        <h5>Bilan</h5>
+                        <p>Production automatique du bilan à partir des soldes comptables regroupés selon vos postes et rubriques.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h5>Compte de résultat / Tableau d’activité</h5>
+                        <p>Présentation des produits, charges et résultats selon le type d’organisation et le référentiel utilisé.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-layout-text-window-reverse"></i>
+                        </div>
+                        <h5>Annexes & états complémentaires</h5>
+                        <p>Complétez vos productions avec des tableaux annexes, détails de postes et informations de synthèse.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h5>Regroupement des comptes</h5>
+                        <p>Chaque état est alimenté par des regroupements de comptes configurés pour refléter fidèlement votre structure financière.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane fade" id="service-details-analyse" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-layers"></i>
+                        </div>
+                        <h5>Comparatifs N / N-1 / N-2</h5>
+                        <p>Comparez plusieurs exercices pour suivre l’évolution des équilibres financiers et des grandes masses comptables.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h5>Lecture analytique des variations</h5>
+                        <p>Visualisez rapidement les hausses, baisses et écarts significatifs pour mieux interpréter vos résultats.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-search"></i>
+                        </div>
+                        <h5>Détail par poste</h5>
+                        <p>Accédez au détail des postes pour comprendre quels comptes ou familles influencent chaque rubrique des états.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-speedometer2"></i>
+                        </div>
+                        <h5>Indicateurs de pilotage</h5>
+                        <p>Appuyez vos décisions avec des états lisibles, synthétiques et directement exploitables par la direction.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 3 -->
+                <div class="tab-pane fade" id="service-details-controles" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5>Contrôles de cohérence</h5>
+                        <p>Contrôle des équilibres, des totaux et de la cohérence entre balance, grand-livre et états financiers produits.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h5>Mise à jour automatique</h5>
+                        <p>Les états évoluent avec vos données comptables, ce qui limite les retraitements manuels et sécurise les versions finales.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-filetype-pdf"></i>
+                        </div>
+                        <h5>Exports PDF & Excel</h5>
+                        <p>Diffusez facilement vos états sous format PDF ou Excel pour impression, analyse complémentaire ou archivage.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h5>Traçabilité des éditions</h5>
+                        <p>Conservez un historique des productions et sécurisez le suivi des états diffusés au fil des clôtures.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div><!-- /tab-content -->
+            </div><!-- /features-tabs -->
+          </div>
+
+          <!-- Client success / testimonial 
+          <div class="client-success mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="success-card">
+              <div class="success-header d-flex align-items-center mb-4">
+                <img src="assets/img/person/person-w-4.webp" alt="Client" class="client-avatar">
+                <div class="client-info ms-3">
+                  <h5 class="client-name mb-1">Fatou B.</h5>
+                  <span class="client-role">Responsable Administrative & Financière</span>
+                </div>
+                <div class="ms-auto">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <blockquote class="success-quote mb-4">
+                "Avec Fincompta, nous passons de la balance comptable à des états financiers propres, comparables
+                et prêts à être présentés. Les comparatifs N / N-1 / N-2 nous aident beaucoup dans le pilotage."
+              </blockquote>
+
+              <div class="success-metrics row text-center">
+                <div class="col-4">
+                  <div class="metric-value">-45%</div>
+                  <div class="metric-label">Temps de préparation</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">+Clair</div>
+                  <div class="metric-label">Lecture des états</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">N / N-1 / N-2</div>
+                  <div class="metric-label">Vision comparative</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div><!-- /service-content -->
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar" data-aos="fade-left" data-aos-delay="200">
+           <!--
+          <div class="service-card mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Aperçu du module</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="overview-list">
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Déploiement</span>
+                  </div>
+                  <span class="item-value">1 à 2 semaines</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>Inclus</span>
+                  </div>
+                  <span class="item-value">Selon votre abonnement</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-diagram-2"></i>
+                    <span>Périmètre</span>
+                  </div>
+                  <span class="item-value">Bilan • Résultat • Annexes</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-lock"></i>
+                    <span>Sécurité</span>
+                  </div>
+                  <span class="item-value">Contrôles + traçabilité</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-headset"></i>
+                    <span>Support</span>
+                  </div>
+                  <span class="item-value">Accompagnement + FAQ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+          <div class="contact-card">
+            <div class="card-header">
+             
+              {% if messages %}
+                <div class="mb-3">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}  
+                  <h4 class="card-title">Demander une démo gratuite chez vous</h4>
+                  <p class="card-subtitle">Expliquez vos besoins en production d’états, comparatifs et éditions financières.</p>
+              {% endif %}
+            </div>
+
+            <div class="card-body">
+              <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" name="name" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="votre.email@exemple.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-telephone input-icon"></i>
+                    <input type="tel" name="phone" placeholder="+225 XX XX XX XX XX">
+                  </div>
+                </div>
+
+                <input type="hidden" name="subject" value="Demande Démo - Module États Financiers">
+
+                <div class="form-group mb-4">
+                  <textarea name="message" rows="4" placeholder="Décrivez : nombre d’exercices, besoin de bilan, compte de résultat ou tableau d’activité, annexes, comparatifs N/N-1/N-2, exports PDF/Excel..." required></textarea>
+                </div>
+                <input type="text" name="website" style="display:none">
+                <button type="submit" class="submit-btn w-100">
+                  <span>Envoyer la demande</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /row -->
+
+    <!-- ACTION BUTTONS 
+    <div class="action-section text-center mt-5 pt-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="action-buttons d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#service-details" class="action-btn primary">
+          <i class="bi bi-play-circle"></i>
+          <span>Voir la démo</span>
+        </a>
+        <a href="portfolio-etats-financiers.html" class="action-btn secondary">
+          <i class="bi bi-images"></i>
+          <span>Voir les captures</span>
+        </a>
+        <a href="assets/docs/fiche-module-etats-financiers.pdf" class="action-btn secondary">
+          <i class="bi bi-download"></i>
+          <span>Télécharger la fiche</span>
+        </a>
+      </div>
+    </div>
+    -->
+  </div><!-- /container -->
+</section>
+<!-- /Service Details Section -->
+
+{% endblock %}

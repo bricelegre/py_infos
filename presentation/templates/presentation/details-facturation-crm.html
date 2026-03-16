@@ -1,0 +1,467 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">Module Facturation</h1>
+          <p class="mb-0">
+            Gérez vos devis, factures, avoirs, règlements, échéances et relances dans un espace unique.
+            Fincompta ERP vous aide à sécuriser votre cycle de facturation, améliorer le suivi client et
+            mieux piloter vos encaissements au quotidien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'presentation:accueil' %}">Accueil</a></li>
+        <li><a href="{% url 'presentation:accueil' %}#modules">Modules</a></li>
+        <li class="current">Facturation</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<!-- Service Details Section -->
+<section id="service-details" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row">
+
+      <!-- MAIN CONTENT -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="service-content">
+
+          <div class="content-header mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-meta d-flex align-items-center gap-3 mb-3 flex-wrap">
+              <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">FINCOMPTA • Facturation</span>
+              <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">Entreprise / Association</span>
+              <div class="divider"></div>
+              
+            </div>
+
+            <h1 class="service-title mb-3">Une facturation claire, rapide et mieux suivie</h1>
+            <p class="service-subtitle">
+              Créez vos devis et factures, suivez les règlements, relancez les impayés et gardez une vision
+              en temps réel de votre chiffre d’affaires, de vos encaissements et de vos créances clients.
+            </p>
+          </div>
+
+          <!-- Visual / Demo 
+          <div class="visual-showcase mb-5" data-aos="zoom-in" data-aos-delay="200">
+            <div class="image-container position-relative">
+              <img src="assets/img/services/module-facturation.webp" alt="Module Facturation" class="img-fluid">
+              <div class="image-overlay">
+                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox">
+                  <div class="play-button">
+                    <i class="bi bi-play-fill"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          -->
+          <!-- Process -->
+          <div class="process-section mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Mise en place du module</h3>
+
+            <div class="process-steps">
+              <div class="step-item" data-aos="fade-right" data-aos-delay="150">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                  <h4 class="step-title">Paramétrage des documents commerciaux</h4>
+                  <p>
+                    Configuration des modèles de devis, factures, avoirs, numérotations, taxes, conditions
+                    de paiement, modes de règlement et informations de l’entreprise.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="250">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                  <h4 class="step-title">Création de la base clients et articles/services</h4>
+                  <p>
+                    Mise en place des fiches clients, produits, prestations, tarifs, remises,
+                    références commerciales et informations utiles à la facturation.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="350">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                  <h4 class="step-title">Émission des devis, factures et suivi des règlements</h4>
+                  <p>
+                    Création rapide des documents, transformation devis en facture, saisie des règlements,
+                    suivi des soldes clients et des échéances.
+                  </p>
+                </div>
+              </div>
+
+              <div class="step-item" data-aos="fade-right" data-aos-delay="450">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Relances, reporting et intégration comptable</h4>
+                  <p>
+                    Pilotage des impayés, relances des clients, tableaux de bord de facturation,
+                    exports PDF/Excel et lien avec la comptabilité pour limiter la ressaisie.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Features Tabs -->
+          <div class="features-showcase mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Fonctionnalités clés</h3>
+
+            <div class="features-tabs" data-aos="fade-up" data-aos-delay="200">
+              <nav class="nav nav-pills justify-content-center mb-4" role="tablist">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#service-details-docs" role="tab">
+                  Devis & Factures
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-reglements" role="tab">
+                  Règlements & Relances
+                </button>
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#service-details-pilotage" role="tab">
+                  Pilotage & Intégration
+                </button>
+              </nav>
+
+              <div class="tab-content">
+                <!-- TAB 1 -->
+                <div class="tab-pane fade show active" id="service-details-docs" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h5>Devis & proforma</h5>
+                        <p>Éditez vos devis rapidement, appliquez remises et conditions commerciales, puis transformez-les en facture en un clic.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-receipt"></i>
+                        </div>
+                        <h5>Factures & avoirs</h5>
+                        <p>Créez vos factures, avoirs et documents associés avec une présentation professionnelle et un suivi structuré.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-box-seam"></i>
+                        </div>
+                        <h5>Articles, services & tarifs</h5>
+                        <p>Gérez vos prestations, produits, abonnements, cotisations ou services selon votre activité et vos grilles tarifaires.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-printer"></i>
+                        </div>
+                        <h5>Éditions PDF</h5>
+                        <p>Imprimez ou envoyez des documents commerciaux propres, lisibles et adaptés à l’image de votre structure.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="tab-pane fade" id="service-details-reglements" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-cash-coin"></i>
+                        </div>
+                        <h5>Suivi des règlements</h5>
+                        <p>Enregistrez les paiements clients, acomptes, paiements partiels et soldes restants avec une vue claire sur chaque facture.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h5>Échéances clients</h5>
+                        <p>Suivez les dates d’échéance de vos factures pour mieux anticiper les encaissements et réduire les retards de paiement.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bell"></i>
+                        </div>
+                        <h5>Relances d’impayés</h5>
+                        <p>Identifiez rapidement les factures en retard et structurez vos relances pour améliorer votre recouvrement amiable.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-people"></i>
+                        </div>
+                        <h5>Suivi des comptes clients</h5>
+                        <p>Consultez l’historique de facturation, les montants dus, les règlements reçus et la situation globale de chaque client.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- TAB 3 -->
+                <div class="tab-pane fade" id="service-details-pilotage" role="tabpanel">
+                  <div class="row g-4">
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-bar-chart-line"></i>
+                        </div>
+                        <h5>Tableaux de bord commerciaux</h5>
+                        <p>Suivez votre chiffre d’affaires, vos ventes, vos encaissements, vos créances et les documents en attente.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-arrow-repeat"></i>
+                        </div>
+                        <h5>Lien avec la comptabilité</h5>
+                        <p>Réduisez la ressaisie grâce à l’intégration avec les modules de comptabilité et de gestion client de Fincompta ERP.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5>Contrôles & traçabilité</h5>
+                        <p>Sécurisez les créations, validations et modifications de documents avec des droits d’accès et un historique des actions.</p>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="feature-card">
+                        <div class="feature-icon">
+                          <i class="bi bi-filetype-xlsx"></i>
+                        </div>
+                        <h5>Exports & synthèses</h5>
+                        <p>Exportez vos listes de factures, règlements, créances et états commerciaux en PDF ou Excel selon vos besoins.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 
+          <div class="client-success mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="success-card">
+              <div class="success-header d-flex align-items-center mb-4">
+                <img src="assets/img/person/person-m-3.webp" alt="Client" class="client-avatar">
+                <div class="client-info ms-3">
+                  <h5 class="client-name mb-1">Yao P.</h5>
+                  <span class="client-role">Responsable Commercial & Facturation</span>
+                </div>
+                <div class="ms-auto">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+              </div>
+
+              <blockquote class="success-quote mb-4">
+                "Avec Fincompta ERP, nous suivons mieux nos devis, nos factures et nos règlements.
+                Les relances sont plus simples et nous avons enfin une vraie visibilité sur les clients en retard."
+              </blockquote>
+
+              <div class="success-metrics row text-center">
+                <div class="col-4">
+                  <div class="metric-value">-45%</div>
+                  <div class="metric-label">Temps de facturation</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">+Rapide</div>
+                  <div class="metric-label">Suivi des paiements</div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-value">+Clair</div>
+                  <div class="metric-label">Pilotage client</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar" data-aos="fade-left" data-aos-delay="200">
+          <!--
+          <div class="service-card mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Aperçu du module</h4>
+            </div>
+
+            <div class="card-body">
+              <div class="overview-list">
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Déploiement</span>
+                  </div>
+                  <span class="item-value">3 à 10 jours</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-check2-circle"></i>
+                    <span>Inclus</span>
+                  </div>
+                  <span class="item-value">Selon votre abonnement</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-diagram-2"></i>
+                    <span>Périmètre</span>
+                  </div>
+                  <span class="item-value">Devis • Factures • Règlements</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-lock"></i>
+                    <span>Sécurité</span>
+                  </div>
+                  <span class="item-value">Droits + traçabilité</span>
+                </div>
+
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-headset"></i>
+                    <span>Support</span>
+                  </div>
+                  <span class="item-value">Accompagnement + FAQ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+           -->
+          <div class="contact-card">
+            <div class="card-header">
+               
+
+              {% if messages %}
+                <div class="mb-3">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}  
+                  <h4 class="card-title">Demander une démo gratuite chez vous</h4>
+                  <p class="card-subtitle">Expliquez votre besoin en devis, facturation, règlements et relances clients.</p>
+              {% endif %}
+            </div>
+
+            <div class="card-body">
+              <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" name="name" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="votre.email@exemple.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-telephone input-icon"></i>
+                    <input type="tel" name="phone" placeholder="+225 XX XX XX XX XX">
+                  </div>
+                </div>
+
+                <input type="hidden" name="subject" value="Demande Démo - Module Facturation">
+
+                <div class="form-group mb-4">
+                  <textarea name="message" rows="4" placeholder="Décrivez : nombre de factures par mois, devis, règlements, impayés, relances, types de prestations, besoins d’exports..." required></textarea>
+                </div>
+                <input type="text" name="website" style="display:none">
+                <button type="submit" class="submit-btn w-100">
+                  <span>Envoyer la demande</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS 
+    <div class="action-section text-center mt-5 pt-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="action-buttons d-flex flex-wrap gap-3 justify-content-center">
+        <a href="#service-details" class="action-btn primary">
+          <i class="bi bi-play-circle"></i>
+          <span>Voir la démo</span>
+        </a>
+        <a href="portfolio-facturation.html" class="action-btn secondary">
+          <i class="bi bi-images"></i>
+          <span>Voir les captures</span>
+        </a>
+        <a href="assets/docs/fiche-module-facturation.pdf" class="action-btn secondary">
+          <i class="bi bi-download"></i>
+          <span>Télécharger la fiche</span>
+        </a>
+      </div>
+    </div>
+    -->
+  </div>
+</section>
+<!-- /Service Details Section -->
+
+{% endblock %}

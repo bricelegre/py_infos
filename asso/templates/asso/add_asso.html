@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Pricing Section -->
+<section id="pricing" class="pricing section">
+
+</section>
+<!-- /Pricing Section -->
+
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Créer votre compte gratuitement - version Syscebnl</h2>
+    <p>Demarrer aujourd'hui, et profiter de 3 mois gratuits sans obligations d'abonnement.</p>
+  </div>
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-4">
+
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+        <div class="quick-contact-wrapper">
+
+           <div class="trust-indicators">
+            <div class="indicator-item">
+              <div class="indicator-icon"><i class="bi bi-shield-check"></i></div>
+              <div class="indicator-text">
+                <strong>Accompagnement</strong>
+                <span class="availability">3 mois offerts</span>
+                <span class="availability">Paramétrage + formation gratuit (en ligne ou en présentiel)</span>
+              </div>
+            </div>
+            <div class="indicator-item">
+              <div class="indicator-icon"><i class="bi bi-clock-history"></i></div>
+              <div class="indicator-text">
+                <strong>Support</strong>
+                <span>Assistance réactive</span>
+                <span class="availability">infos@erpmfr.net</span>
+                <span class="availability">+2250708218574 (appel)</span>
+                <!-- WhatsApp -->
+                <a class="availability d-inline-flex align-items-center gap-2 mt-2"
+                   href="https://wa.me/2250708218574?text=Bonjour%20MFR%2C%20j%27ai%20besoin%20d%27assistance%20sur%20Fincompta."
+                  target="_blank" rel="noopener">
+                  <i class="bi bi-whatsapp"></i>
+                  Envoyer un message WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+        <div class="main-form-container">
+          <div class="form-intro">
+            <div class="intro-badge"><i class="bi bi-stars"></i><span>Démarrer</span></div>
+          </div>
+          {% if messages %}
+            <div class="mb-3">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+          {# Remplace action par ta vue Django (ex: {% url 'website:contact' %}) #}
+          <form action="" method="post" class="modern-form">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="user_pseudo" placeholder="Pseudo" required>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="cust_identifiant" placeholder="Identifiant" required>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-6">
+                <input type="text" class="form-control" name="cust_fone" placeholder="Téléphone">
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" name="cust_email" placeholder="Email">
+              </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-12">
+                <input type="text" class="form-control" name="cust_company_name" placeholder="Nom de l'association">
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit mt-3">
+              <span>Valider la création</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /Contact Section -->
+
+{% endblock %}

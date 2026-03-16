@@ -1,0 +1,15 @@
+Bonjour ,
+
+Sujet :  {{ subject }}
+
+Nom : {{ name }}
+Email : {{ email }}
+Téléphone : {{ phone }}
+Plan : {{ plan }}
+Type d'organisation : {{org_type}}
+
+Message :
+{{ message }}
+
+Cordialement,
+L’équipe Fincompta

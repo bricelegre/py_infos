@@ -1,0 +1,281 @@
+// main: ../main.scss
+/*--------------------------------------------------------------
+# Pricing Section
+--------------------------------------------------------------*/
+.pricing {
+  .pricing-card {
+    background-color: var(--surface-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    border-radius: 8px;
+    padding: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--accent-color), transparent 70%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    &.featured {
+      border-color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      .popular-badge {
+        position: absolute;
+        top: -14px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+        padding: 6px 20px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .btn-plan {
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+
+        &:hover {
+          background-color: color-mix(in srgb, var(--accent-color), black 10%);
+        }
+      }
+    }
+  }
+
+  .plan-header {
+    border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+
+    .plan-name {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--heading-color);
+    }
+
+    .plan-subtitle {
+      font-size: 15px;
+      color: color-mix(in srgb, var(--default-color), transparent 30%);
+      margin: 0;
+    }
+  }
+
+  .plan-pricing {
+    margin-bottom: 32px;
+
+    .price-wrapper {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 8px;
+
+      &.custom {
+        justify-content: flex-start;
+
+        .custom-text {
+          font-size: 32px;
+          font-weight: 700;
+          color: var(--heading-color);
+        }
+      }
+
+      .currency {
+        font-size: 20px;
+        font-weight: 500;
+        color: var(--heading-color);
+      }
+
+      .amount {
+        font-size: 48px;
+        font-weight: 700;
+        color: var(--heading-color);
+        line-height: 1;
+
+        &.annual-price {
+          display: none;
+        }
+      }
+
+      .period {
+        font-size: 15px;
+        color: color-mix(in srgb, var(--default-color), transparent 40%);
+        font-weight: 400;
+      }
+    }
+
+    .billing-info {
+      font-size: 14px;
+      color: color-mix(in srgb, var(--default-color), transparent 40%);
+      margin: 0;
+
+      &.annual-billing {
+        display: none;
+      }
+    }
+  }
+
+  .plan-features {
+    flex-grow: 1;
+    margin-bottom: 32px;
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        font-size: 15px;
+        color: var(--default-color);
+        border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 95%);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        i {
+          color: var(--accent-color);
+          font-size: 18px;
+          flex-shrink: 0;
+          margin-top: 2px;
+        }
+
+        span {
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  .plan-action {
+    text-align: center;
+
+    .btn-plan {
+      display: block;
+      width: 100%;
+      padding: 14px 28px;
+      background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+      color: var(--accent-color);
+      border: 1px solid color-mix(in srgb, var(--accent-color), transparent 70%);
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--accent-color), transparent 85%);
+        border-color: var(--accent-color);
+      }
+    }
+
+    .trial-info {
+      font-size: 13px;
+      color: color-mix(in srgb, var(--default-color), transparent 40%);
+      margin: 12px 0 0;
+    }
+  }
+
+  .pricing-footer {
+    text-align: center;
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+
+    .footer-text {
+      font-size: 14px;
+      color: color-mix(in srgb, var(--default-color), transparent 30%);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      a {
+        font-size: 14px;
+        color: var(--accent-color);
+        font-weight: 500;
+
+        &:hover {
+          color: color-mix(in srgb, var(--accent-color), black 15%);
+        }
+      }
+
+      .divider {
+        color: color-mix(in srgb, var(--default-color), transparent 80%);
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .pricing-card {
+      margin-bottom: 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pricing-toggle {
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+
+      .toggle-option {
+        font-size: 14px;
+      }
+    }
+
+    .pricing-card {
+      padding: 24px;
+    }
+
+    .plan-pricing .price-wrapper {
+      .amount {
+        font-size: 40px;
+      }
+
+      .currency {
+        font-size: 18px;
+      }
+
+      .period {
+        font-size: 14px;
+      }
+
+      &.custom .custom-text {
+        font-size: 28px;
+      }
+    }
+
+    .plan-features .features-list li {
+      font-size: 14px;
+
+      i {
+        font-size: 16px;
+      }
+    }
+
+    .pricing-footer .footer-links {
+      flex-direction: column;
+      gap: 8px;
+
+      .divider {
+        display: none;
+      }
+    }
+  }
+}

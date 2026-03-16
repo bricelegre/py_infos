@@ -1,0 +1,14 @@
+Bonjour {{ company_name }},
+
+Votre compte a été créé avec succès.
+
+Identifiant (pseudo) : {{ user_pseudo }}
+Email : {{ email }}
+Mot de passe : {{ password }}
+
+Lien de connexion : {{ login_url }}
+
+Conseil : changez votre mot de passe après la première connexion.
+
+Cordialement,
+L’équipe Fincompta
