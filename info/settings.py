@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'presentation',
     'asso',
     'clients',
+    'analytics',
+    'django_user_agents',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'analytics.middleware.VisitorTrackingMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 ROOT_URLCONF = 'info.urls'
@@ -78,7 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'info.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
