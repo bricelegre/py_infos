@@ -18,6 +18,7 @@ from django.core.validators import validate_email
 
 def add_client(request, cust_plan_text):
     plan_map = {
+        "free": 1,
         "starter": 2,
         "premium": 3,
     }
