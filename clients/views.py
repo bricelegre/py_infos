@@ -154,9 +154,12 @@ def add_client(request, cust_plan_text):
                 "user_pseudo": user_pseudo,
                 "email": cust_email,
                 "password": user_password,
+                "cust_plan_text": plan_key,
+                "login_url": settings.FINCOMPTA_LOGIN_URL,
             }
 
-            text_body = render_to_string("emails/account_created.txt", email_context)
+            text_body = render_to_string("clients/emails/account_created.txt", email_context)
+            html_body = render_to_string("clients/emails/account_created.html", email_context)
 
             email = EmailMultiAlternatives(
                 subject=subject,
@@ -164,6 +167,7 @@ def add_client(request, cust_plan_text):
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[cust_email],
             )
+            email.attach_alternative(html_body, "text/html")
 
             try:
                 email.send(fail_silently=False)

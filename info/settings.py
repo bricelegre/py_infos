@@ -185,4 +185,8 @@ else:
 # (optionnel) notification admin
 ADMINS = [("Admin", "infos@erpmfr.net")]
 
+# URLs de connexion utilisées dans les emails de bienvenue
+FINCOMPTA_LOGIN_URL = os.getenv("FINCOMPTA_LOGIN_URL", "https://infos.fincompta.net/login")
+ASSO_LOGIN_URL = os.getenv("ASSO_LOGIN_URL", "https://association.fincompta.net")
+
 
