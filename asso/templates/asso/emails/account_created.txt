@@ -1,6 +1,6 @@
 Bonjour {{ user_pseudo }},
 
-Votre compte entreprise "{{ company_name }}" a été créé avec succès sur Fincompta (plan {{ cust_plan_text }}).
+Votre compte de l'association {{ company_name }} a été créé avec succès.
 
 Identifiant  : {{ cust_identifiant }}
 Pseudo       : {{ user_pseudo }}
@@ -12,9 +12,9 @@ Lien de connexion : {{ login_url }}
 Conditions de connexion :
 - Ce mot de passe est strictement personnel : ne le communiquez à personne.
 - Nous vous recommandons de le changer dès votre première connexion.
-- Votre compte est actif immédiatement pour le plan {{ cust_plan_text }}.
+- Votre compte est actif immédiatement.
 - En cas de mot de passe oublié, utilisez le lien "Mot de passe oublié" sur la page de connexion.
 - Pour toute question, contactez notre support : infos@erpmfr.net / +2250708218574.
 
 Cordialement,
-L'équipe Fincompta
+L’équipe Fincompta

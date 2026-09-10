@@ -105,17 +105,18 @@ def add_asso(request):
         # --- 2) Email AFTER commit ---
         if cust_email:
             subject = "Votre compte Fincompta a été créé"
-            
+
             context = {
                 "cust_identifiant": cust_identifiant,
                 "company_name": cust_company_name,
                 "user_pseudo": user_pseudo,
                 "email": cust_email,
                 "password": user_password,
+                "login_url": settings.ASSO_LOGIN_URL,
             }
 
-            text_body = render_to_string("emails/account_created.txt", context)
-            #html_body = render_to_string("emails/account_created.html", context)
+            text_body = render_to_string("asso/emails/account_created.txt", context)
+            html_body = render_to_string("asso/emails/account_created.html", context)
 
             email = EmailMultiAlternatives(
                 subject=subject,
@@ -123,6 +124,7 @@ def add_asso(request):
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[cust_email],
             )
+            email.attach_alternative(html_body, "text/html")
 
             try:
                 email.send(fail_silently=False)
