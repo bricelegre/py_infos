@@ -17,7 +17,6 @@ class Customer(models.Model):
     cust_start_date = models.DateTimeField(auto_now_add=True)
     cust_email = models.CharField(max_length=50)
     cust_connect_statut = models.IntegerField(default=0)
-    cust_ip = models.CharField(max_length=200)
     admin_code = models.CharField(max_length=10, default=1)
     cust_end_subscription = models.DateField(null=True, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
