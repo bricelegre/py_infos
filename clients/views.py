@@ -120,6 +120,7 @@ def add_client(request, cust_plan_text):
                 "sales": "manager_ventes",
                 "taxation": "utilisateur_impots",
                 "users": "manager_utilisateur",
+                "administration": "app_admin",
             }
 
             user_roles = []

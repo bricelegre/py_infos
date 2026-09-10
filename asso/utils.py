@@ -50,7 +50,8 @@ def get_module_id_by_key(module_key):
         'pay': 3,
         'sales': 4,
         'taxation': 5,
-        'users': 6
+        'users': 6,
+        'administration': 7
     }
     return module_ids.get(module_key)
 
@@ -61,7 +62,8 @@ def assign_role_to_user(user_id, module_key, role_name):
         'pay': 3,
         'sales': 4,
         'taxation': 5,
-        'users': 6
+        'users': 6,
+        'administration': 7
     }
 
     module_id = module_ids.get(module_key)
