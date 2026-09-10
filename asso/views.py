@@ -78,7 +78,8 @@ def add_asso(request):
                 'pay': 'paie_manager',
                 'sales': 'manager_ventes',
                 'taxation': 'utilisateur_impots',
-                'users': 'manager_utilisateur'
+                'users': 'manager_utilisateur',
+                'administration': 'app_admin',
             }
 
             user_roles = []
