@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /creer-votre-compte-entreprise/
+Disallow: /creer-votre-compte-association/
+Disallow: /static/admin/
+
+Sitemap: https://infos.fincompta.net/sitemap.xml
