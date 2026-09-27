@@ -189,4 +189,18 @@ ADMINS = [("Admin", "infos@erpmfr.net")]
 FINCOMPTA_LOGIN_URL = os.getenv("FINCOMPTA_LOGIN_URL", "https://infos.fincompta.net/login")
 ASSO_LOGIN_URL = os.getenv("ASSO_LOGIN_URL", "https://association.fincompta.net")
 
+# Création de compte : API POST /api/provision/ de chaque application (cf.
+# info/provisioning.py). Le secret doit être identique à PROVISIONING_SECRET
+# côté application ; sans secret, la création de compte est indisponible.
+PROVISIONING = {
+    "fincompta": {
+        "url": os.getenv("FINCOMPTA_PROVISION_URL", "https://infos.fincompta.net/api/provision/"),
+        "secret": os.getenv("FINCOMPTA_PROVISIONING_SECRET", ""),
+    },
+    "syscebnl": {
+        "url": os.getenv("SYSCEBNL_PROVISION_URL", "https://association.fincompta.net/api/provision/"),
+        "secret": os.getenv("SYSCEBNL_PROVISIONING_SECRET", ""),
+    },
+}
+
 

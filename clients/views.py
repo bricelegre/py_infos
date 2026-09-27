@@ -1,20 +1,15 @@
 from django.shortcuts import render, redirect
-from .models import *
 from django.utils import timezone
-from clients.utils import *
 from django.contrib import messages
 from dateutil.relativedelta import relativedelta
-from django.db.models import Q, F
-from slugify import slugify
-from .utils import *
-from django.db import transaction
-from django.contrib.auth.hashers import make_password
 from django.conf import settings
-from django.db import transaction, IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
+
+from info.provisioning import provision
+from .utils import generate_password
 
 def add_client(request, cust_plan_text):
     plan_map = {
@@ -66,135 +61,70 @@ def add_client(request, cust_plan_text):
         messages.error(request, "Adresse email invalide.")
         return render(request, "clients/add_clients.html", context)
 
-    # Unicité côté applicatif
-    if Customer.objects.filter(
-        Q(cust_identifiant__iexact=cust_identifiant) |
-        Q(cust_email__iexact=cust_email)
-    ).exists():
-        messages.error(request, "Identifiant ou email déjà utilisé.")
-        return render(request, "clients/add_clients.html", context)
-
-    if Users.objects.filter(
-        Q(user_email__iexact=cust_email) |
-        Q(user_pseudo__iexact=user_pseudo)
-    ).exists():
-        messages.error(request, "Pseudo ou email utilisateur déjà utilisé.")
-        return render(request, "clients/add_clients.html", context)
-
     user_password = generate_password(8)
-    user_password_hashed = make_password(user_password)
-    cust_slug = slugify(cust_identifiant)
     cust_end_subscription = timezone.localdate() + relativedelta(months=1)
 
-    try:
-        with transaction.atomic():
-            customer = Customer.objects.create(
-                cust_identifiant=cust_identifiant,
-                cust_company_name=cust_company_name,
-                cust_email=cust_email,
-                cust_fone=cust_fone,
-                cust_plan=cust_plan,  # on garde le plan validé depuis l'URL
-                cust_end_subscription=cust_end_subscription,
-                cust_slug=cust_slug,
-                cust_status=1,
-            )
-
-            cust_id = customer.cust_id
-
-            # Initialisation des données client
-            initialize_customer_data(cust_id)
-
-            user_created = Users.objects.create(
-                user_pseudo=user_pseudo,
-                user_password=user_password_hashed,
-                cust_id=cust_id,
-                user_email=cust_email,
-            )
-
-            user_id = user_created.user_id
-
-            roles = {
-                "accounting": "manager_comptable",
-                "employees": "rh_manager",
-                "pay": "paie_manager",
-                "sales": "manager_ventes",
-                "taxation": "utilisateur_impots",
-                "users": "manager_utilisateur",
-                "administration": "app_admin",
-            }
-
-            user_roles = []
-            for module_key, role_name in roles.items():
-                role_id = get_role_id_by_name(role_name)
-                module_id = get_module_id_by_key(module_key)
-                if role_id and module_id:
-                    user_roles.append(
-                        UserRole(user_id=user_id, roles_id=role_id, module_id=module_id)
-                    )
-
-            if user_roles:
-                UserRole.objects.bulk_create(user_roles)
-
-            CompanyData.objects.create(
-                cust_id=cust_id,
-                company_name=cust_company_name,
-                company_fone=cust_fone,
-                company_adress="Adresse",
-                company_email=cust_email,
-            )
-
-        # Envoi d'email APRÈS validation de la transaction
-        email_sent = False
-        email_err = None
-
-        if cust_email:
-            subject = "Votre compte Fincompta a été créé"
-            email_context = {
-                "cust_identifiant": cust_identifiant,
-                "company_name": cust_company_name,
-                "user_pseudo": user_pseudo,
-                "email": cust_email,
-                "password": user_password,
-                "cust_plan_text": plan_key,
-                "login_url": settings.FINCOMPTA_LOGIN_URL,
-            }
-
-            text_body = render_to_string("clients/emails/account_created.txt", email_context)
-            html_body = render_to_string("clients/emails/account_created.html", email_context)
-
-            email = EmailMultiAlternatives(
-                subject=subject,
-                body=text_body,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[cust_email],
-            )
-            email.attach_alternative(html_body, "text/html")
-
-            try:
-                email.send(fail_silently=False)
-                email_sent = True
-            except Exception as e:
-                email_err = str(e)
-        else:
-            email_err = "Aucun email fourni"
-
-        if email_sent:
-            messages.success(
-                request,
-                "Compte client créé avec succès. Vérifiez votre email pour les identifiants de connexion."
-            )
-        else:
-            messages.warning(
-                request,
-                f"Compte créé, mais email non envoyé : {email_err}"
-            )
-
-        return redirect("clients:ajouter_client", cust_plan_text=plan_key)
-
-    except IntegrityError:
-        messages.error(request, "Impossible de créer le compte : doublon détecté.")
+    # Le compte est créé par fincompta (API POST /api/provision/) : client,
+    # référentiel SYSCOHADA, paramètres de paie, administrateur et rôles, en
+    # une transaction. L'unicité de l'identifiant et de l'email y est vérifiée.
+    result = provision("fincompta", {
+        "identifiant": cust_identifiant,
+        "nom": cust_company_name,
+        "pseudo": user_pseudo,
+        "password": user_password,
+        "email": cust_email,
+        "telephone": cust_fone,
+        "plan": cust_plan,  # on garde le plan validé depuis l'URL
+        "fin_abonnement": cust_end_subscription.isoformat(),
+    })
+    if not result.ok:
+        messages.error(request, result.error)
         return render(request, "clients/add_clients.html", context)
 
-    except Exception as e:
-        messages.error(request, f"Erreur lors de la création : {e}")
-        return render(request, "clients/add_clients.html", context)       
+    # Envoi d'email APRÈS création du compte
+    email_sent = False
+    email_err = None
+
+    if cust_email:
+        subject = "Votre compte Fincompta a été créé"
+        email_context = {
+            "cust_identifiant": cust_identifiant,
+            "company_name": cust_company_name,
+            "user_pseudo": user_pseudo,
+            "email": cust_email,
+            "password": user_password,
+            "cust_plan_text": plan_key,
+            "login_url": settings.FINCOMPTA_LOGIN_URL,
+        }
+
+        text_body = render_to_string("clients/emails/account_created.txt", email_context)
+        html_body = render_to_string("clients/emails/account_created.html", email_context)
+
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[cust_email],
+        )
+        email.attach_alternative(html_body, "text/html")
+
+        try:
+            email.send(fail_silently=False)
+            email_sent = True
+        except Exception as e:
+            email_err = str(e)
+    else:
+        email_err = "Aucun email fourni"
+
+    if email_sent:
+        messages.success(
+            request,
+            "Compte client créé avec succès. Vérifiez votre email pour les identifiants de connexion."
+        )
+    else:
+        messages.warning(
+            request,
+            f"Compte créé, mais email non envoyé : {email_err}"
+        )
+
+    return redirect("clients:ajouter_client", cust_plan_text=plan_key)
