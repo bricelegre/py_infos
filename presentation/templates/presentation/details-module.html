@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">{% if module.plan == 'asso' %}Offre{% else %}Module{% endif %} {{ module.name }}</h1>
+          <p class="mb-0">{{ module.lead }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'presentation:accueil' %}">Accueil</a></li>
+        <li><a href="{% url 'presentation:accueil' %}#modules">Modules</a></li>
+        <li class="current">{{ module.name }}</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<!-- Service Details Section -->
+<section id="service-details" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row">
+      <!-- MAIN CONTENT -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="service-content">
+
+          <div class="content-header mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-meta d-flex align-items-center gap-3 mb-3 flex-wrap">
+              <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2">FINCOMPTA • {{ module.name }}</span>
+              {% for badge in module.badges %}
+                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2">{{ badge }}</span>
+              {% endfor %}
+              <span class="badge {% if module.plan == 'all' %}bg-info text-info{% else %}bg-warning text-warning{% endif %} bg-opacity-10 px-3 py-2">
+                <i class="bi bi-tag"></i> {{ module.plan_label }}
+              </span>
+            </div>
+
+            <h1 class="service-title mb-3">{{ module.headline }}</h1>
+            <p class="service-subtitle">{{ module.subtitle }}</p>
+          </div>
+
+          <!-- Process / Implementation -->
+          <div class="process-section mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Comment ça marche</h3>
+
+            <div class="process-steps">
+              {% for step in module.steps %}
+              <div class="step-item" data-aos="fade-right" data-aos-delay="{% widthratio forloop.counter 1 100 %}">
+                <div class="step-number">{{ forloop.counter|stringformat:"02d" }}</div>
+                <div class="step-content">
+                  <h4 class="step-title">{{ step.title }}</h4>
+                  <p>{{ step.text }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Features Tabs -->
+          <div class="features-showcase mb-5">
+            <h3 class="section-heading mb-4" data-aos="fade-up" data-aos-delay="100">Fonctionnalités clés</h3>
+
+            <div class="features-tabs" data-aos="fade-up" data-aos-delay="200">
+              {% if module.tabs|length > 1 %}
+              <nav class="nav nav-pills justify-content-center mb-4" role="tablist">
+                {% for tab in module.tabs %}
+                <button class="nav-link{% if forloop.first %} active{% endif %}" data-bs-toggle="pill" data-bs-target="#module-tab-{{ forloop.counter }}" role="tab">
+                  {{ tab.title }}
+                </button>
+                {% endfor %}
+              </nav>
+              {% endif %}
+
+              <div class="tab-content">
+                {% for tab in module.tabs %}
+                <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="module-tab-{{ forloop.counter }}" role="tabpanel">
+                  <div class="row g-4">
+                    {% for feature in tab.features %}
+                    <div class="col-md-6">
+                      <div class="feature-card h-100">
+                        <div class="feature-icon">
+                          <i class="bi {{ feature.icon }}"></i>
+                        </div>
+                        <h5>{{ feature.title }}</h5>
+                        <p>{{ feature.text }}</p>
+                        {% if feature.plan != 'all' and feature.plan != module.plan %}
+                          <span class="badge bg-warning bg-opacity-10 text-warning"><i class="bi bi-star-fill"></i> {{ feature.plan_label }}</span>
+                        {% endif %}
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div><!-- /tab-content -->
+            </div><!-- /features-tabs -->
+          </div>
+
+        </div><!-- /service-content -->
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="sidebar" data-aos="fade-left" data-aos-delay="200">
+
+          <div class="service-card mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Disponibilité</h4>
+            </div>
+            <div class="card-body">
+              <div class="overview-list">
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-tag"></i>
+                    <span>Formules</span>
+                  </div>
+                  <span class="item-value">{{ module.plans_text }}</span>
+                </div>
+                {% if module.plan != 'asso' %}
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-heart"></i>
+                    <span>Association/ONG</span>
+                  </div>
+                  <span class="item-value">{% if module.asso_note %}Inclus{% else %}Non inclus{% endif %}</span>
+                </div>
+                {% endif %}
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Intégration</span>
+                  </div>
+                  <span class="item-value">Comptabilité automatique</span>
+                </div>
+                <div class="overview-item">
+                  <div class="item-label">
+                    <i class="bi bi-lock"></i>
+                    <span>Accès</span>
+                  </div>
+                  <span class="item-value">Rôles &amp; permissions</span>
+                </div>
+              </div>
+              {% if module.asso_note %}
+                <p class="small text-muted mt-3 mb-0"><strong>Version Association/ONG (SYCEBNL) :</strong> {{ module.asso_note }}</p>
+              {% endif %}
+              <a href="{% url 'presentation:accueil' %}#pricing" class="btn btn-outline-primary w-100 mt-3">Comparer les formules</a>
+            </div>
+          </div>
+
+          <div class="contact-card mb-4">
+            <div class="card-header">
+
+              {% if messages %}
+                <div class="mb-3">
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                  <h4 class="card-title">Demander une démo gratuite</h4>
+                  <p class="card-subtitle">Expliquez votre besoin (entreprise / association) et vos objectifs.</p>
+              {% endif %}
+
+            </div>
+
+            <div class="card-body">
+              <form method="post" class="contact-form">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-person input-icon"></i>
+                    <input type="text" name="name" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-envelope input-icon"></i>
+                    <input type="email" name="email" placeholder="votre.email@exemple.com" required>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-wrapper">
+                    <i class="bi bi-telephone input-icon"></i>
+                    <input type="tel" name="phone" placeholder="+225 XX XX XX XX XX">
+                  </div>
+                </div>
+
+                <input type="hidden" name="subject" value="Demande Démo - Module {{ module.name }}">
+
+                <div class="form-group mb-4">
+                  <textarea name="message" rows="4" placeholder="{{ module.form_hint }}" required></textarea>
+                </div>
+
+                <input type="text" name="website" style="display:none">
+                <button type="submit" class="submit-btn w-100">
+                  <span>Envoyer la demande</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="card-header">
+              <h4 class="card-title">{% if module.plan == 'asso' %}Modules inclus{% else %}Autres modules{% endif %}</h4>
+            </div>
+            <div class="card-body">
+              <div class="overview-list">
+                {% for other in modules %}{% if other.slug != module.slug %}{% if module.plan != 'asso' or other.asso_note %}
+                <div class="overview-item">
+                  <a href="{% url other.url_name %}" class="item-label">
+                    <i class="bi {{ other.icon }}"></i>
+                    <span>{{ other.name }}</span>
+                  </a>
+                  {% if other.plan != 'all' and module.plan != 'asso' %}<span class="item-value small">{{ other.plan_label }}</span>{% endif %}
+                </div>
+                {% endif %}{% endif %}{% endfor %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /row -->
+
+  </div><!-- /container -->
+</section>
+<!-- /Service Details Section -->
+
+{% endblock %}

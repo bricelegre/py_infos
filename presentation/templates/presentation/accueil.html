@@ -21,8 +21,8 @@
           </h2>
 
           <p data-aos="fade-right" data-aos-delay="500">
-            Comptabilité, trésorerie, facturation, CRM, GRH &amp; Paie, états financiers…
-            Fincompta centralise votre gestion, fiabilise vos données et vous donne des indicateurs clairs pour décider.
+            Comptabilité, trésorerie, facturation, CRM, GRH &amp; Paie, états financiers, budget et audit…
+            Fincompta centralise votre gestion, comptabilise automatiquement vos opérations et vous donne des indicateurs clairs pour décider.
           </p>
 
           <div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
@@ -84,21 +84,22 @@
         <div class="about-content">
           <h2 class="mb-3">Une gestion centralisée, orientée décision</h2>
           <p class="lead mb-3">
-            Fincompta regroupe comptabilité, trésorerie, facturation/CRM et GRH/Paie dans une même solution.
+            Fincompta regroupe comptabilité, trésorerie, facturation/CRM, GRH/Paie, états financiers, budget et audit
+            dans une même solution : ce qui est saisi dans un module est comptabilisé automatiquement.
           </p>
 
           <div class="mt-3">
             <div class="d-flex gap-2 align-items-start mb-2">
               <i class="bi bi-check-circle-fill text-primary"></i>
-              <div><strong>Fiabilisation automatique</strong> : contrôles métiers intégrés (équilibre, cohérence, suppression sécurisée).</div>
+              <div><strong>Zéro ressaisie</strong> : caisse, factures et bulletins de paie génèrent eux-mêmes leurs écritures comptables.</div>
             </div>
             <div class="d-flex gap-2 align-items-start mb-2">
               <i class="bi bi-check-circle-fill text-primary"></i>
-              <div><strong>États disponibles</strong> : balances, détails comptes/tiers, compte d’exploitation, analyses.</div>
+              <div><strong>États disponibles</strong> : balance générale, grand livre tiers, compte d’exploitation, État 301, DISA.</div>
             </div>
             <div class="d-flex gap-2 align-items-start mb-2">
               <i class="bi bi-check-circle-fill text-primary"></i>
-              <div><strong>Multi-exercices</strong> : comparaisons N, N-1, N-2 pour comprendre l’évolution.</div>
+              <div><strong>Multi-exercices</strong> : tableau de bord comparé à N-1 et N-2, clôture avec reports à nouveau.</div>
             </div>
           </div>
 
@@ -114,21 +115,21 @@
         <article class="about-card h-100">
           <div class="icon-wrap mb-3"><i class="bi bi-shield-lock"></i></div>
           <h5 class="mb-2">Sécurité &amp; traçabilité</h5>
-          <p>Accès par rôles, données isolées par client, journalisation des opérations clés.</p>
+          <p>Rôles et permissions par utilisateur, données isolées par organisation, historique des connexions.</p>
         </article>
       </div>
       <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
         <article class="about-card h-100">
           <div class="icon-wrap mb-3"><i class="bi bi-diagram-3"></i></div>
-          <h5 class="mb-2">ERP modulaire</h5>
-          <p>Activez seulement les modules dont vous avez besoin : compta, trésorerie, paie, CRM, facturation, analyses financières.</p>
+          <h5 class="mb-2">Tout-en-un dès la formule gratuite</h5>
+          <p>Comptabilité, trésorerie, facturation, CRM, GRH et paie sont inclus dans toutes les formules ; Starter et Premium ajoutent l’automatisation, l’audit, le budget et l’analyse financière.</p>
         </article>
       </div>
       <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
         <article class="about-card h-100">
           <div class="icon-wrap mb-3"><i class="bi bi-rocket-takeoff"></i></div>
           <h5 class="mb-2">Mise en route rapide</h5>
-          <p>Pré-Paramétrage Syscohada Revisé/Syscebnl, accompagnement, import possible, et prise en main facile, même pour les non-comptables.</p>
+          <p>Compte prêt à l’emploi : plan comptable SYSCOHADA révisé (ou SYCEBNL), journaux et paramètres de paie installés à l’inscription. Import Excel de l’historique possible.</p>
         </article>
       </div>
     </div>
@@ -146,59 +147,19 @@
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row g-4">
 
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-journal-text"></i></div>
-          <h3>Comptabilité</h3>
-          <p>Plan comptable, journaux, écritures, tiers, contrôles et traçabilité pour une comptabilité fiable.</p>
-          <div class="card-links"><a href="{% url 'presentation:details-comptabilite' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
+      {% for module in modules %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{% cycle '100' '200' '300' %}">
+        <div class="service-item h-100">
+          <div class="icon"><i class="bi {{ module.icon }}"></i></div>
+          <h3>{{ module.name }}</h3>
+          {% if module.plan != 'all' %}
+            <span class="badge bg-warning bg-opacity-10 text-warning mb-2"><i class="bi bi-star-fill"></i> {{ module.plan_label }}</span>
+          {% endif %}
+          <p>{{ module.summary }}</p>
+          <div class="card-links"><a href="{% url module.url_name %}" class="link-item">Découvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
         </div>
       </div>
-
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-cash-coin"></i></div>
-          <h3>Paie</h3>
-          <p>La gestion de la paie de vos salariés avec prise en charge des salaires de base. Gestion des prèts, des avances, nombre de jours travaillés etc.</p>
-          <div class="card-links"><a href="{% url 'presentation:details_paies' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-receipt"></i></div>
-          <h3>Facturation </h3>
-          <p>Devis, factures, suivi des encaissements et intégration progressive avec la comptabilité.</p>
-          <div class="card-links"><a href="{% url 'presentation:detail_facturation_crm' %}" class="link-item">Decouvrir les points forts<i class="bi bi-arrow-right"></i></a></div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-people"></i></div>
-          <h3>CRM</h3>
-          <p>Pipeline, opportunités, activités, relances et historique : une vision claire du commercial.</p>
-          <div class="card-links"><a href="{% url 'presentation:detail_crm' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-person-badge"></i></div>
-          <h3>GRH</h3>
-          <p>Dossiers salariés, contrats, congés, éléments de paie et synthèses par mois / exercice.</p>
-          <div class="card-links"><a href="{% url 'presentation:details_grh' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-        <div class="service-item">
-          <div class="icon"><i class="bi bi-graph-up"></i></div>
-          <h3>États &amp; Analyses</h3>
-          <p>Balances, détails comptes/tiers, compte d’exploitation, indicateurs et analyses (FR, BFR, trésorerie nette…).</p>
-          <div class="card-links"><a href="{% url 'presentation:details_etats_financiers' %}" class="link-item">Decouvrir les points forts <i class="bi bi-arrow-right"></i></a></div>
-        </div>
-      </div>
+      {% endfor %}
 
     </div>
   </div>
@@ -215,8 +176,8 @@
           <div class="intro-badge"><i class="bi bi-stars"></i><span>Points forts</span></div>
           <h2>Fiabilité, rapidité, pilotage</h2>            
           <p>
-            Fincompta est pensé pour les usages réels : saisie simple, contrôles automatiques,
-            états disponibles et décisions plus rapides.
+            Fincompta est pensé pour les usages réels : saisie simple, comptabilisation automatique,
+            contrôles intégrés et états disponibles à tout moment.
           </p>
           <div class="metrics-display">
             <div class="metric-card">
@@ -245,7 +206,7 @@
               <div class="feature-icon-wrapper"><i class="bi bi-arrow-left-right"></i></div>
               <div class="feature-meta">
                 <h3>Équilibre automatique</h3>
-                <span class="feature-tag active">Active</span>
+                <span class="feature-tag active">Toutes formules</span>
               </div>
             </div>
             <p>Contrôle des écritures : total débit = total crédit, cohérence des pièces et des paramètres.</p>
@@ -255,44 +216,44 @@
             <div class="feature-header">
               <div class="feature-icon-wrapper"><i class="bi bi-journals"></i></div>
               <div class="feature-meta">
-                <h3>États disponibles</h3>
-                <span class="feature-tag active">Active</span>
+                <h3>Comptabilisation automatique</h3>
+                <span class="feature-tag active">Toutes formules</span>
               </div>
             </div>
-            <p>Balance générale, détails compte/tiers, compte d’exploitation et vues par période.</p>
+            <p>Caisse, factures et bulletins de paie passent en comptabilité sans ressaisie ; la paie du mois se comptabilise en un clic (Starter &amp; Premium).</p>
           </div>
 
           <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
             <div class="feature-header">
               <div class="feature-icon-wrapper"><i class="bi bi-arrow-repeat"></i></div>
               <div class="feature-meta">
-                <h3>Abonnements / récurrences</h3>
-                <span class="feature-tag active">Active</span>
+                <h3>Écritures récurrentes &amp; imports</h3>
+                <span class="feature-tag active">Starter &amp; Premium</span>
               </div>
             </div>
-            <p>Modèles d’écritures pour les charges récurrentes (loyer, internet, assurance…), gain de temps et fiabilité.</p>
+            <p>Modèles d’écritures pour les charges récurrentes (loyer, internet, assurance…), import Excel des écritures et des ventes E-impôt.</p>
           </div>
 
           <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
             <div class="feature-header">
               <div class="feature-icon-wrapper"><i class="bi bi-graph-up-arrow"></i></div>
               <div class="feature-meta">
-                <h3>Pilotage multi-exercices</h3>
-                <span class="feature-tag beta">Advanced</span>
+                <h3>Audit &amp; analyse financière</h3>
+                <span class="feature-tag beta">Starter / Premium</span>
               </div>
             </div>
-            <p>Comparaison N / N-1 / N-2 et indicateurs (BFR, FR, trésorerie nette…) pour comprendre l’évolution.</p>
+            <p>14 contrôles automatiques de la comptabilité (Starter &amp; Premium) ; bilan fonctionnel, FRNG, BFR, trésorerie nette et ratios (Premium).</p>
           </div>
 
           <div class="feature-item" data-aos="fade-up" data-aos-delay="500">
             <div class="feature-header">
               <div class="feature-icon-wrapper"><i class="bi bi-shield-lock"></i></div>
               <div class="feature-meta">
-                <h3>Multi-clients &amp; permissions</h3>
-                <span class="feature-tag active">Active</span>
+                <h3>Rôles &amp; permissions</h3>
+                <span class="feature-tag active">Toutes formules</span>
               </div>
             </div>
-            <p>Chaque organisation possède son espace. Accès contrôlés par utilisateur/permission.</p>
+            <p>Chaque organisation possède son espace. Chaque utilisateur n’accède qu’aux modules et actions autorisés par son rôle.</p>
           </div>
 
         </div>
@@ -339,7 +300,7 @@
               <div class="benefit-icon"><i class="bi bi-check2-circle"></i></div>
               <div class="benefit-content">
                 <h4>Compta &amp; Trésorerie</h4>
-                <p>Saisie rapide, contrôles, soldes et états.</p>
+                <p>Saisie, caisse, lettrage, rapport mensuel.</p>
               </div>
             </div>
 
@@ -347,7 +308,7 @@
               <div class="benefit-icon"><i class="bi bi-receipt"></i></div>
               <div class="benefit-content">
                 <h4>Facturation &amp; CRM</h4>
-                <p>Suivi client, pipeline et relances.</p>
+                <p>Devis, factures, impayés, pipeline.</p>
               </div>
             </div>
 
@@ -355,15 +316,15 @@
               <div class="benefit-icon"><i class="bi bi-person-badge"></i></div>
               <div class="benefit-content">
                 <h4>GRH &amp; Paie</h4>
-                <p>Contrats, congés, bulletins et synthèses.</p>
+                <p>Contrats, congés, bulletins, 301, DISA.</p>
               </div>
             </div>
 
             <div class="benefit-item">
               <div class="benefit-icon"><i class="bi bi-graph-up"></i></div>
               <div class="benefit-content">
-                <h4>Analyses &amp; reporting</h4>
-                <p>Comparaisons et indicateurs de gestion.</p>
+                <h4>Budget, audit &amp; analyses</h4>
+                <p>Budget vs réalisé, contrôles, ratios.</p>
               </div>
             </div>
           </div>
@@ -387,113 +348,97 @@
 
   <div class="container section-title" data-aos="fade-up">
     <h2>Offres &amp; Abonnements</h2>
-    <p>Choisissez la formule adaptée à votre structure. Upgrade possible à tout moment.</p>
+    <p>Tous les modules essentiels dès la formule gratuite. Les formules payantes ajoutent utilisateurs, salariés, automatisation et pilotage.</p>
   </div>
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
     <div class="row gy-4">
 
-      <!-- Entreprise -->
-      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
+      <!-- Free -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
         <div class="pricing-card featured">
-          <div class="popular-badge">Gratuit</div>
+          <div class="popular-badge">Free</div>
           <div class="plan-header">
-            <p class="plan-subtitle"> Demarrer avec un compte gratuit</p>
-            <p class="plan-subtitle">Conforme Syscohada Revisé</p>
+            <p class="plan-subtitle">Démarrer gratuitement</p>
+            <p class="plan-subtitle">Conforme SYSCOHADA révisé</p>
           </div>
 
-           <div class="plan-pricing">
-            <p class="billing-info"> 0 Fcfa / Mois</p>
+          <div class="plan-pricing">
+            <p class="billing-info">0 Fcfa / mois</p>
           </div>
 
           <div class="plan-features">
             <ul class="features-list">
-              <ul class="features-list">
-                <li><i class="bi bi-check-circle-fill"></i><span> 1 utilisateur</span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span> 2 Salariés </span></li>
-                <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
-              </ul>
+              <li><i class="bi bi-check-circle-fill"></i><span>1 utilisateur</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>2 salariés</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Comptabilité, caisse, facturation &amp; CRM</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>GRH &amp; paie, État 301, DISA</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Balance, grand livre tiers, compte d’exploitation</span></li>
+              <li><i class="bi bi-x-circle text-muted"></i><span>Imports, audit, paie groupée</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
             </ul>
           </div>
 
           <div class="plan-action">
             <a href="{% url 'clients:ajouter_client' 'Free' %}" class="btn-plan">Je démarre</a>
-            <p class="trial-info">Idéal pour TPE </p>
+            <p class="trial-info">Idéal pour découvrir ou pour une TPE</p>
           </div>
         </div>
       </div>
 
-       <!-- Association -->
-      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
-        <div class="pricing-card featured">
-          <div class="popular-badge">Association/ONG</div>
-          <div class="plan-header">
-            <p class="plan-subtitle">Conforme au Syscebnl</p>
-          </div>
-          <div class="plan-pricing">
-            <p class="billing-info">5 000 Fcfa / Mois</p>
-          </div>
-
-          <div class="plan-features">
-            <ul class="features-list">
-            <ul class="features-list">
-              <li><i class="bi bi-check-circle-fill"></i><span> 10 utilisateurs</span></li>
-              <li><i class="bi bi-check-circle-fill"></i><span> 200 Salariés </span></li>
-              <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
-            </ul>
-              
-            </ul>
-          </div>
-
-          <div class="plan-action">
-            <a href="{% url 'asso:ajouter_asso' %}" class="btn-plan">Je démarre</a>
-            <p class="trial-info">Systeme Syscebnl</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Essentiel -->
+      <!-- Starter -->
       <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
         <div class="pricing-card featured">
           <div class="popular-badge">Starter</div>
           <div class="plan-header">
-            <p class="plan-subtitle">Conforme Syscohada Revisé</p>
+            <p class="plan-subtitle">Automatiser la gestion</p>
+            <p class="plan-subtitle">Conforme SYSCOHADA révisé</p>
           </div>
 
           <div class="plan-pricing">
-            <p class="billing-info">10 000 Fcfa / Mois</p>
+            <p class="billing-info">10 000 Fcfa / mois</p>
           </div>
 
           <div class="plan-features">
             <ul class="features-list">
-                <li><i class="bi bi-check-circle-fill"></i><span> 2 utilisateurs</span></li>
-              <li><i class="bi bi-check-circle-fill"></i><span> 20 Salariés </span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>2 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>20 salariés</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Tout le contenu Free</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Imports Excel &amp; ventes E-impôt, écritures récurrentes</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Paie groupée, simulateurs, calcul du congé payé</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Audit comptable (14 contrôles)</span></li>
               <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
             </ul>
           </div>
 
           <div class="plan-action">
             <a href="{% url 'clients:ajouter_client' 'Starter' %}" class="btn-plan">Je démarre</a>
-            <p class="trial-info">Idéal pour TPE </p>
+            <p class="trial-info">Idéal pour TPE</p>
           </div>
         </div>
       </div>
 
-      <!-- Pro -->
+      <!-- Premium -->
       <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
         <div class="pricing-card featured">
           <div class="popular-badge">Premium</div>
           <div class="plan-header">
-            <p class="plan-subtitle">Conforme Syscohada Revisé</p>
+            <p class="plan-subtitle">Piloter et anticiper</p>
+            <p class="plan-subtitle">Conforme SYSCOHADA révisé</p>
           </div>
+
           <div class="plan-pricing">
-            <p class="billing-info">15 000 Fcfa/ mois</p>
+            <p class="billing-info">15 000 Fcfa / mois</p>
           </div>
-          
+
           <div class="plan-features">
             <ul class="features-list">
-              <li><i class="bi bi-check-circle-fill"></i><span> 10 utilisateurs</span></li>
-              <li><i class="bi bi-check-circle-fill"></i><span> 200 Salariés </span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>10 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>200 salariés</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Tout le contenu Starter</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Gestion budgétaire</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Analyses &amp; structures financières</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Prospection automatique</span></li>
               <li><i class="bi bi-check-circle-fill"></i><span>Support prioritaire</span></li>
             </ul>
           </div>
@@ -501,6 +446,39 @@
           <div class="plan-action">
             <a href="{% url 'clients:ajouter_client' 'Premium' %}" class="btn-plan">Je choisis Premium</a>
             <p class="trial-info">Idéal PME en croissance</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Association -->
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
+        <div class="pricing-card featured">
+          <div class="popular-badge">Association/ONG</div>
+          <div class="plan-header">
+            <p class="plan-subtitle">Version dédiée aux associations</p>
+            <p class="plan-subtitle">Conforme SYCEBNL</p>
+          </div>
+
+          <div class="plan-pricing">
+            <p class="billing-info">5 000 Fcfa / mois</p>
+          </div>
+
+          <div class="plan-features">
+            <ul class="features-list">
+              <li><i class="bi bi-check-circle-fill"></i><span>10 utilisateurs</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>200 salariés</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Plan comptable &amp; états SYCEBNL</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Bilan, emplois-ressources, exécution budgétaire, notes annexes</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Comptabilité, caisse, GRH &amp; paie</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Audit (23 contrôles)</span></li>
+              <li><i class="bi bi-x-circle text-muted"></i><span>Facturation, CRM, budget, prospection</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
+            </ul>
+          </div>
+
+          <div class="plan-action">
+            <a href="{% url 'asso:ajouter_asso' %}" class="btn-plan">Je démarre</a>
+            <p class="trial-info"><a href="{% url 'presentation:details_association' %}">Voir le détail de l’offre</a></p>
           </div>
         </div>
       </div>
@@ -541,9 +519,44 @@
 
     </div>
 
+    <div class="plan-comparison mt-5" data-aos="fade-up" data-aos-delay="250">
+      <h3 class="text-center mb-4">Comparer les formules</h3>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center" style="--bs-table-bg: transparent; --bs-table-color: inherit;">
+          <thead>
+            <tr>
+              <th class="text-start">Fonctionnalité</th>
+              <th>Free</th>
+              <th>Starter</th>
+              <th>Premium</th>
+              <th>Association/ONG</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in plan_comparison %}
+            <tr>
+              <td class="text-start">{{ row.label }}</td>
+              {% for value in row.values %}
+              <td>
+                {% if value is True %}<i class="bi bi-check-circle-fill text-success" aria-label="Inclus"></i>
+                {% elif value is False %}<i class="bi bi-dash-lg text-muted" aria-label="Non inclus"></i>
+                {% else %}{{ value }}{% endif %}
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="small text-muted text-center mb-0">
+        Quotas d’utilisateurs et de salariés appliqués par formule.
+        <a href="{% url 'presentation:details_association' %}">Découvrir l’offre Association/ONG</a>
+      </p>
+    </div>
+
     <div class="pricing-footer" data-aos="fade-up" data-aos-delay="300">
       <p class="footer-text">
-        Toutes les formules incluent : sécurité, sauvegarde, évolutivité et assistance.
+        Toutes les formules incluent : sécurité, sauvegarde, mises à jour et assistance. Passage à une formule supérieure à tout moment, sans perte de données.
       </p>
       <div class="footer-links">
         <a href="#faq">Voir la FAQ</a>
@@ -577,19 +590,25 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Oui. Fincompta peut être configuré pour une gestion associative (SYCEBNL) avec suivi, états et reporting adaptés.</p>
+                <p>Oui. L’offre Association/ONG (5 000 Fcfa / mois) est une version dédiée, conforme au SYCEBNL : plan comptable SYCEBNL,
+                  bilan, tableau emplois-ressources, exécution budgétaire, notes annexes, comptabilité, caisse, GRH, paie et un audit de 23 contrôles.
+                  Elle n’inclut pas la facturation, le CRM, la gestion budgétaire ni la prospection.
+                  <a href="{% url 'presentation:details_association' %}">En savoir plus</a></p>
               </div>
             </div>
           </div>
 
           <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
             <div class="faq-header">
-              <h4>Puis-je commencer avec un module puis évoluer ?</h4>
+              <h4>Quelle différence entre Free, Starter et Premium ?</h4>
               <div class="faq-icon"><i class="bi bi-chevron-down"></i></div>
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Oui. L’ERP est modulaire : vous pouvez démarrer (compta/trésorerie) puis activer facturation, CRM, GRH/Paie et analyses.</p>
+                <p>Free inclut déjà la comptabilité, la caisse, la facturation, le CRM, la GRH et la paie (1 utilisateur, 2 salariés).
+                  Starter (2 utilisateurs, 20 salariés) ajoute les imports Excel et E-impôt, les écritures récurrentes, la paie groupée,
+                  les simulateurs de paie et l’audit comptable. Premium (10 utilisateurs, 200 salariés) ajoute la gestion budgétaire,
+                  l’analyse financière, la prospection automatique et le support prioritaire.</p>
               </div>
             </div>
           </div>
@@ -601,7 +620,8 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Nous vous accompagnons sur le paramétrage (plan comptable, journaux, tiers), l’import si nécessaire, et la formation.</p>
+                <p>Votre compte est créé en ligne, prêt à l’emploi : plan comptable, journaux et paramètres de paie sont installés automatiquement.
+                  Nous vous accompagnons ensuite sur les tiers, la reprise de l’historique si nécessaire et la formation.</p>
               </div>
             </div>
           </div>
@@ -613,7 +633,7 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Les accès sont gérés par utilisateurs/permissions et les données sont isolées par organisation. Des sauvegardes sont prévues.</p>
+                <p>Les accès sont gérés par rôles et permissions, les données sont isolées par organisation, l’historique des connexions est conservé et des sauvegardes sont prévues.</p>
               </div>
             </div>
           </div>
@@ -625,7 +645,7 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Oui. Vous pouvez upgrader/downgrader selon votre besoin. L’équipe vous guide pour un changement sans perte de données.</p>
+                <p>Oui. Vous pouvez passer à une formule supérieure à tout moment depuis l’application, avec paiement en ligne. Vos données sont conservées.</p>
               </div>
             </div>
           </div>
@@ -757,9 +777,10 @@
               <div class="col-md-6">
                 <select class="form-select" name="plan">
                   <option value="">Formule souhaitée (optionnel)</option>
-                  <option value="Association">Association</option>
+                  <option value="Free">Free</option>
                   <option value="Starter">Starter</option>
-                  <option value="Professionnel">Professionnel</option>
+                  <option value="Premium">Premium</option>
+                  <option value="Association">Association/ONG</option>
                 </select>
               </div>
               <div class="col-md-6">
