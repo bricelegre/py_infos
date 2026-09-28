@@ -7,7 +7,13 @@ réellement l'application fincompta, formule par formule :
 
 - "all"     : inclus dans toutes les formules (Free, Starter, Premium) ;
 - "paid"    : formules payantes uniquement (Starter et Premium) ;
-- "premium" : formule Premium uniquement.
+- "premium" : formule Premium uniquement ;
+- "asso"    : offre Association/ONG uniquement.
+
+L'offre Association/ONG repose sur une application distincte, syscebnl
+(plan comptable et états SYCEBNL). ASSO_AVAILABILITY indique, module par
+module, ce qu'elle reprend de fincompta ; syscebnl n'applique pas de
+restriction par formule.
 
 Ces niveaux reprennent FEATURE_MIN_PLAN_LEVEL (fincompta/payment/services.py) :
 à tenir à jour ensemble.
@@ -17,6 +23,31 @@ PLAN_LABELS = {
     "all": "Toutes formules",
     "paid": "Starter & Premium",
     "premium": "Premium",
+    "asso": "Association/ONG",
+}
+
+PLAN_AVAILABILITY = {
+    "all": "Free, Starter, Premium",
+    "paid": "Starter, Premium",
+    "premium": "Premium",
+    "asso": "Association/ONG",
+}
+
+# Disponibilité de chaque module dans l'offre Association/ONG (syscebnl) :
+# None = module absent ; sinon texte affiché sur la page du module.
+ASSO_AVAILABILITY = {
+    "comptabilite": "Inclus, avec le plan comptable SYCEBNL. Sans import des ventes E-impôt ni "
+                    "comptabilisation groupée de la paie.",
+    "tresorerie": "Journal de caisse inclus. Sans état de caisse ni rapport mensuel par e-mail.",
+    "facturation": None,
+    "crm": None,
+    "grh": "Inclus.",
+    "paie": "Inclus. Comptabilisation bulletin par bulletin.",
+    "etats": "Inclus, avec en plus les états SYCEBNL : bilan, tableau emplois-ressources, "
+             "exécution budgétaire et notes annexes.",
+    "budget": None,
+    "audit": "Inclus, avec 23 contrôles dont 9 propres au SYCEBNL.",
+    "prospection": None,
 }
 
 
@@ -592,6 +623,82 @@ MODULES = {
         ],
         "form_hint": "Décrivez : votre secteur, les sites à surveiller, les opportunités recherchées…",
     },
+
+    # ------------------------------------------------------------------ Association / ONG
+    "association": {
+        "url_name": "presentation:details_association",
+        "name": "Association / ONG",
+        "icon": "bi-heart",
+        "plan": "asso",
+        "summary": (
+            "Version dédiée aux associations, ONG, fondations et projets : plan comptable et états "
+            "SYCEBNL, trésorerie, GRH, paie et audit."
+        ),
+        "lead": (
+            "Une version de Fincompta conçue pour les entités à but non lucratif : plan comptable "
+            "SYCEBNL installé à l'inscription, états financiers SYCEBNL (bilan, tableau "
+            "emplois-ressources, exécution budgétaire, notes annexes), caisse, GRH, paie et un audit "
+            "qui connaît les règles propres aux fonds dédiés, subventions et contributions en nature."
+        ),
+        "badges": ["Conforme SYCEBNL", "États SYCEBNL"],
+        "headline": "La comptabilité SYCEBNL, sans tableur",
+        "subtitle": (
+            "Cotisations, dons, subventions, fonds affectés à des projets : vos opérations sont "
+            "saisies une fois et vos états SYCEBNL sont produits directement."
+        ),
+        "steps": [
+            ("Paramétrage", "Plan comptable SYCEBNL, journaux et paramètres de paie installés à la "
+             "création du compte."),
+            ("Saisie", "Opérations, caisse, écritures récurrentes et import Excel des écritures."),
+            ("Paie", "Bulletins conformes (ITS, CNPS, CMU), État 301, DISA, comptabilisation."),
+            ("Audit", "23 contrôles automatiques, dont 9 propres au SYCEBNL."),
+            ("États & clôture", "Bilan, compte d'exploitation, emplois-ressources, exécution budgétaire, "
+             "notes annexes, clôture."),
+        ],
+        "tabs": [
+            ("États SYCEBNL", [
+                ("bi-building", "Bilan",
+                 "Actif / passif avec comparatif N-1 : dotations, fonds propres, fonds affectés et reportés, "
+                 "fonds de projet, excédent ou déficit.", "asso"),
+                ("bi-arrow-down-up", "Tableau emplois-ressources",
+                 "Pour les projets : ressources, immobilisations, charges de fonctionnement, excédent ou "
+                 "déficit des fonds reçus et contrôle de la trésorerie.", "asso"),
+                ("bi-clipboard-data", "Exécution budgétaire",
+                 "Budget, décaissements, engagements, réalisation, crédit disponible et taux d'exécution "
+                 "par ligne.", "asso"),
+                ("bi-journal-bookmark", "Notes annexes",
+                 "Contributions volontaires en nature (classe 9), legs, dons et usufruits temporaires.", "asso"),
+            ]),
+            ("Audit SYCEBNL", [
+                ("bi-arrow-repeat", "Reprises de fonds",
+                 "Subventions d'investissement, fonds de dons et legs, fonds affectés aux projets non repris.",
+                 "asso"),
+                ("bi-cash-coin", "Dotations & fonds d'administration",
+                 "Dotation consomptible non transférée, fonds d'administration (462 / 702), apports non "
+                 "libérés.", "asso"),
+                ("bi-people", "Adhérents & usagers",
+                 "Cotisations et ventes passées sur le bon compte (adhérents 411, clients-usagers 412).",
+                 "asso"),
+                ("bi-gift", "Contributions en nature & usufruit",
+                 "Contributions volontaires hors classe 9, usufruit temporaire non amorti.", "asso"),
+            ]),
+            ("Modules inclus", [
+                ("bi-journal-text", "Comptabilité & caisse",
+                 "Saisie, import Excel des écritures, écritures récurrentes, lettrage, recherche, journal "
+                 "de caisse.", "asso"),
+                ("bi-person-badge", "GRH & Paie",
+                 "Dossiers salariés, contrats, congés, prêts, bulletins, paie groupée, simulateurs, État 301, "
+                 "DISA.", "asso"),
+                ("bi-graph-up", "Analyses",
+                 "Balance, grand livre tiers, compte d'exploitation, analyses et structures financières.",
+                 "asso"),
+                ("bi-clipboard-check", "Audit comptable",
+                 "Les 14 contrôles de la version entreprise, plus 9 contrôles SYCEBNL et la checklist de "
+                 "révision.", "asso"),
+            ]),
+        ],
+        "form_hint": "Décrivez : type d'entité, projets et bailleurs, nombre de salariés, états à produire…",
+    },
 }
 
 # Ordre d'affichage (accueil, pied de page, navigation entre modules).
@@ -603,6 +710,8 @@ MODULE_ORDER = [
 for _slug, _module in MODULES.items():
     _module["slug"] = _slug
     _module["plan_label"] = PLAN_LABELS[_module["plan"]]
+    _module["plans_text"] = PLAN_AVAILABILITY[_module["plan"]]
+    _module["asso_note"] = ASSO_AVAILABILITY.get(_slug)
     _module["tabs"] = [
         {
             "title": title,
@@ -621,26 +730,29 @@ def module_list():
     return [MODULES[slug] for slug in MODULE_ORDER]
 
 
-# Comparatif des formules Free / Starter / Premium affiché sur l'accueil
-# (l'offre Association repose sur l'application syscebnl, présentée à part).
+# Comparatif des formules affiché sur l'accueil : Free, Starter, Premium
+# (fincompta) puis Association/ONG (syscebnl).
 # Valeurs : True (inclus), False (non inclus) ou texte.
 PLAN_COMPARISON = [
-    ("Utilisateurs", "1", "2", "10"),
-    ("Salariés gérés (GRH & Paie)", "2", "20", "200"),
-    ("Comptabilité : saisie, lettrage, recherche", True, True, True),
-    ("Trésorerie & caisse, rapport mensuel", True, True, True),
-    ("Facturation & CRM", True, True, True),
-    ("GRH & Paie (bulletins, État 301, DISA)", True, True, True),
-    ("Balance, grand livre tiers, compte d'exploitation", True, True, True),
-    ("Import des écritures & des ventes E-impôt", False, True, True),
-    ("Écritures récurrentes", False, True, True),
-    ("Paie groupée & comptabilisation de la paie du mois", False, True, True),
-    ("Simulateurs de paie & calcul du congé payé", False, True, True),
-    ("Audit comptable (14 contrôles)", False, True, True),
-    ("Analyses financières & structures financières", False, False, True),
-    ("Gestion budgétaire", False, False, True),
-    ("Prospection automatique", False, False, True),
-    ("Support", "Standard", "Standard", "Prioritaire"),
+    ("Utilisateurs", "1", "2", "10", "10"),
+    ("Salariés gérés (GRH & Paie)", "2", "20", "200", "200"),
+    ("Référentiel comptable", "SYSCOHADA révisé", "SYSCOHADA révisé", "SYSCOHADA révisé", "SYCEBNL"),
+    ("Comptabilité : saisie, lettrage, recherche", True, True, True, True),
+    ("Journal de caisse", True, True, True, True),
+    ("État de caisse & rapport mensuel par e-mail", True, True, True, False),
+    ("Facturation & CRM", True, True, True, False),
+    ("GRH & Paie (bulletins, État 301, DISA)", True, True, True, True),
+    ("Balance, grand livre tiers, compte d'exploitation", True, True, True, True),
+    ("Bilan, emplois-ressources, exécution budgétaire, notes annexes", False, False, False, True),
+    ("Import des écritures (Excel) & écritures récurrentes", False, True, True, True),
+    ("Import des ventes E-impôt", False, True, True, False),
+    ("Paie groupée, simulateurs, calcul du congé payé", False, True, True, True),
+    ("Comptabilisation de la paie du mois en un clic", False, True, True, False),
+    ("Audit comptable", False, "14 contrôles", "14 contrôles", "23 contrôles"),
+    ("Analyses financières & structures financières", False, False, True, True),
+    ("Gestion budgétaire", False, False, True, False),
+    ("Prospection automatique", False, False, True, False),
+    ("Support", "Standard", "Standard", "Prioritaire", "Standard"),
 ]
 
 

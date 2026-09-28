@@ -467,14 +467,18 @@
             <ul class="features-list">
               <li><i class="bi bi-check-circle-fill"></i><span>10 utilisateurs</span></li>
               <li><i class="bi bi-check-circle-fill"></i><span>200 salariés</span></li>
-              <li><i class="bi bi-check-circle-fill"></i><span>Plan comptable SYCEBNL</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Plan comptable &amp; états SYCEBNL</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Bilan, emplois-ressources, exécution budgétaire, notes annexes</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Comptabilité, caisse, GRH &amp; paie</span></li>
+              <li><i class="bi bi-check-circle-fill"></i><span>Audit (23 contrôles)</span></li>
+              <li><i class="bi bi-x-circle text-muted"></i><span>Facturation, CRM, budget, prospection</span></li>
               <li><i class="bi bi-check-circle-fill"></i><span>Support standard</span></li>
             </ul>
           </div>
 
           <div class="plan-action">
             <a href="{% url 'asso:ajouter_asso' %}" class="btn-plan">Je démarre</a>
-            <p class="trial-info">Associations, ONG, fondations</p>
+            <p class="trial-info"><a href="{% url 'presentation:details_association' %}">Voir le détail de l’offre</a></p>
           </div>
         </div>
       </div>
@@ -525,6 +529,7 @@
               <th>Free</th>
               <th>Starter</th>
               <th>Premium</th>
+              <th>Association/ONG</th>
             </tr>
           </thead>
           <tbody>
@@ -544,7 +549,8 @@
         </table>
       </div>
       <p class="small text-muted text-center mb-0">
-        Offre Association/ONG : version SYCEBNL dédiée, présentée séparément. Quotas d’utilisateurs et de salariés appliqués par formule.
+        Quotas d’utilisateurs et de salariés appliqués par formule.
+        <a href="{% url 'presentation:details_association' %}">Découvrir l’offre Association/ONG</a>
       </p>
     </div>
 
@@ -584,7 +590,10 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Oui. L’offre Association/ONG repose sur une version dédiée, conforme au SYCEBNL, avec son propre plan comptable et ses états.</p>
+                <p>Oui. L’offre Association/ONG (5 000 Fcfa / mois) est une version dédiée, conforme au SYCEBNL : plan comptable SYCEBNL,
+                  bilan, tableau emplois-ressources, exécution budgétaire, notes annexes, comptabilité, caisse, GRH, paie et un audit de 23 contrôles.
+                  Elle n’inclut pas la facturation, le CRM, la gestion budgétaire ni la prospection.
+                  <a href="{% url 'presentation:details_association' %}">En savoir plus</a></p>
               </div>
             </div>
           </div>

@@ -14,4 +14,5 @@ urlpatterns = [
     path("details-budget", views.detail_module, {"slug": "budget"}, name="details_budget"),
     path("details-audit", views.detail_module, {"slug": "audit"}, name="details_audit"),
     path("details-prospection", views.detail_module, {"slug": "prospection"}, name="details_prospection"),
+    path("details-association", views.detail_module, {"slug": "association"}, name="details_association"),
 ]
