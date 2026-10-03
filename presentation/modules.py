@@ -39,8 +39,7 @@ ASSO_AVAILABILITY = {
     "comptabilite": "Inclus, avec le plan comptable SYCEBNL. Sans import des ventes E-impôt ni "
                     "comptabilisation groupée de la paie.",
     "tresorerie": "Journal de caisse inclus. Sans état de caisse ni rapport mensuel par e-mail.",
-    "facturation": None,
-    "crm": None,
+    "facturation_crm": None,
     "grh": "Inclus.",
     "paie": "Inclus. Comptabilisation bulletin par bulletin.",
     "etats": "Inclus, avec en plus les états SYCEBNL : bilan, tableau emplois-ressources, "
@@ -198,36 +197,63 @@ MODULES = {
         "form_hint": "Décrivez : nombre de caisses, volume d'opérations, banques et mobile money utilisés…",
     },
 
-    # ------------------------------------------------------------------ Facturation
-    "facturation": {
+    # ------------------------------------------------------------------ Facturation & CRM
+    "facturation_crm": {
         "url_name": "presentation:detail_facturation_crm",
-        "name": "Facturation",
+        "name": "Facturation & CRM",
         "icon": "bi-receipt",
         "plan": "all",
         "summary": (
-            "Devis et factures (HT, TVA, TTC), PDF avec QR code de vérification, envoi par e-mail, "
-            "paiements partiels et comptabilisation en un clic."
+            "Clients et prospects, activités, pipeline Kanban et prévisions ; devis et factures avec "
+            "QR code, envoi par e-mail, paiements partiels et comptabilisation en un clic."
         ),
         "lead": (
-            "Émettez vos devis et factures en quelques clics, envoyez-les par e-mail, suivez les "
-            "règlements et les impayés, puis comptabilisez chaque facture sans ressaisie."
+            "Suivez vos clients et prospects, faites avancer les opportunités dans le pipeline, puis "
+            "émettez devis et factures, suivez les règlements et les impayés et comptabilisez chaque "
+            "facture sans ressaisie : de la première activité commerciale à l'encaissement."
         ),
-        "badges": ["Devis & factures", "QR code d'authenticité"],
-        "headline": "Du devis à l'encaissement, sans ressaisie",
+        "badges": ["Pipeline Kanban", "Devis & factures", "QR code d'authenticité"],
+        "headline": "De la prospection à l'encaissement, sans ressaisie",
         "subtitle": (
-            "Les clients sont partagés avec la comptabilité et le CRM : une facture émise est suivie "
-            "jusqu'à son règlement et à sa comptabilisation."
+            "Une fiche client unique, partagée avec la comptabilité : opportunités, devis, factures, "
+            "règlements et historique des échanges sont au même endroit."
         ),
         "steps": [
-            ("Clients", "Fiche client commune à la facturation, au CRM et à la comptabilité."),
-            ("Devis", "Lignes de prestation, quantités, prix unitaires, remise, TVA et autres taxes."),
-            ("Facture", "Conversion du devis en facture, n° de bon de commande, échéance et modalité de "
-             "paiement."),
-            ("Envoi & encaissement", "PDF envoyé par e-mail, règlements partiels et reste dû suivis."),
+            ("Clients & prospects", "Fiche entreprise (RCCM, n° de compte contribuable, contacts), "
+             "commune au CRM, à la facturation et à la comptabilité."),
+            ("Activités & opportunités", "Appels, rendez-vous, relances ; opportunités avec montant, "
+             "probabilité et échéance, suivies dans le pipeline Kanban."),
+            ("Devis & facture", "Lignes de prestation, remise, TVA et autres taxes ; conversion du devis "
+             "en facture, échéance et modalité de paiement."),
+            ("Envoi & encaissement", "PDF avec QR code envoyé par e-mail, règlements partiels et reste dû "
+             "suivis."),
             ("Comptabilisation", "La facture passe en comptabilité en un clic, avec le choix du centre "
              "analytique en Premium."),
         ],
         "tabs": [
+            ("Clients & activités", [
+                ("bi-building", "Clients & prospects",
+                 "Fiche entreprise, timeline des échanges, factures et synthèse par client.", "all"),
+                ("bi-calendar-check", "Activités & tâches",
+                 "Mes activités, toutes les activités de l'équipe, tâches assignées et échéances.", "all"),
+                ("bi-cart-check", "Ventes",
+                 "Ventes par client et par commercial, reste dû échu et retard maximum.", "all"),
+                ("bi-binoculars", "Prospection automatique",
+                 "Veille sur les sites et flux de votre choix pour détecter de nouvelles opportunités.",
+                 "premium"),
+            ]),
+            ("Opportunités & prévisions", [
+                ("bi-kanban", "Pipeline Kanban",
+                 "Étapes du pipeline, probabilité, montant pondéré, opportunités gagnées ou perdues (avec "
+                 "la raison).", "all"),
+                ("bi-graph-up", "Prévisions de ventes",
+                 "Prévision des 6 prochains mois, pondérée par la probabilité et l'échéance.", "all"),
+                ("bi-trophy", "Statistiques d'équipe",
+                 "Taux de réussite à 90 et 360 jours, taux de conversion, panier moyen sur 12 mois.", "all"),
+                ("bi-speedometer2", "Tableau de bord",
+                 "CA HT, TVA et TTC du mois et de l'année, CA N / N-1, top clients, opportunités ouvertes.",
+                 "all"),
+            ]),
             ("Devis & factures", [
                 ("bi-file-earmark-text", "Devis et factures",
                  "Désignation, quantité, prix unitaire, remise, HT, TVA, autres taxes et TTC calculés.", "all"),
@@ -239,81 +265,22 @@ MODULES = {
                 ("bi-envelope", "Envoi par e-mail",
                  "Envoi du devis ou de la facture au client directement depuis Fincompta.", "all"),
             ]),
-            ("Suivi & reporting", [
+            ("Encaissement & exports", [
                 ("bi-wallet2", "Paiements partiels",
                  "Plusieurs règlements par facture, montant déjà réglé et reste dû toujours à jour.", "all"),
                 ("bi-exclamation-triangle", "Factures échues",
-                 "Liste des factures échues et non payées, avec le retard et le reste dû par client.", "all"),
-                ("bi-speedometer2", "Tableau de bord",
-                 "CA HT, TVA et TTC du mois et de l'année, nombre de ventes, opportunités ouvertes.", "all"),
-                ("bi-filetype-pdf", "Rapport Facturation & CRM",
-                 "Rapport mensuel PDF : ventes comptabilisées, créations et activités commerciales du mois.",
+                 "Factures échues et non payées par ancienneté, avec le retard et le reste dû par client.",
                  "all"),
-                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
-                 "Liste des factures, liste des devis et tableau de bord (CA N / N-1, top clients, échues "
-                 "par ancienneté) exportés avec vos filtres.", "all"),
+                ("bi-file-earmark-arrow-down", "Rapports & exports PDF / Excel",
+                 "Rapport mensuel PDF ; factures, devis, clients, opportunités, pipeline, prévisions, "
+                 "activités et tâches exportés avec vos filtres.", "all"),
                 ("bi-diagram-3", "Ventes par centre",
                  "À la comptabilisation, la vente est affectée au centre de responsabilité de votre choix.",
                  "premium"),
             ]),
         ],
-        "form_hint": "Décrivez : nombre de factures par mois, taxes appliquées, besoin d'envoi par e-mail…",
-    },
-
-    # ------------------------------------------------------------------ CRM
-    "crm": {
-        "url_name": "presentation:detail_crm",
-        "name": "CRM",
-        "icon": "bi-people",
-        "plan": "all",
-        "summary": (
-            "Clients et prospects, activités, opportunités, pipeline Kanban, prévisions de ventes "
-            "et statistiques d'équipe."
-        ),
-        "lead": (
-            "Suivez vos clients et prospects, planifiez les activités de vos commerciaux, faites "
-            "avancer les opportunités dans le pipeline et anticipez vos ventes des six prochains mois."
-        ),
-        "badges": ["Pipeline Kanban", "Prévisions pondérées"],
-        "headline": "Une vision claire de votre activité commerciale",
-        "subtitle": (
-            "Le CRM partage ses clients avec la facturation : de la première activité à la facture "
-            "réglée, tout l'historique est au même endroit."
-        ),
-        "steps": [
-            ("Clients & prospects", "Fiche entreprise (RCCM, n° de compte contribuable, contacts) et "
-             "historique complet."),
-            ("Activités", "Appels, rendez-vous, relances : chaque commercial suit ses activités et tâches."),
-            ("Opportunités", "Montant, probabilité, échéance prévue et étape du pipeline."),
-            ("Pipeline", "Vue Kanban : faites glisser une opportunité d'une étape à l'autre, gagnée ou "
-             "perdue (avec la raison)."),
-            ("Prévisions", "Prévision mensuelle pondérée et statistiques d'équipe."),
-        ],
-        "tabs": [
-            ("Clients & activités", [
-                ("bi-building", "Clients & prospects",
-                 "Fiche entreprise, timeline des échanges, factures et synthèse par client.", "all"),
-                ("bi-calendar-check", "Activités & tâches",
-                 "Mes activités, toutes les activités de l'équipe, tâches assignées et échéances.", "all"),
-                ("bi-cart-check", "Ventes",
-                 "Ventes par client et par commercial, reste dû échu et retard maximum.", "all"),
-                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
-                 "Clients et prospects, ventes, factures échues, opportunités, pipeline, prévisions, "
-                 "activités et tâches exportés avec vos filtres, liste complète.", "all"),
-            ]),
-            ("Opportunités & prévisions", [
-                ("bi-kanban", "Pipeline Kanban",
-                 "Étapes du pipeline, probabilité, montant pondéré, opportunités gagnées ou perdues.", "all"),
-                ("bi-graph-up", "Prévisions de ventes",
-                 "Prévision des 6 prochains mois, pondérée par la probabilité et l'échéance.", "all"),
-                ("bi-trophy", "Statistiques d'équipe",
-                 "Taux de réussite à 90 et 360 jours, taux de conversion, panier moyen sur 12 mois.", "all"),
-                ("bi-binoculars", "Prospection automatique",
-                 "Veille sur les sites et flux de votre choix pour détecter de nouvelles opportunités.",
-                 "premium"),
-            ]),
-        ],
-        "form_hint": "Décrivez : taille de l'équipe commerciale, cycle de vente, suivi actuel des prospects…",
+        "form_hint": "Décrivez : équipe commerciale, cycle de vente, nombre de factures par mois, taxes "
+                     "appliquées…",
     },
 
     # ------------------------------------------------------------------ GRH
@@ -766,7 +733,7 @@ MODULES = {
 
 # Ordre d'affichage (accueil, pied de page, navigation entre modules).
 MODULE_ORDER = [
-    "comptabilite", "tresorerie", "facturation", "crm", "grh", "paie",
+    "comptabilite", "tresorerie", "facturation_crm", "grh", "paie",
     "etats", "cdg", "audit", "prospection",
 ]
 

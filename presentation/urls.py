@@ -7,8 +7,11 @@ urlpatterns = [
     path("", views.accueil, name="accueil"),
     path("details-comptabilite", views.detail_module, {"slug": "comptabilite"}, name="details-comptabilite"),
     path("details-tresorerie", views.detail_module, {"slug": "tresorerie"}, name="details_tresorerie"),
-    path("details-facturation-crm", views.detail_module, {"slug": "facturation"}, name="detail_facturation_crm"),
-    path("details-crm", views.detail_module, {"slug": "crm"}, name="detail_crm"),
+    path("details-facturation-crm", views.detail_module, {"slug": "facturation_crm"},
+         name="detail_facturation_crm"),
+    # Ancienne page CRM, réunie avec la facturation
+    path("details-crm", RedirectView.as_view(pattern_name="presentation:detail_facturation_crm", permanent=True),
+         name="detail_crm"),
     path("details-grh", views.detail_module, {"slug": "grh"}, name="details_grh"),
     path("details-paies", views.detail_module, {"slug": "paie"}, name="details_paies"),
     path("details-etats", views.detail_module, {"slug": "etats"}, name="details_etats_financiers"),

@@ -29,7 +29,6 @@ class StaticViewSitemap(Sitemap):
             "presentation:details_etats_financiers",
             "presentation:details_paies",
             "presentation:detail_facturation_crm",
-            "presentation:detail_crm",
             "presentation:details_tresorerie",
             "presentation:details_cdg",
             "presentation:details_audit",
