@@ -45,7 +45,7 @@ ASSO_AVAILABILITY = {
     "paie": "Inclus. Comptabilisation bulletin par bulletin.",
     "etats": "Inclus, avec en plus les états SYCEBNL : bilan, tableau emplois-ressources, "
              "exécution budgétaire et notes annexes.",
-    "budget": None,
+    "cdg": None,
     "audit": "Inclus, avec 23 contrôles dont 9 propres au SYCEBNL.",
     "prospection": None,
 }
@@ -126,6 +126,14 @@ MODULES = {
                  "Tiers actifs ou suspendus, détection des doublons, compte de rattachement proposé à la "
                  "saisie et à l'import.", "all"),
             ]),
+            ("Axe analytique", [
+                ("bi-diagram-3", "Centre à la saisie",
+                 "Charges et produits affectés à un centre de responsabilité dès la saisie, à la caisse et à "
+                 "la comptabilisation des factures et de la paie.", "premium"),
+                ("bi-kanban", "Rattachement aux projets",
+                 "Une écriture peut être rattachée à un ou plusieurs projets, en tout ou en partie, sans "
+                 "modifier la comptabilité.", "premium"),
+            ]),
         ],
         "form_hint": "Décrivez : volume d'écritures, journaux, imports à prévoir, reprise d'historique…",
     },
@@ -156,7 +164,8 @@ MODULES = {
              "comptes de débit et de crédit."),
             ("Saisie de la caisse", "Enregistrez les entrées et sorties du jour avec n° de pièce, tiers "
              "et libellé."),
-            ("Pièces justificatives", "Joignez les pièces (reçus, factures) à chaque opération."),
+            ("Pièces justificatives", "Joignez les pièces (reçus, factures) à chaque opération ; affectez "
+             "la charge ou le produit à un centre analytique (Premium)."),
             ("Comptabilisation", "L'écriture est générée automatiquement ; un bordereau comptable "
              "imprimable accompagne chaque opération."),
             ("Suivi", "Solde de caisse, état de caisse par e-mail et rapport mensuel du dirigeant."),
@@ -215,7 +224,8 @@ MODULES = {
             ("Facture", "Conversion du devis en facture, n° de bon de commande, échéance et modalité de "
              "paiement."),
             ("Envoi & encaissement", "PDF envoyé par e-mail, règlements partiels et reste dû suivis."),
-            ("Comptabilisation", "La facture passe en comptabilité en un clic."),
+            ("Comptabilisation", "La facture passe en comptabilité en un clic, avec le choix du centre "
+             "analytique en Premium."),
         ],
         "tabs": [
             ("Devis & factures", [
@@ -239,6 +249,12 @@ MODULES = {
                 ("bi-filetype-pdf", "Rapport Facturation & CRM",
                  "Rapport mensuel PDF : ventes comptabilisées, créations et activités commerciales du mois.",
                  "all"),
+                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
+                 "Liste des factures, liste des devis et tableau de bord (CA N / N-1, top clients, échues "
+                 "par ancienneté) exportés avec vos filtres.", "all"),
+                ("bi-diagram-3", "Ventes par centre",
+                 "À la comptabilisation, la vente est affectée au centre de responsabilité de votre choix.",
+                 "premium"),
             ]),
         ],
         "form_hint": "Décrivez : nombre de factures par mois, taxes appliquées, besoin d'envoi par e-mail…",
@@ -281,8 +297,9 @@ MODULES = {
                  "Mes activités, toutes les activités de l'équipe, tâches assignées et échéances.", "all"),
                 ("bi-cart-check", "Ventes",
                  "Ventes par client et par commercial, reste dû échu et retard maximum.", "all"),
-                ("bi-filetype-pdf", "Rapport d'activité",
-                 "Rapport PDF des activités commerciales du mois.", "all"),
+                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
+                 "Clients et prospects, ventes, factures échues, opportunités, pipeline, prévisions, "
+                 "activités et tâches exportés avec vos filtres, liste complète.", "all"),
             ]),
             ("Opportunités & prévisions", [
                 ("bi-kanban", "Pipeline Kanban",
@@ -306,8 +323,8 @@ MODULES = {
         "icon": "bi-person-badge",
         "plan": "all",
         "summary": (
-            "Dossier salarié complet, contrats et échéances, congés, avances, retenues, prêts "
-            "et fin de contrat."
+            "Dossier salarié complet, contrats et échéances, congés, avances, retenues, prêts, "
+            "fin de contrat, État 301, DISA et exports PDF / Excel."
         ),
         "lead": (
             "Centralisez les dossiers de vos salariés, de l'embauche à la sortie : contrats, période "
@@ -327,6 +344,8 @@ MODULES = {
             ("Congés", "Demandes de congé, état des congés et attestation de congé."),
             ("Avances, retenues & prêts", "Échéancier déduit automatiquement des bulletins de paie."),
             ("Fin de contrat", "Motif, indemnités de fin de contrat, certificat de travail, réactivation."),
+            ("États annuels", "État 301 et DISA, tableau de bord RH et situation des contrats, en PDF et "
+             "Excel."),
         ],
         "tabs": [
             ("Dossier & contrats", [
@@ -350,6 +369,18 @@ MODULES = {
                 ("bi-bank2", "Prêts",
                  "Montant, nombre d'échéances, échéance courante et progression du remboursement.", "all"),
             ]),
+            ("États & exports", [
+                ("bi-file-earmark-spreadsheet", "État 301 & DISA",
+                 "Synthèse annuelle par salarié et déclaration individuelle des salaires annuels, en PDF et "
+                 "Excel.", "all"),
+                ("bi-speedometer2", "Tableau de bord RH",
+                 "Effectifs, répartitions, contrats échus ou à échoir et alertes Code du travail.", "all"),
+                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
+                 "Employés, congés, acomptes et retenues, situation des contrats : listes filtrées "
+                 "complètes.", "all"),
+                ("bi-filetype-pdf", "Fiche employé PDF",
+                 "Identité, contacts, poste et récapitulatif du dernier contrat sur une page A4.", "all"),
+            ]),
         ],
         "form_hint": "Décrivez : effectif, types de contrats, gestion actuelle des congés et des prêts…",
     },
@@ -362,7 +393,7 @@ MODULES = {
         "plan": "all",
         "summary": (
             "Bulletins automatiques ou manuels conformes à la législation ivoirienne (ITS, CNPS, CMU), "
-            "états de paie, État 301, DISA et comptabilisation."
+            "états de paie en PDF et Excel, État 301, DISA et comptabilisation."
         ),
         "lead": (
             "Calculez vos bulletins selon la réglementation ivoirienne : ITS, CNPS, CMU, prime "
@@ -379,8 +410,10 @@ MODULES = {
             ("Paramètres de paie", "Taux et barèmes, taux AT CNPS employeur, rubriques de primes."),
             ("Calcul", "Paie automatique selon les paramètres, ou assistant de paie manuelle pas à pas."),
             ("Validation", "Contrôle et validation des bulletins ; paie groupée pour valider en lot."),
-            ("États", "Bulletins PDF, état de la paie par mois et par exercice, État 301, DISA."),
-            ("Comptabilisation", "Écriture de paie générée par bulletin ou pour tout le mois."),
+            ("États", "Bulletins PDF, état de la paie par mois et par exercice, tableau de bord, État 301, "
+             "DISA, en PDF et Excel."),
+            ("Comptabilisation", "Écriture de paie générée par bulletin ou pour tout le mois, charges "
+             "affectées au centre du salarié (Premium)."),
         ],
         "tabs": [
             ("Calcul des bulletins", [
@@ -391,7 +424,7 @@ MODULES = {
                  "Assistant pas à pas pour ajuster jours travaillés, primes et retenues.", "all"),
                 ("bi-plus-slash-minus", "Éléments variables",
                  "Prime d'ancienneté calculée, sursalaire, prime de transport, gratifications, avances et "
-                 "échéances de prêt.", "all"),
+                 "échéances de prêt retenues jusqu'au solde.", "all"),
                 ("bi-people-fill", "Paie groupée",
                  "Calcul et validation des bulletins de tous les salariés en lot.", "paid"),
             ]),
@@ -399,9 +432,11 @@ MODULES = {
                 ("bi-file-earmark-pdf", "Bulletins de paie",
                  "Bulletins PDF avec parts salariale et patronale.", "all"),
                 ("bi-table", "État de la paie",
-                 "Par mois et par exercice, avec totaux des gains, retenues et charges.", "all"),
+                 "Par mois et par exercice, avec totaux des gains, retenues et charges ; tableau de bord de "
+                 "la paie ; exports PDF et Excel.", "all"),
                 ("bi-file-earmark-spreadsheet", "État 301 & DISA",
-                 "Synthèse annuelle par salarié et déclaration individuelle des salaires annuels.", "all"),
+                 "Synthèse annuelle par salarié et déclaration individuelle des salaires annuels, en PDF et "
+                 "Excel.", "all"),
                 ("bi-journal-check", "Comptabilisation",
                  "Par bulletin, ou « Tout comptabiliser » pour le mois entier (Starter & Premium).", "all"),
             ]),
@@ -441,7 +476,6 @@ MODULES = {
              "N vs N-1, alertes."),
             ("États comptables", "Balance générale, détail d'un compte, grand livre tiers, compte "
              "d'exploitation."),
-            ("États sociaux", "État 301 et DISA établis à partir de la paie."),
             ("Analyses", "Marges, délais clients et fournisseurs, liquidité, bilan fonctionnel (Premium)."),
             ("Clôture", "Clôture de l'exercice et génération des reports à nouveau."),
         ],
@@ -461,69 +495,98 @@ MODULES = {
                 ("bi-speedometer2", "Tableau de bord comparatif",
                  "Indicateurs N à date vs N-1 même période, CA mensuel N vs N-1, compte de résultat N-1 et "
                  "N-2.", "all"),
-                ("bi-file-earmark-spreadsheet", "État 301 & DISA",
-                 "États sociaux annuels issus de la paie.", "all"),
                 ("bi-graph-up-arrow", "Analyses financières",
                  "Marges brute et d'exploitation, délais clients et fournisseurs, liquidités, trésorerie "
                  "nette mois par mois.", "premium"),
                 ("bi-diagram-3", "Structures financières",
                  "Bilan fonctionnel, FRNG, BFRE/BFRHE, trésorerie nette, autonomie financière, rentabilité, "
                  "capacité de remboursement.", "premium"),
+                ("bi-layer-forward", "SIG & résultat de gestion",
+                 "Soldes intermédiaires de gestion et seuil de rentabilité, comparés au budget dans le "
+                 "Contrôle de gestion.", "premium"),
             ]),
         ],
         "form_hint": "Décrivez : états attendus, fréquence de reporting, exercices à comparer…",
     },
 
-    # ------------------------------------------------------------------ Budget
-    "budget": {
-        "url_name": "presentation:details_budget",
-        "name": "Gestion budgétaire",
+    # ------------------------------------------------------------------ Contrôle de gestion
+    "cdg": {
+        "url_name": "presentation:details_cdg",
+        "name": "Contrôle de gestion",
         "icon": "bi-pie-chart",
         "plan": "premium",
         "summary": (
-            "Rubriques et lignes budgétaires, saisie mensuelle ou annuelle, suivi budget vs réalisé "
-            "lu dans la comptabilité, exports Excel."
+            "Budget des charges et des produits, versions, centres de responsabilité et axe "
+            "analytique, analyse des écarts, résultat de gestion, SIG, projets et plan d'actions."
         ),
         "lead": (
-            "Construisez votre budget par rubriques et lignes, rattachez chaque ligne à ses comptes "
-            "comptables et suivez chaque mois le réalisé, les écarts et le taux de consommation, "
-            "sans aucune ressaisie."
+            "Construisez votre budget de charges et de produits, affectez vos écritures à des centres "
+            "de responsabilité et à des projets, puis suivez le réalisé lu dans la comptabilité : "
+            "écarts, seuil de rentabilité, soldes intermédiaires de gestion et atterrissage de fin "
+            "d'exercice, sans aucune ressaisie."
         ),
-        "badges": ["Budget vs réalisé", "Exports Excel"],
-        "headline": "Un budget suivi en temps réel depuis la comptabilité",
+        "badges": ["Budget vs réalisé vs N-1", "Centres & projets"],
+        "headline": "Piloter la performance depuis la comptabilité",
         "subtitle": (
-            "Le réalisé est lu directement dans les écritures : dès qu'une dépense est comptabilisée, "
-            "elle apparaît dans le suivi budgétaire."
+            "Le réalisé est lu directement dans les écritures : dès qu'une charge ou un produit est "
+            "comptabilisé, il alimente le suivi budgétaire, les centres, les projets et les indicateurs."
         ),
         "steps": [
-            ("Paramétrage", "Rubriques et lignes budgétaires (nature fixe ou variable, responsable)."),
-            ("Règles comptables", "Chaque ligne est rattachée à un compte exact, un préfixe ou une plage "
-             "de comptes."),
-            ("Saisie du budget", "Mois par mois, ou montant annuel réparti automatiquement sur 12 mois."),
-            ("Validation", "Budget en brouillon, validé puis clôturé."),
-            ("Suivi", "Budget, réalisé, écart et consommation, par mois et sur l'année, avec alertes."),
+            ("Paramétrage", "Rubriques et lignes de charges et de produits rattachées à leurs comptes "
+             "(compte exact, préfixe ou plage), centres de responsabilité."),
+            ("Budget", "Saisie mensuelle ou annuelle ; versions initiale, révisée et prévision "
+             "(reforecast à partir du réalisé), avec version active."),
+            ("Axe analytique", "Centre choisi à la saisie, à la caisse, à la comptabilisation des factures "
+             "et de la paie, ou affecté par des règles automatiques."),
+            ("Suivi", "Budget, réalisé et écart par mois, sur l'année, par centre et par projet, avec "
+             "comparaison N-1 et écarts significatifs."),
+            ("Résultats & actions", "Résultat de gestion, SIG, atterrissage, indicateurs et plan "
+             "d'actions correctives."),
         ],
         "tabs": [
-            ("Construction", [
+            ("Budget", [
                 ("bi-diagram-2", "Rubriques & lignes",
-                 "Organisation du budget par rubriques, lignes activables/désactivables, responsable.",
-                 "premium"),
-                ("bi-link", "Règles comptables",
-                 "Rattachement par compte exact, préfixe ou plage : le réalisé se calcule tout seul.",
-                 "premium"),
+                 "Budget des charges et des produits, lignes rattachées à un compte exact, un préfixe ou une "
+                 "plage de comptes : le réalisé se calcule tout seul.", "premium"),
                 ("bi-calendar3", "Saisie mensuelle ou annuelle",
-                 "Saisie sur un mois ou sur les 12 mois, avec répartition d'un montant annuel.", "premium"),
-            ]),
-            ("Suivi", [
-                ("bi-bar-chart", "Suivi mensuel",
-                 "Budget du mois et cumulé, réalisé, écart et alertes de dépassement.", "premium"),
-                ("bi-calendar-range", "Synthèse annuelle",
-                 "Consommation annuelle par ligne et par rubrique.", "premium"),
+                 "Saisie sur un mois ou sur les 12 mois de l'exercice dans une seule grille.", "premium"),
+                ("bi-layers", "Versions budgétaires",
+                 "Budget initial, révisé et prévision construite à partir du réalisé ; version active et "
+                 "comparaison des versions.", "premium"),
                 ("bi-file-earmark-excel", "Exports Excel",
-                 "Export de la saisie annuelle et des suivis mensuel et annuel.", "premium"),
+                 "Chaque saisie, suivi et analyse s'exporte en Excel.", "premium"),
+            ]),
+            ("Suivi & analytique", [
+                ("bi-bar-chart", "Suivi mensuel et annuel",
+                 "Budget, réalisé, écart et taux de consommation, ligne par ligne et par rubrique.",
+                 "premium"),
+                ("bi-arrow-left-right", "Analyse des écarts",
+                 "Budget / réalisé / N-1, écarts significatifs selon vos seuils, filtres par centre, "
+                 "rubrique et sens.", "premium"),
+                ("bi-diagram-3", "Centres de responsabilité",
+                 "Centres de coût, de profit, support ou d'investissement : budget et réalisé ventilé par "
+                 "centre, détail ligne par ligne.", "premium"),
+                ("bi-shuffle", "Ventilation & règles d'affectation",
+                 "Écritures de charges et de produits ventilées sur un ou plusieurs centres, à la saisie ou "
+                 "par règles (compte, journal, tiers, libellé) ; centre par défaut de chaque salarié pour "
+                 "la paie.", "premium"),
+            ]),
+            ("Résultats & pilotage", [
+                ("bi-calculator", "Résultat de gestion",
+                 "Marge sur coûts variables, seuil de rentabilité, point mort, marge et indice de sécurité, "
+                 "levier opérationnel.", "premium"),
+                ("bi-layer-forward", "SIG & atterrissage",
+                 "Soldes intermédiaires de gestion SYSCOHADA (budget, réalisé, N-1) et prévision de fin "
+                 "d'exercice.", "premium"),
+                ("bi-kanban", "Projets",
+                 "Budget prévu du projet, charges et produits réalisés rattachés, marge et consommation, "
+                 "tous exercices confondus.", "premium"),
+                ("bi-bullseye", "Indicateurs & plan d'actions",
+                 "Indicateurs de pilotage avec objectifs annuels, actions correctives rattachées aux "
+                 "écarts.", "premium"),
             ]),
         ],
-        "form_hint": "Décrivez : structure de votre budget, nombre de lignes, fréquence du suivi…",
+        "form_hint": "Décrivez : structure de votre budget, centres et projets à suivre, fréquence du suivi…",
     },
 
     # ------------------------------------------------------------------ Audit
@@ -704,7 +767,7 @@ MODULES = {
 # Ordre d'affichage (accueil, pied de page, navigation entre modules).
 MODULE_ORDER = [
     "comptabilite", "tresorerie", "facturation", "crm", "grh", "paie",
-    "etats", "budget", "audit", "prospection",
+    "etats", "cdg", "audit", "prospection",
 ]
 
 for _slug, _module in MODULES.items():
@@ -750,7 +813,7 @@ PLAN_COMPARISON = [
     ("Comptabilisation de la paie du mois en un clic", False, True, True, False),
     ("Audit comptable", False, "14 contrôles", "14 contrôles", "23 contrôles"),
     ("Analyses financières & structures financières", False, False, True, True),
-    ("Gestion budgétaire", False, False, True, False),
+    ("Contrôle de gestion : budget, centres, projets, écarts", False, False, True, False),
     ("Prospection automatique", False, False, True, False),
     ("Support", "Standard", "Standard", "Prioritaire", "Standard"),
 ]

@@ -30,6 +30,11 @@ class StaticViewSitemap(Sitemap):
             "presentation:details_paies",
             "presentation:detail_facturation_crm",
             "presentation:detail_crm",
+            "presentation:details_tresorerie",
+            "presentation:details_cdg",
+            "presentation:details_audit",
+            "presentation:details_prospection",
+            "presentation:details_association",
         ]
 
     def location(self, item):
