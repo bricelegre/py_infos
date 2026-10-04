@@ -38,7 +38,8 @@ PLAN_AVAILABILITY = {
 ASSO_AVAILABILITY = {
     "comptabilite": "Inclus, avec le plan comptable SYCEBNL. Sans import des ventes E-impôt ni "
                     "comptabilisation groupée de la paie.",
-    "tresorerie": "Journal de caisse inclus. Sans état de caisse ni rapport mensuel par e-mail.",
+    "tresorerie": "Journal de caisse inclus. Sans banque, rapprochement ni prévisionnel, ni état de "
+                  "caisse et rapport mensuel par e-mail.",
     "facturation_crm": None,
     "grh": "Inclus.",
     "paie": "Inclus. Comptabilisation bulletin par bulletin.",
@@ -140,61 +141,81 @@ MODULES = {
     # ------------------------------------------------------------------ Trésorerie
     "tresorerie": {
         "url_name": "presentation:details_tresorerie",
-        "name": "Trésorerie & Caisse",
+        "name": "Gestion de trésorerie",
         "icon": "bi-cash-coin",
         "plan": "all",
         "summary": (
-            "Journal de caisse, pièces justificatives, comptabilisation automatique, états de caisse "
-            "et rapport mensuel du dirigeant par e-mail."
+            "Caisse et banque, comptes de trésorerie, virements internes, rapprochement bancaire "
+            "avec import des relevés, prévisionnel de trésorerie et rapport mensuel par e-mail."
         ),
         "lead": (
-            "Tenez votre caisse au jour le jour : chaque entrée ou sortie est rattachée à un type "
-            "d'opération et à ses pièces justificatives, puis comptabilisée automatiquement. Vous "
-            "recevez l'état de caisse et un rapport mensuel clair par e-mail."
+            "Tenez la caisse et la banque au jour le jour, rapprochez vos relevés bancaires en quelques "
+            "clics et anticipez vos besoins : la position consolidée et le prévisionnel sont calculés "
+            "directement depuis la comptabilité, sans tableur."
         ),
-        "badges": ["Caisse & banque", "Rapport mensuel par e-mail"],
-        "headline": "Votre caisse tenue au quotidien, votre trésorerie lisible",
+        "badges": ["Caisse & banque", "Rapprochement bancaire", "Prévisionnel 13 semaines / 12 mois"],
+        "headline": "Votre trésorerie lisible aujourd'hui, anticipée pour demain",
         "subtitle": (
-            "Plus besoin de cahier de caisse ni de ressaisie en comptabilité : la caisse alimente "
-            "directement les journaux et les indicateurs de trésorerie."
+            "Les soldes sont lus dans les écritures comptables : chaque opération de caisse ou de banque "
+            "alimente directement les journaux, le rapprochement et le prévisionnel."
         ),
         "steps": [
-            ("Types d'opération", "Paramétrez vos types de dépenses et de recettes : chacun porte ses "
-             "comptes de débit et de crédit."),
-            ("Saisie de la caisse", "Enregistrez les entrées et sorties du jour avec n° de pièce, tiers "
-             "et libellé."),
-            ("Pièces justificatives", "Joignez les pièces (reçus, factures) à chaque opération ; affectez "
-             "la charge ou le produit à un centre analytique (Premium)."),
-            ("Comptabilisation", "L'écriture est générée automatiquement ; un bordereau comptable "
-             "imprimable accompagne chaque opération."),
-            ("Suivi", "Solde de caisse, état de caisse par e-mail et rapport mensuel du dirigeant."),
+            ("Comptes de trésorerie", "Banques, caisses et mobile money détectés depuis la comptabilité, "
+             "avec seuil d'alerte et découvert autorisé."),
+            ("Caisse & banque", "Entrées et sorties saisies avec n° de pièce, tiers, type d'opération et "
+             "pièces justificatives ; écriture générée automatiquement."),
+            ("Virements internes", "Caisse ↔ banque ou banque ↔ banque via le compte 585, neutres pour la "
+             "trésorerie."),
+            ("Rapprochement", "Import du relevé (PDF, CSV ou Excel), rapprochement automatique et manuel, "
+             "frais bancaires comptabilisés depuis le relevé."),
+            ("Pilotage", "Tableau de bord, prévisionnel 13 semaines / 12 mois avec scénario pessimiste, "
+             "rapport mensuel du dirigeant par e-mail."),
         ],
         "tabs": [
-            ("Caisse", [
+            ("Caisse & banque", [
                 ("bi-cash-stack", "Journal de caisse",
-                 "Entrées et sorties par jour et par mois, avec n° de pièce, tiers et type d'opération.", "all"),
+                 "Entrées et sorties par jour et par mois, avec n° de pièce, tiers, type d'opération, pièces "
+                 "justificatives et bordereau imprimable.", "all"),
+                ("bi-bank", "Banque",
+                 "Encaissements et décaissements saisis comme à la caisse (virements, chèques, frais, agios, "
+                 "salaires, CNPS…), avis d'opération PDF, alerte de découvert.", "all"),
                 ("bi-tags", "Types d'opération",
-                 "Chaque type d'opération sait quels comptes mouvementer : pas de schéma comptable à "
-                 "connaître.", "all"),
-                ("bi-paperclip", "Pièces justificatives",
-                 "Les justificatifs restent attachés à l'opération et consultables à tout moment.", "all"),
-                ("bi-printer", "Bordereau comptable",
-                 "Ticket imprimable avec journal, compte débit et compte crédit de l'opération.", "all"),
+                 "Chaque type d'opération de caisse ou de banque sait quels comptes mouvementer : pas de "
+                 "schéma comptable à connaître.", "all"),
+                ("bi-diagram-3", "Centre analytique",
+                 "La charge ou le produit est affecté à un centre de responsabilité dès la saisie.",
+                 "premium"),
             ]),
-            ("Suivi & rapports", [
-                ("bi-envelope-paper", "État de caisse par e-mail",
-                 "Solde de départ, total des recettes, total des dépenses et mouvements des autres journaux.",
-                 "all"),
-                ("bi-graph-up-arrow", "Rapport mensuel du dirigeant",
-                 "Chaque mois : avez-vous gagné de l'argent ? combien avez-vous ? qui vous doit ? vos salariés "
-                 "et ce qu'il faut déclarer et payer.", "all"),
-                ("bi-bank", "Trésorerie nette",
-                 "Disponible en caisse, banques et mobile money, suivi dans les états et les analyses.", "all"),
+            ("Comptes & rapprochement", [
+                ("bi-wallet2", "Comptes de trésorerie",
+                 "Banques, caisses et mobile money, seuil d'alerte, découvert autorisé, journal mensuel par "
+                 "compte avec solde progressif.", "paid"),
                 ("bi-arrow-left-right", "Virements internes",
-                 "Les virements caisse ↔ banque sont suivis et leurs écarts signalés.", "all"),
+                 "Virements entre caisse et banques via le compte 585, suivis et neutres pour la trésorerie.",
+                 "paid"),
+                ("bi-file-earmark-arrow-up", "Import des relevés",
+                 "Relevés PDF électroniques, CSV ou Excel, soldes repris du relevé et lignes déjà importées "
+                 "écartées.", "paid"),
+                ("bi-check2-square", "Rapprochement bancaire",
+                 "Rapprochement automatique puis manuel, frais bancaires comptabilisés depuis le relevé, état "
+                 "de rapprochement en PDF.", "paid"),
+            ]),
+            ("Pilotage & prévisions", [
+                ("bi-speedometer2", "Tableau de bord",
+                 "Position consolidée, évolution mensuelle, couverture des charges, principaux encaissements "
+                 "et décaissements, alertes.", "paid"),
+                ("bi-graph-up-arrow", "Prévisionnel de trésorerie",
+                 "13 semaines ou 12 mois : créances clients, dettes fournisseurs, paie, TVA, abonnements, "
+                 "charges courantes projetées sur leur tendance, flux saisis et scénario pessimiste.", "paid"),
+                ("bi-envelope-paper", "État de caisse & rapport mensuel",
+                 "État de caisse par e-mail et, chaque mois, un rapport clair : avez-vous gagné de l'argent ? "
+                 "combien avez-vous ? qui vous doit ?", "all"),
+                ("bi-file-earmark-arrow-down", "Exports PDF & Excel",
+                 "Tableau de bord, journaux, rapprochement et prévisionnel exportés en PDF et Excel.", "paid"),
             ]),
         ],
-        "form_hint": "Décrivez : nombre de caisses, volume d'opérations, banques et mobile money utilisés…",
+        "form_hint": "Décrivez : nombre de caisses et de comptes bancaires, mobile money, volume "
+                     "d'opérations, besoin de prévisions…",
     },
 
     # ------------------------------------------------------------------ Facturation & CRM
@@ -239,7 +260,8 @@ MODULES = {
                 ("bi-cart-check", "Ventes",
                  "Ventes par client et par commercial, reste dû échu et retard maximum.", "all"),
                 ("bi-binoculars", "Prospection automatique",
-                 "Veille sur les sites et flux de votre choix pour détecter de nouvelles opportunités.",
+                 "Signaux de la veille commerciale (appels d'offres, financements…) convertis en prospects et "
+                 "opportunités.",
                  "premium"),
             ]),
             ("Opportunités & prévisions", [
@@ -617,38 +639,69 @@ MODULES = {
         "icon": "bi-binoculars",
         "plan": "premium",
         "summary": (
-            "Veille automatique sur les sites et flux RSS de votre choix, filtrée par vos mots-clés "
-            "et classée par pertinence."
+            "Veille commerciale automatique : appels d'offres, financements, créations d'entreprises "
+            "et recrutements détectés, notés et convertis en prospects du CRM."
         ),
         "lead": (
-            "Ne ratez plus une opportunité : Fincompta surveille les sites et flux que vous choisissez "
-            "(appels d'offres, annonces, actualités de votre secteur), repère vos mots-clés et classe "
-            "les résultats par pertinence."
+            "Ne ratez plus une opportunité : Fincompta surveille les sites, flux RSS et recherches "
+            "Google Actualités de votre choix, repère vos mots-clés, identifie la nature de chaque "
+            "signal et le note de 0 à 100. Un clic suffit pour en faire un prospect et une "
+            "opportunité dans le CRM."
         ),
-        "badges": ["Veille automatique", "Sources & mots-clés"],
-        "headline": "Vos opportunités détectées automatiquement",
+        "badges": ["Veille automatique", "Score de pertinence 0-100", "Conversion en prospect CRM"],
+        "headline": "Vos opportunités détectées, qualifiées et suivies",
         "subtitle": (
-            "La prospection complète le CRM : les résultats pertinents deviennent des prospects et "
-            "des opportunités."
+            "La prospection alimente le CRM : les signaux pertinents deviennent des prospects et des "
+            "opportunités, et les clients déjà connus cités dans l'actualité sont repérés."
         ),
         "steps": [
-            ("Sources", "Ajoutez les sites (flux RSS/Atom ou pages HTML) à surveiller et leur poids."),
-            ("Mots-clés", "Définissez les mots-clés propres à votre activité."),
-            ("Collecte", "Recherches automatiques ou lancées à la demande."),
-            ("Résultats", "Articles classés par score : mots-clés trouvés, présence dans le titre, poids "
-             "de la source."),
+            ("Sources", "Sites (flux RSS détecté automatiquement ou pages HTML ciblées) et recherches "
+             "Google Actualités, avec leur poids et leur état de santé."),
+            ("Mots-clés", "Variantes, préfixes (trésor*), poids et exclusions ; accents, casse et pluriels "
+             "ignorés."),
+            ("Collecte", "Recherches planifiées ou lancées à la demande, historique détaillé par source."),
+            ("Analyse", "Nature du signal, organisation, contacts, montants et date limite extraits ; "
+             "score expliqué et doublons fusionnés."),
+            ("Exploitation", "Boîte de signaux à traiter, conversion en prospect et opportunité, "
+             "récapitulatif par e-mail."),
         ],
         "tabs": [
             ("Veille", [
                 ("bi-rss", "Sources",
-                 "Sites et flux RSS/Atom ou HTML, activables à volonté, pondérés dans le classement.",
-                 "premium"),
+                 "Flux RSS/Atom, pages HTML ciblées (filtre d'URL, sélecteur CSS) et recherches Google "
+                 "Actualités ; dernier état et erreurs de chaque source.", "premium"),
                 ("bi-key", "Mots-clés",
-                 "Liste de mots-clés propre à votre organisation.", "premium"),
-                ("bi-sort-down", "Résultats classés",
-                 "Résultats triés par date et par score de pertinence.", "premium"),
-                ("bi-play-circle", "Recherche à la demande",
-                 "Lancez une collecte manuelle en plus des recherches automatiques.", "premium"),
+                 "Variantes, préfixes, poids et exclusions, propres à votre organisation.", "premium"),
+                ("bi-play-circle", "Collecte planifiée ou à la demande",
+                 "Collectes automatiques, collecte manuelle et recherche ponctuelle d'informations.",
+                 "premium"),
+                ("bi-clock-history", "Historique des collectes",
+                 "Durée, sources interrogées et nouveaux signaux de chaque collecte.", "premium"),
+            ]),
+            ("Analyse des signaux", [
+                ("bi-tags", "Nature du signal",
+                 "Appel d'offres, financement, création, recrutement… identifiés automatiquement.",
+                 "premium"),
+                ("bi-sort-down", "Score de pertinence",
+                 "Note de 0 à 100 expliquée : mots-clés trouvés, présence dans le titre, poids de la "
+                 "source ; doublons entre médias fusionnés.", "premium"),
+                ("bi-card-text", "Informations extraites",
+                 "Organisation, e-mails, téléphones, montants, date de publication et date limite.",
+                 "premium"),
+                ("bi-people", "Clients & prospects cités",
+                 "Les clients et prospects du CRM mentionnés dans un signal sont repérés.", "premium"),
+            ]),
+            ("Exploitation", [
+                ("bi-inbox", "Boîte de signaux",
+                 "Statuts (à traiter, à suivre, ignoré, converti), favoris, notes, filtres et actions "
+                 "groupées.", "premium"),
+                ("bi-person-plus", "Conversion en prospect",
+                 "Un signal devient un prospect CRM avec une opportunité « Piste » et une note.", "premium"),
+                ("bi-envelope", "Récapitulatif par e-mail",
+                 "Synthèse des nouveaux signaux, ancienneté maximale et durée de conservation réglables.",
+                 "premium"),
+                ("bi-file-earmark-arrow-down", "Tableau de bord & exports",
+                 "Tableau de bord de la veille et export PDF / Excel des signaux.", "premium"),
             ]),
         ],
         "form_hint": "Décrivez : votre secteur, les sites à surveiller, les opportunités recherchées…",
@@ -769,6 +822,7 @@ PLAN_COMPARISON = [
     ("Référentiel comptable", "SYSCOHADA révisé", "SYSCOHADA révisé", "SYSCOHADA révisé", "SYCEBNL"),
     ("Comptabilité : saisie, lettrage, recherche", True, True, True, True),
     ("Journal de caisse", True, True, True, True),
+    ("Banque : saisie des encaissements et décaissements", True, True, True, False),
     ("État de caisse & rapport mensuel par e-mail", True, True, True, False),
     ("Facturation & CRM", True, True, True, False),
     ("GRH & Paie (bulletins, État 301, DISA)", True, True, True, True),
@@ -778,10 +832,11 @@ PLAN_COMPARISON = [
     ("Import des ventes E-impôt", False, True, True, False),
     ("Paie groupée, simulateurs, calcul du congé payé", False, True, True, True),
     ("Comptabilisation de la paie du mois en un clic", False, True, True, False),
+    ("Trésorerie : rapprochement bancaire, virements, prévisionnel", False, True, True, False),
     ("Audit comptable", False, "14 contrôles", "14 contrôles", "23 contrôles"),
     ("Analyses financières & structures financières", False, False, True, True),
     ("Contrôle de gestion : budget, centres, projets, écarts", False, False, True, False),
-    ("Prospection automatique", False, False, True, False),
+    ("Prospection : veille commerciale automatique", False, False, True, False),
     ("Support", "Standard", "Standard", "Prioritaire", "Standard"),
 ]
 
