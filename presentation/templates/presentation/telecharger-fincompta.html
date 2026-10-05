@@ -11,8 +11,8 @@
         <div class="col-lg-9">
           <h1 class="heading-title">Installer FinCompta sur Windows</h1>
           <p class="mb-0">
-            FinCompta s’installe comme un logiciel classique, sans Python ni ligne de commande,
-            et fonctionne sans connexion Internet une fois installé.
+            Votre comptabilité, votre trésorerie, votre facturation et votre paie réunies dans un seul logiciel,
+            installé en quelques clics sur votre ordinateur.
           </p>
         </div>
       </div>
@@ -37,12 +37,19 @@
       <div class="col-lg-7">
         <div class="service-content">
 
-          <h2 class="service-title mb-3">Installation en ligne</h2>
+          <h2 class="service-title mb-3">Votre gestion d’entreprise, prête en quelques minutes</h2>
           <p>
-            L’installateur en ligne est un petit programme qui télécharge automatiquement
-            la <strong>dernière version</strong> de FinCompta, en vérifie l’intégrité puis l’installe.
-            Relancé plus tard, il met FinCompta à jour sans toucher à vos données.
+            Avec FinCompta sur votre PC, vous pilotez votre activité au quotidien sans dépendre
+            d’Internet : vos écritures, vos factures et vos états sont disponibles à tout moment,
+            même hors connexion. Un clic suffit pour installer la <strong>dernière version</strong>,
+            et vos collègues du même réseau peuvent travailler avec vous depuis leur propre poste.
           </p>
+          <ul class="list-unstyled mb-2">
+            <li class="mb-2"><i class="bi bi-lightning-charge text-primary"></i> <strong>Simple</strong> : un assistant guidé, aucune compétence technique requise.</li>
+            <li class="mb-2"><i class="bi bi-wifi-off text-primary"></i> <strong>Autonome</strong> : fonctionne sans connexion Internet une fois installé.</li>
+            <li class="mb-2"><i class="bi bi-shield-check text-primary"></i> <strong>Sûr</strong> : vos données restent sur votre ordinateur et sont conservées à chaque mise à jour.</li>
+            <li><i class="bi bi-arrow-repeat text-primary"></i> <strong>Toujours à jour</strong> : relancez l’installateur pour profiter des dernières nouveautés.</li>
+          </ul>
 
           {% if installateur_disponible and version %}
             <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg my-3">
@@ -108,7 +115,7 @@
                 <div class="step-number">03</div>
                 <div class="step-content">
                   <h4 class="step-title">Téléchargement et installation</h4>
-                  <p>La dernière version est téléchargée, vérifiée (empreinte SHA-256) puis installée automatiquement.</p>
+                  <p>La dernière version de FinCompta est téléchargée et installée automatiquement, en toute sécurité.</p>
                 </div>
               </div>
               <div class="step-item">
@@ -116,9 +123,9 @@
                 <div class="step-content">
                   <h4 class="step-title">Première connexion</h4>
                   <p>
-                    Double-cliquez sur l’icône « FinCompta » ; la base est créée au premier lancement.
-                    Connexion : <code>admin</code> / <code>admin</code>, à changer immédiatement
-                    (menu « Infos du compte »).
+                    Double-cliquez sur l’icône « FinCompta » : votre espace est prêt.
+                    Identifiant <strong>admin</strong>, mot de passe <strong>admin</strong> ;
+                    pensez à le personnaliser dès la première connexion (menu « Infos du compte »).
                   </p>
                 </div>
               </div>
@@ -126,8 +133,9 @@
           </div>
 
           {% if version %}
-          <h3 class="section-heading mt-5 mb-3">Sans rien télécharger : PowerShell</h3>
-          <p>
+          <details class="mt-5">
+          <summary class="h6">Utilisateurs avancés : installation par PowerShell</summary>
+          <p class="mt-3">
             Vous pouvez aussi installer ou mettre à jour FinCompta en collant cette commande dans
             <strong>Windows PowerShell</strong> (menu Démarrer → « PowerShell ») :
           </p>
@@ -139,10 +147,10 @@
             </button>
           </div>
           <p class="small">
-            Le script télécharge la même version, vérifie son empreinte puis l’installe
-            (une confirmation administrateur est demandée).
+            La même version est téléchargée puis installée (une confirmation de Windows est demandée).
             <a href="{% url 'presentation:fincompta_script' %}" target="_blank">Voir le script</a>.
           </p>
+          </details>
           {% endif %}
 
         </div>
@@ -166,11 +174,11 @@
             <div class="card-header"><h4 class="card-title">Bon à savoir</h4></div>
             <div class="card-body">
               <ul class="mb-0 ps-3">
-                <li class="mb-2">Vos données sont enregistrées dans <code>%LOCALAPPDATA%\FinCompta</code>
-                  (raccourci « Dossier des données FinCompta » dans le menu Démarrer). Elles sont conservées
-                  lors des mises à jour et de la désinstallation.</li>
-                <li class="mb-2">Les autres postes du réseau local accèdent à FinCompta avec un navigateur, à
-                  l’adresse affichée dans le titre de la fenêtre, tant que l’application est ouverte.</li>
+                <li class="mb-2">Vos données restent sur votre ordinateur, accessibles via le raccourci
+                  « Dossier des données FinCompta » du menu Démarrer. Elles sont conservées lors des mises
+                  à jour et même en cas de désinstallation.</li>
+                <li class="mb-2">Travail en équipe : tant que FinCompta est ouvert sur ce PC, vos collègues
+                  du même réseau y accèdent depuis leur navigateur, à l’adresse affichée dans le titre de la fenêtre.</li>
                 {% if version %}
                 <li>Version proposée : <strong>{{ version.numero }}</strong>
                   ({{ version.taille|filesizeformat }}).</li>
