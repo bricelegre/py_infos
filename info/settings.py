@@ -205,3 +205,11 @@ PROVISIONING = {
 }
 
 
+
+# Installation de FinCompta (Windows) : dossier où déposer
+# FinCompta-Setup-<version>.exe et FinCompta-Installateur.exe
+# (cf. presentation/telechargement.py).
+FINCOMPTA_DOWNLOAD_DIR = os.getenv("FINCOMPTA_DOWNLOAD_DIR", str(BASE_DIR / "telechargements" / "fincompta"))
+# Adresse publique du site pour les liens absolus du manifeste et du script
+# PowerShell (ex. https://infos.fincompta.net) ; vide : adresse de la requête.
+FINCOMPTA_SITE_URL = os.getenv("FINCOMPTA_SITE_URL", "")

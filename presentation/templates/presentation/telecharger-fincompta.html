@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Installer FinCompta sur Windows{% endblock %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-9">
+          <h1 class="heading-title">Installer FinCompta sur Windows</h1>
+          <p class="mb-0">
+            FinCompta s’installe comme un logiciel classique, sans Python ni ligne de commande,
+            et fonctionne sans connexion Internet une fois installé.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'presentation:accueil' %}">Accueil</a></li>
+        <li class="current">Installer FinCompta</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<section id="installation" class="service-details section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row g-5">
+
+      <div class="col-lg-7">
+        <div class="service-content">
+
+          <h2 class="service-title mb-3">Installation en ligne</h2>
+          <p>
+            L’installateur en ligne est un petit programme qui télécharge automatiquement
+            la <strong>dernière version</strong> de FinCompta, en vérifie l’intégrité puis l’installe.
+            Relancé plus tard, il met FinCompta à jour sans toucher à vos données.
+          </p>
+
+          {% if installateur_disponible and version %}
+            <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg my-3">
+              <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
+            </a>
+          {% else %}
+            <div class="alert alert-info my-3">
+              L’installateur sera disponible très prochainement.
+              <a href="{% url 'presentation:accueil' %}#contact">Contactez-nous</a> pour être prévenu.
+            </div>
+          {% endif %}
+
+          <div class="process-section mt-4">
+            <h3 class="section-heading mb-4">Comment ça marche</h3>
+            <div class="process-steps">
+              <div class="step-item">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                  <h4 class="step-title">Lancez l’installateur</h4>
+                  <p>Ouvrez <em>FinCompta-Installateur</em> et acceptez la demande d’autorisation de Windows.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                  <h4 class="step-title">Choisissez vos options</h4>
+                  <p>Icône sur le Bureau, accès depuis les autres postes du réseau local.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                  <h4 class="step-title">Téléchargement et installation</h4>
+                  <p>La dernière version est téléchargée, vérifiée (empreinte SHA-256) puis installée automatiquement.</p>
+                </div>
+              </div>
+              <div class="step-item">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                  <h4 class="step-title">Première connexion</h4>
+                  <p>
+                    Double-cliquez sur l’icône « FinCompta » ; la base est créée au premier lancement.
+                    Connexion : <code>admin</code> / <code>admin</code>, à changer immédiatement
+                    (menu « Infos du compte »).
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% if version %}
+          <h3 class="section-heading mt-5 mb-3">Sans rien télécharger : PowerShell</h3>
+          <p>
+            Vous pouvez aussi installer ou mettre à jour FinCompta en collant cette commande dans
+            <strong>Windows PowerShell</strong> (menu Démarrer → « PowerShell ») :
+          </p>
+          <div class="input-group mb-2">
+            <input type="text" class="form-control font-monospace" id="commande-ps" readonly
+                   value="irm {{ script_url }} | iex">
+            <button class="btn btn-outline-secondary" type="button" id="copier-commande-ps">
+              <i class="bi bi-clipboard"></i> Copier
+            </button>
+          </div>
+          <p class="small">
+            Le script télécharge la même version, vérifie son empreinte puis l’installe
+            (une confirmation administrateur est demandée).
+            <a href="{% url 'presentation:fincompta_script' %}" target="_blank">Voir le script</a>.
+          </p>
+          {% endif %}
+
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="sidebar">
+          <div class="service-card mb-4">
+            <div class="card-header"><h4 class="card-title">Configuration requise</h4></div>
+            <div class="card-body">
+              <ul class="list-unstyled mb-0">
+                <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Windows 10 ou 11, 64 bits</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Droits administrateur pour l’installation</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Connexion Internet pendant l’installation uniquement</li>
+                <li><i class="bi bi-check-circle text-success"></i> Environ 500 Mo d’espace disque</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="service-card mb-4">
+            <div class="card-header"><h4 class="card-title">Bon à savoir</h4></div>
+            <div class="card-body">
+              <ul class="mb-0 ps-3">
+                <li class="mb-2">Vos données sont enregistrées dans <code>%LOCALAPPDATA%\FinCompta</code>
+                  (raccourci « Dossier des données FinCompta » dans le menu Démarrer). Elles sont conservées
+                  lors des mises à jour et de la désinstallation.</li>
+                <li class="mb-2">Les autres postes du réseau local accèdent à FinCompta avec un navigateur, à
+                  l’adresse affichée dans le titre de la fenêtre, tant que l’application est ouverte.</li>
+                {% if version %}
+                <li>Version proposée : <strong>{{ version.numero }}</strong>
+                  ({{ version.taille|filesizeformat }}).</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var bouton = document.getElementById("copier-commande-ps");
+    if (!bouton) return;
+    bouton.addEventListener("click", function () {
+      var champ = document.getElementById("commande-ps");
+      champ.select();
+      (navigator.clipboard ? navigator.clipboard.writeText(champ.value) : Promise.reject())
+        .catch(function () { document.execCommand("copy"); })
+        .then(function () { bouton.innerHTML = '<i class="bi bi-check"></i> Copié'; });
+    });
+  })();
+</script>
+
+{% endblock %}
