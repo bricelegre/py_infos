@@ -34,6 +34,7 @@ class StaticViewSitemap(Sitemap):
             "presentation:details_audit",
             "presentation:details_prospection",
             "presentation:details_association",
+            "presentation:telecharger_fincompta",
         ]
 
     def location(self, item):

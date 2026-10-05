@@ -22,4 +22,9 @@ urlpatterns = [
     path("details-audit", views.detail_module, {"slug": "audit"}, name="details_audit"),
     path("details-prospection", views.detail_module, {"slug": "prospection"}, name="details_prospection"),
     path("details-association", views.detail_module, {"slug": "association"}, name="details_association"),
+    # Installation de la version Windows (cf. presentation/telechargement.py)
+    path("telecharger-fincompta", views.telecharger_fincompta, name="telecharger_fincompta"),
+    path("telecharger/fincompta/derniere-version.ini", views.fincompta_manifeste, name="fincompta_manifeste"),
+    path("telecharger/fincompta/installer.ps1", views.fincompta_script, name="fincompta_script"),
+    path("telecharger/fincompta/<str:nom>", views.fincompta_fichier, name="fincompta_fichier"),
 ]
