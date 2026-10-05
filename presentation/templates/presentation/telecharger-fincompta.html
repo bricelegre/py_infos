@@ -55,6 +55,37 @@
             </div>
           {% endif %}
 
+          <div class="smartscreen-aide my-4" id="avertissement-windows">
+            <h3 class="h5"><i class="bi bi-shield-exclamation"></i> Windows affiche « Windows a protégé votre ordinateur » ?</h3>
+            <p class="mb-3">
+              C’est normal : Windows SmartScreen affiche ce message pour les logiciels récemment publiés.
+              L’installateur provient bien de infos.fincompta.net et ne modifie rien sans votre accord.
+              Pour continuer :
+            </p>
+            <div class="row g-3 align-items-center">
+              <div class="col-md-6">
+                <ol class="mb-0 ps-3">
+                  <li class="mb-2">Cliquez sur <strong>Informations complémentaires</strong>.</li>
+                  <li class="mb-2">Vérifiez que l’application est <em>FinCompta-Installateur.exe</em>.</li>
+                  <li>Cliquez sur <strong>Exécuter quand même</strong>, puis acceptez la demande d’autorisation de Windows.</li>
+                </ol>
+              </div>
+              <div class="col-md-6">
+                <div class="smartscreen-apercu" role="img"
+                     aria-label="Aperçu de la fenêtre Windows SmartScreen avec le lien Informations complémentaires et le bouton Exécuter quand même">
+                  <div class="titre">Windows a protégé votre ordinateur</div>
+                  <p>Microsoft Defender SmartScreen a empêché le démarrage d’une application non reconnue…</p>
+                  <p class="lien">Informations complémentaires <span class="etape">1</span></p>
+                  <p class="detail">Application : FinCompta-Installateur.exe<br>Éditeur : Éditeur inconnu</p>
+                  <div class="boutons">
+                    <span class="bouton principal">Exécuter quand même <span class="etape">3</span></span>
+                    <span class="bouton">Ne pas exécuter</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="process-section mt-4">
             <h3 class="section-heading mb-4">Comment ça marche</h3>
             <div class="process-steps">
@@ -62,7 +93,8 @@
                 <div class="step-number">01</div>
                 <div class="step-content">
                   <h4 class="step-title">Lancez l’installateur</h4>
-                  <p>Ouvrez <em>FinCompta-Installateur</em> et acceptez la demande d’autorisation de Windows.</p>
+                  <p>Ouvrez <em>FinCompta-Installateur</em> et acceptez la demande d’autorisation de Windows
+                    (en cas d’avertissement, voir <a href="#avertissement-windows">ci-dessus</a>).</p>
                 </div>
               </div>
               <div class="step-item">
@@ -152,6 +184,23 @@
     </div>
   </div>
 </section>
+
+<style>
+  .smartscreen-aide { border: 1px solid rgba(13, 110, 253, .35); border-left: 4px solid #0d6efd;
+                      border-radius: 8px; padding: 1.25rem; background: rgba(13, 110, 253, .06); }
+  .smartscreen-apercu { background: #0b5cad; color: #fff; border-radius: 4px; padding: 1rem;
+                        font-family: "Segoe UI", system-ui, sans-serif; font-size: .82rem; line-height: 1.35; }
+  .smartscreen-apercu .titre { font-size: 1.1rem; margin-bottom: .5rem; }
+  .smartscreen-apercu p { margin-bottom: .5rem; color: #fff; }
+  .smartscreen-apercu .lien { text-decoration: underline; font-weight: 600; }
+  .smartscreen-apercu .detail { opacity: .85; }
+  .smartscreen-apercu .boutons { display: flex; gap: .5rem; justify-content: flex-end; flex-wrap: wrap; }
+  .smartscreen-apercu .bouton { border: 1px solid #fff; padding: .25rem .6rem; }
+  .smartscreen-apercu .bouton.principal { background: #fff; color: #0b5cad; font-weight: 600; }
+  .smartscreen-apercu .etape { display: inline-block; background: #ffc107; color: #000; border-radius: 50%;
+                               width: 1.3em; height: 1.3em; text-align: center; line-height: 1.3em;
+                               font-size: .75rem; font-weight: 700; margin-left: .25rem; text-decoration: none; }
+</style>
 
 <script>
   (function () {
