@@ -52,10 +52,26 @@
             <li><i class="bi bi-arrow-repeat text-primary"></i> <strong>Toujours à jour</strong> : relancez l’installateur pour profiter des dernières nouveautés.</li>
           </ul>
 
-          {% if installateur_disponible and version %}
-            <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg my-3">
-              <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
-            </a>
+          {% if version %}
+            <div class="d-flex flex-wrap gap-2 my-3">
+              {% if installateur_disponible %}
+              <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
+              </a>
+              {% endif %}
+              <a href="{% url 'presentation:fincompta_demo' %}"
+                 class="btn {% if installateur_disponible %}btn-outline-primary{% else %}btn-primary{% endif %} btn-lg">
+                <i class="bi bi-download"></i> Télécharger la version de démonstration
+                <small>({{ version.taille|filesizeformat }})</small>
+              </a>
+            </div>
+            {% if installateur_disponible %}
+            <p class="small mb-1">
+              « Installer » télécharge un petit assistant qui récupère FinCompta pendant l’installation ;
+              « Télécharger » vous donne directement le programme d’installation complet, à conserver
+              ou à copier sur un autre PC (utile aussi sans bonne connexion).
+            </p>
+            {% endif %}
             <p class="small mb-0">
               Téléchargement gratuit : FinCompta démarre en version de démonstration.
               <a href="#licence">Obtenir la clé de la version complète</a>

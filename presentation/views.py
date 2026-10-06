@@ -122,6 +122,15 @@ def fincompta_script(request):
     return reponse
 
 
+def fincompta_demo(request):
+    """Installateur complet de la dernière version (démarre en démonstration sans clé)."""
+    version = telechargement.derniere_version()
+    if version is None:
+        raise Http404("Aucune version publiée")
+    return FileResponse(version.fichier.open("rb"), as_attachment=True, filename=version.fichier.name,
+                        content_type="application/vnd.microsoft.portable-executable")
+
+
 def fincompta_fichier(request, nom):
     chemin = telechargement.fichier_telechargeable(nom)
     if chemin is None:

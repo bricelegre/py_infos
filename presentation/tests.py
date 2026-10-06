@@ -50,7 +50,23 @@ class InstallationFinComptaTests(TestCase):
         reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
         self.assertContains(reponse, "Installer FinCompta 1.2.3")
         self.assertContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
+        self.assertContains(reponse, "/telecharger/fincompta/demo")
         self.assertContains(reponse, "irm http://testserver/telecharger/fincompta/installer.ps1 | iex")
+
+    def test_lien_demo_derniere_version(self):
+        self.assertEqual(self.client.get(reverse("presentation:fincompta_demo")).status_code, 404)
+        self.deposer("FinCompta-Setup-1.1.0.exe", b"MZ ancienne")
+        self.deposer("FinCompta-Setup-1.1.1.exe", b"MZ derniere")
+        reponse = self.client.get("/telecharger/fincompta/demo")
+        self.assertEqual(b"".join(reponse.streaming_content), b"MZ derniere")
+        self.assertIn('filename="FinCompta-Setup-1.1.1.exe"', reponse["Content-Disposition"])
+
+    def test_page_sans_installateur_en_ligne(self):
+        self.deposer("FinCompta-Setup-1.1.1.exe")
+        reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
+        self.assertContains(reponse, "/telecharger/fincompta/demo")
+        self.assertNotContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
+        self.assertNotContains(reponse, "disponible très prochainement")
 
     def test_telechargement_fichiers(self):
         self.deposer("FinCompta-Installateur.exe", b"MZ installateur")
