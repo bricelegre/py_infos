@@ -12,7 +12,8 @@
           <h1 class="heading-title">Installer FinCompta sur Windows</h1>
           <p class="mb-0">
             Votre comptabilité, votre trésorerie, votre facturation et votre paie réunies dans un seul logiciel,
-            installé en quelques clics sur votre ordinateur.
+            installé en quelques clics sur votre ordinateur. Essayez gratuitement la version de démonstration,
+            puis débloquez la version complète avec une simple clé de licence.
           </p>
         </div>
       </div>
@@ -55,6 +56,12 @@
             <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg my-3">
               <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
             </a>
+            <p class="small mb-0">
+              Téléchargement gratuit : FinCompta démarre en version de démonstration.
+              <a href="#licence">Obtenir la clé de la version complète</a>
+              {% if offre.promo %}(<strong>{{ offre.prix }}</strong> au lieu de {{ offre.prix_normal }}
+              jusqu’au {{ offre.fin_promo|date:"j F Y" }}){% endif %}.
+            </p>
           {% else %}
             <div class="alert alert-info my-3">
               L’installateur sera disponible très prochainement.
@@ -129,7 +136,102 @@
                   </p>
                 </div>
               </div>
+              <div class="step-item">
+                <div class="step-number">05</div>
+                <div class="step-content">
+                  <h4 class="step-title">Débloquez la version complète</h4>
+                  <p>
+                    Collez la clé de licence reçue par email dans <strong>Application › Licence</strong>
+                    puis cliquez sur « Activer la licence » : toutes les limites sont levées,
+                    sans réinstallation ni perte des données déjà saisies (<a href="#licence">obtenir une clé</a>).
+                  </p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="licence-section mt-5" id="licence">
+            <h3 class="section-heading mb-3">Version de démonstration et version complète</h3>
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="licence-carte h-100">
+                  <h4 class="h6"><i class="bi bi-play-circle text-primary"></i> Version de démonstration — gratuite</h4>
+                  <p class="small mb-0">
+                    C’est la version installée par défaut. Tous les modules sont accessibles, mais les
+                    enregistrements (écritures, factures, bulletins de paie, relevés bancaires…) sont limités
+                    à un seul exercice et à ses <strong>3 premiers mois</strong> (janvier à mars) ;
+                    la clôture d’exercice n’est pas disponible.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="licence-carte licence-complete h-100">
+                  <h4 class="h6"><i class="bi bi-unlock text-success"></i> Version complète</h4>
+                  <p class="mb-1">
+                    {% if offre.promo %}
+                      <span class="badge bg-danger">Promotion</span>
+                      <span class="licence-prix">{{ offre.prix }}</span><br>
+                      <span class="small">au lieu de <s>{{ offre.prix_normal }}</s></span>
+                    {% else %}
+                      <span class="licence-prix">{{ offre.prix }}</span>
+                    {% endif %}
+                  </p>
+                  {% if offre.promo %}
+                  <p class="small text-danger mb-1">Offre valable jusqu’au {{ offre.fin_promo|date:"j F Y" }}.</p>
+                  {% endif %}
+                  <p class="small mb-0">
+                    Aucune limite de période ni d’exercice, clôture d’exercice incluse. Même logiciel :
+                    la clé débloque la version déjà installée et conserve vos données.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="h6">Obtenir votre clé de licence</h4>
+            <ol class="small ps-3">
+              <li class="mb-1">Installez FinCompta et essayez-le librement en version de démonstration.</li>
+              <li class="mb-1">Envoyez-nous le formulaire ci-dessous : nous vous recontactons pour le règlement.</li>
+              <li class="mb-1">Vous recevez par email votre clé de licence personnelle (elle commence par <code>FC1.</code>).</li>
+              <li>Dans FinCompta, menu <strong>Application › Licence</strong> : collez la clé et cliquez sur
+                « Activer la licence ».</li>
+            </ol>
+
+            <form method="post" action="{% url 'presentation:telecharger_fincompta' %}#licence" class="licence-form mt-3">
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-12">
+                  <label class="form-label small" for="licence-titulaire">Entreprise ou association (titulaire de la licence) *</label>
+                  <input type="text" class="form-control" id="licence-titulaire" name="titulaire" required
+                         placeholder="Ex. : SARL Exemple">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="name" placeholder="Votre nom">
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="phone" placeholder="Téléphone *" required>
+                </div>
+                <div class="col-12">
+                  <input type="email" class="form-control" name="email" placeholder="Email (pour recevoir la clé) *" required>
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control" name="message" rows="3"
+                            placeholder="Message (facultatif) : nombre de postes, besoin de formation…"></textarea>
+                </div>
+              </div>
+              <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+              <button type="submit" class="btn btn-success mt-3">
+                <i class="bi bi-key"></i> Demander ma clé de licence
+              </button>
+            </form>
           </div>
 
           {% if version %}
@@ -158,6 +260,22 @@
 
       <div class="col-lg-5">
         <div class="sidebar">
+          <div class="service-card mb-4">
+            <div class="card-header"><h4 class="card-title">Version complète</h4></div>
+            <div class="card-body">
+              {% if offre.promo %}
+              <p class="mb-1"><span class="badge bg-danger">Promotion jusqu’au {{ offre.fin_promo|date:"j F Y" }}</span></p>
+              <p class="mb-2"><span class="licence-prix">{{ offre.prix }}</span>
+                au lieu de <s>{{ offre.prix_normal }}</s></p>
+              {% else %}
+              <p class="mb-2"><span class="licence-prix">{{ offre.prix }}</span></p>
+              {% endif %}
+              <p class="small">Essayez d’abord gratuitement la version de démonstration, puis débloquez-la
+                avec votre clé de licence, sans réinstaller.</p>
+              <a href="#licence" class="btn btn-outline-success btn-sm"><i class="bi bi-key"></i> Obtenir ma clé</a>
+            </div>
+          </div>
+
           <div class="service-card mb-4">
             <div class="card-header"><h4 class="card-title">Configuration requise</h4></div>
             <div class="card-body">
@@ -194,6 +312,10 @@
 </section>
 
 <style>
+  .licence-carte { border: 1px solid rgba(127, 127, 127, .35); border-radius: 8px; padding: 1rem; }
+  .licence-complete { border-color: rgba(25, 135, 84, .5); background: rgba(25, 135, 84, .06); }
+  .licence-prix { font-size: 1.35rem; font-weight: 700; color: #198754; white-space: nowrap; }
+  .licence-form { border: 1px solid rgba(127, 127, 127, .35); border-radius: 8px; padding: 1.25rem; }
   .smartscreen-aide { border: 1px solid rgba(13, 110, 253, .35); border-left: 4px solid #0d6efd;
                       border-radius: 8px; padding: 1.25rem; background: rgba(13, 110, 253, .06); }
   .smartscreen-apercu { background: #0b5cad; color: #fff; border-radius: 4px; padding: 1rem;
