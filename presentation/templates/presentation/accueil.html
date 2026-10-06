@@ -670,7 +670,11 @@
             </div>
             <div class="faq-content">
               <div class="content-inner">
-                <p>Oui. Contactez-nous pour une démonstration orientée sur vos besoins (compta, trésorerie, paie, facturation…).</p>
+                <p>Oui. Téléchargez gratuitement la <a href="{% url 'presentation:telecharger_fincompta' %}">version de démonstration pour Windows</a>
+                  (tous les modules, saisies limitées aux 3 premiers mois d’un exercice), puis débloquez la version complète
+                  avec une <a href="{% url 'presentation:telecharger_fincompta' %}#licence">clé de licence</a>
+                  {% if offre.promo %}— {{ offre.prix }} au lieu de {{ offre.prix_normal }} jusqu’au {{ offre.fin_promo|date:"j F Y" }}{% else %}({{ offre.prix }}){% endif %}.
+                  Vous pouvez aussi nous contacter pour une démonstration orientée sur vos besoins (compta, trésorerie, paie, facturation…).</p>
               </div>
             </div>
           </div>

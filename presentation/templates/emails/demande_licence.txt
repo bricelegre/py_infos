@@ -1,0 +1,17 @@
+Bonjour ,
+
+Sujet :  Demande de clé de licence FinCompta (version complète)
+
+Titulaire de la licence : {{ titulaire }}
+Contact : {{ name }}
+Email : {{ email }}
+Téléphone : {{ phone }}
+
+Message :
+{{ message|default:"(aucun)" }}
+
+Après règlement, émettre la clé avec outils\Emettre-licence.bat (dépôt fincompta_pc)
+au nom du titulaire ci-dessus, puis l'envoyer par email.
+
+Cordialement,
+L’équipe Fincompta

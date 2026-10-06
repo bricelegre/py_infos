@@ -1,8 +1,11 @@
 import hashlib
 import shutil
 import tempfile
+from datetime import date
 from pathlib import Path
+from unittest import mock
 
+from django.core import mail
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
@@ -58,3 +61,36 @@ class InstallationFinComptaTests(TestCase):
         for nom in ["secret.txt", "FinCompta-Setup-9.9.9.exe", "..%2Fsettings.py"]:
             reponse = self.client.get(f"/telecharger/fincompta/{nom}")
             self.assertEqual(reponse.status_code, 404, nom)
+
+
+@override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
+class LicenceFinComptaTests(TestCase):
+    url = "/telecharger-fincompta"
+
+    def test_promotion_jusqu_au_31_decembre(self):
+        with mock.patch("presentation.views.timezone.localdate", return_value=date(2026, 12, 31)):
+            reponse = self.client.get(self.url)
+        self.assertContains(reponse, "100\u202f000 FCFA")
+        self.assertContains(reponse, "150\u202f000 FCFA")
+        self.assertContains(reponse, "31 décembre 2026")
+        self.assertContains(reponse, "Application › Licence")
+
+    def test_prix_normal_apres_la_promotion(self):
+        with mock.patch("presentation.views.timezone.localdate", return_value=date(2027, 1, 1)):
+            reponse = self.client.get(self.url)
+        self.assertContains(reponse, "150\u202f000 FCFA")
+        self.assertNotContains(reponse, "100\u202f000 FCFA")
+
+    def test_demande_de_cle(self):
+        reponse = self.client.post(self.url, {
+            "titulaire": "SARL Exemple", "name": "Awa", "email": "awa@exemple.ci", "phone": "0102030405",
+        }, follow=True)
+        self.assertContains(reponse, "Votre demande de clé a été envoyée")
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertIn("SARL Exemple", mail.outbox[0].subject)
+        self.assertEqual(mail.outbox[0].reply_to, ["awa@exemple.ci"])
+
+    def test_demande_de_cle_incomplete(self):
+        reponse = self.client.post(self.url, {"titulaire": "", "email": "awa@exemple.ci"}, follow=True)
+        self.assertContains(reponse, "Une erreur est survenue")
+        self.assertEqual(len(mail.outbox), 0)

@@ -1,12 +1,15 @@
 #presentation/views.py
 from .modules import MODULES, module_list, plan_comparison
-from .utils import send_demo_request, send_contact_request
+from .utils import send_demo_request, send_contact_request, send_licence_request
 from . import telechargement
+from datetime import date
+
 from django.conf import settings
 from django.contrib import messages
 from django.http import FileResponse, Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.utils import timezone
 
 def accueil(request):
 
@@ -24,6 +27,7 @@ def accueil(request):
     return render(request, "presentation/accueil.html", {
         "modules": module_list(),
         "plan_comparison": plan_comparison(),
+        "offre": offre_licence(),
     })
 
 def detail_module(request, slug):
@@ -52,9 +56,38 @@ def _url_absolue(request, chemin):
     return base + chemin if base else request.build_absolute_uri(chemin)
 
 
+# Prix de la clé de licence (version complète), en FCFA, et promotion en cours
+PRIX_LICENCE = 150_000
+PRIX_LICENCE_PROMO = 100_000
+FIN_PROMO_LICENCE = date(2026, 12, 31)
+
+
+def offre_licence():
+    """Prix de la version complète ; la promotion s'arrête d'elle-même après FIN_PROMO_LICENCE."""
+    promo = timezone.localdate() <= FIN_PROMO_LICENCE
+    fcfa = lambda montant: f"{montant:,}".replace(",", "\u202f") + " FCFA"
+    return {
+        "prix": fcfa(PRIX_LICENCE_PROMO if promo else PRIX_LICENCE),
+        "prix_normal": fcfa(PRIX_LICENCE),
+        "promo": promo,
+        "fin_promo": FIN_PROMO_LICENCE,
+    }
+
+
 def telecharger_fincompta(request):
-    """Page « Installer FinCompta » (version Windows)."""
+    """Page « Installer FinCompta » (version Windows) et demande de clé de licence."""
+    if request.method == "POST":
+        success, err = send_licence_request(request)
+        if success:
+            messages.success(request, "Votre demande de clé a été envoyée. Nous vous recontactons rapidement "
+                                      "pour le règlement ; la clé vous est ensuite envoyée par email.")
+        else:
+            messages.error(request, "Une erreur est survenue lors de l'envoi. Vérifiez les champs "
+                                    "ou contactez-nous au 0708218574.")
+        return redirect(reverse("presentation:telecharger_fincompta") + "#licence")
+
     return render(request, "presentation/telecharger-fincompta.html", {
+        "offre": offre_licence(),
         "version": telechargement.derniere_version(),
         "installateur_disponible": telechargement.installateur_en_ligne_disponible(),
         "script_url": _url_absolue(request, reverse("presentation:fincompta_script")),
