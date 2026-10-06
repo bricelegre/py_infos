@@ -5,9 +5,12 @@ from datetime import date
 from pathlib import Path
 from unittest import mock
 
+from django.contrib.auth import get_user_model
 from django.core import mail
 from django.test import TestCase, override_settings
 from django.urls import reverse
+
+from .models import TelechargementFinCompta
 
 
 class InstallationFinComptaTests(TestCase):
@@ -23,7 +26,7 @@ class InstallationFinComptaTests(TestCase):
 
     def test_page_sans_version_publiee(self):
         reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
-        self.assertContains(reponse, "disponible très prochainement")
+        self.assertContains(reponse, "disponible au téléchargement très prochainement")
         self.assertEqual(self.client.get(reverse("presentation:fincompta_manifeste")).status_code, 404)
 
     def test_manifeste_derniere_version(self):
@@ -44,14 +47,16 @@ class InstallationFinComptaTests(TestCase):
         script = self.client.get(reverse("presentation:fincompta_script")).content.decode()
         self.assertIn("'https://infos.fincompta.net/telecharger/fincompta/derniere-version.ini'", script)
 
-    def test_page_avec_installateur(self):
+    def test_page_sans_installateur_en_ligne(self):
         self.deposer("FinCompta-Setup-1.2.3.exe")
         self.deposer("FinCompta-Installateur.exe")
         reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
-        self.assertContains(reponse, "Installer FinCompta 1.2.3")
-        self.assertContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
+        self.assertContains(reponse, "Télécharger FinCompta 1.2.3")
         self.assertContains(reponse, "/telecharger/fincompta/demo")
         self.assertContains(reponse, "irm http://testserver/telecharger/fincompta/installer.ps1 | iex")
+        self.assertNotContains(reponse, "Installateur")
+        self.assertNotContains(reponse, "installateur")
+        self.assertNotContains(reponse, "disponible au téléchargement très prochainement")
 
     def test_lien_demo_derniere_version(self):
         self.assertEqual(self.client.get(reverse("presentation:fincompta_demo")).status_code, 404)
@@ -60,13 +65,6 @@ class InstallationFinComptaTests(TestCase):
         reponse = self.client.get("/telecharger/fincompta/demo")
         self.assertEqual(b"".join(reponse.streaming_content), b"MZ derniere")
         self.assertIn('filename="FinCompta-Setup-1.1.1.exe"', reponse["Content-Disposition"])
-
-    def test_page_sans_installateur_en_ligne(self):
-        self.deposer("FinCompta-Setup-1.1.1.exe")
-        reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
-        self.assertContains(reponse, "/telecharger/fincompta/demo")
-        self.assertNotContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
-        self.assertNotContains(reponse, "disponible très prochainement")
 
     def test_telechargement_fichiers(self):
         self.deposer("FinCompta-Installateur.exe", b"MZ installateur")
@@ -77,6 +75,36 @@ class InstallationFinComptaTests(TestCase):
         for nom in ["secret.txt", "FinCompta-Setup-9.9.9.exe", "..%2Fsettings.py"]:
             reponse = self.client.get(f"/telecharger/fincompta/{nom}")
             self.assertEqual(reponse.status_code, 404, nom)
+
+    def test_compteur_de_telechargements(self):
+        self.deposer("FinCompta-Setup-1.0.0.exe")
+        self.client.get(reverse("presentation:fincompta_fichier", args=["FinCompta-Setup-1.0.0.exe"]))
+        self.deposer("FinCompta-Setup-1.1.0.exe")
+        self.client.get(reverse("presentation:fincompta_demo"))
+        self.client.get(reverse("presentation:fincompta_demo"))
+        self.client.get(reverse("presentation:fincompta_demo"), HTTP_USER_AGENT="Googlebot/2.1")
+        self.deposer("FinCompta-Installateur.exe")
+        self.client.get(reverse("presentation:fincompta_fichier", args=["FinCompta-Installateur.exe"]))
+        self.assertEqual(
+            list(TelechargementFinCompta.objects.order_by("date").values_list("version", flat=True)),
+            ["1.0.0", "1.1.0", "1.1.0"],
+        )
+
+    def test_compteur_visible_uniquement_par_les_superusers(self):
+        self.deposer("FinCompta-Setup-1.1.0.exe")
+        self.client.get(reverse("presentation:fincompta_demo"))
+        url = reverse("presentation:telecharger_fincompta")
+        self.assertNotContains(self.client.get(url), "compteur-telechargements")
+
+        User = get_user_model()
+        self.client.force_login(User.objects.create_user("employe", password="x", is_staff=True))
+        self.assertNotContains(self.client.get(url), "compteur-telechargements")
+
+        self.client.force_login(User.objects.create_superuser("chef", password="x"))
+        reponse = self.client.get(url)
+        self.assertContains(reponse, "compteur-telechargements")
+        self.assertContains(reponse, "Total : <strong>1</strong>", html=False)
+        self.assertContains(reponse, "Version 1.1.0 : <strong>1</strong>", html=False)
 
 
 @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")

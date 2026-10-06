@@ -5,21 +5,30 @@ Installation de FinCompta (version Windows) depuis le site.
 
 Les fichiers sont déposés à la main (FTP, gestionnaire de fichiers cPanel)
 dans settings.FINCOMPTA_DOWNLOAD_DIR :
-- FinCompta-Setup-<version>.exe : installateur complet, produit par le
-  workflow « Installateur Windows » du dépôt fincompta_pc ;
-- FinCompta-Installateur.exe : installateur en ligne (desktop/web-installer.iss),
-  à déposer une seule fois : il télécharge toujours la dernière version.
+- FinCompta-Setup-<version>.exe : programme d'installation complet, produit
+  par le workflow « Installateur Windows » du dépôt fincompta_pc ;
+- FinCompta-Installateur.exe : ancien installateur en ligne, plus proposé sur
+  la page mais toujours servi pour les liens existants.
 
-La version la plus élevée est publiée automatiquement dans le manifeste lu
-par l'installateur en ligne et par le script PowerShell.
+La version la plus élevée est proposée au téléchargement et publiée dans le
+manifeste lu par le script PowerShell (et l'ancien installateur en ligne).
+Chaque téléchargement d'un FinCompta-Setup-<version>.exe est enregistré
+(TelechargementFinCompta), hors robots, pour le compteur des superusers.
 """
 
 import hashlib
 import re
+from datetime import timedelta
 from dataclasses import dataclass
 from pathlib import Path
 
 from django.conf import settings
+from django.db.models import Count
+from django.utils import timezone
+
+from analytics.utils import detect_bot, get_client_ip
+
+from .models import TelechargementFinCompta
 
 INSTALLATEUR_EN_LIGNE = "FinCompta-Installateur.exe"
 SETUP_RE = re.compile(r"^FinCompta-Setup-(\d+(?:\.\d+){0,3})\.exe$")
@@ -81,5 +90,28 @@ def fichier_telechargeable(nom):
     return chemin if chemin.is_file() else None
 
 
-def installateur_en_ligne_disponible():
-    return fichier_telechargeable(INSTALLATEUR_EN_LIGNE) is not None
+def enregistrer_telechargement(request, fichier):
+    """Compte le téléchargement d'un FinCompta-Setup-<version>.exe (robots exclus)."""
+    correspondance = SETUP_RE.match(fichier.name)
+    user_agent = request.META.get("HTTP_USER_AGENT", "")
+    if correspondance is None or request.method != "GET" or detect_bot(user_agent)[0]:
+        return
+    TelechargementFinCompta.objects.create(
+        version=correspondance.group(1),
+        fichier=fichier.name,
+        adresse_ip=get_client_ip(request) or None,
+        user_agent=user_agent,
+    )
+
+
+def statistiques_telechargements(version=None):
+    """Compteurs affichés aux superusers sur la page « Télécharger FinCompta »."""
+    telechargements = TelechargementFinCompta.objects.all()
+    stats = {
+        "total": telechargements.count(),
+        "trente_jours": telechargements.filter(date__gte=timezone.now() - timedelta(days=30)).count(),
+        "par_version": telechargements.values("version").annotate(nombre=Count("id")).order_by("-nombre")[:5],
+    }
+    if version is not None:
+        stats["version_courante"] = telechargements.filter(version=version.numero).count()
+    return stats

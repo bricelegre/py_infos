@@ -42,36 +42,28 @@
           <p>
             Avec FinCompta sur votre PC, vous pilotez votre activité au quotidien sans dépendre
             d’Internet : vos écritures, vos factures et vos états sont disponibles à tout moment,
-            même hors connexion. Un clic suffit pour installer la <strong>dernière version</strong>,
-            et vos collègues du même réseau peuvent travailler avec vous depuis leur propre poste.
+            même hors connexion. Téléchargez la <strong>dernière version</strong>, lancez le programme
+            d’installation, et vos collègues du même réseau peuvent travailler avec vous depuis leur propre poste.
           </p>
           <ul class="list-unstyled mb-2">
             <li class="mb-2"><i class="bi bi-lightning-charge text-primary"></i> <strong>Simple</strong> : un assistant guidé, aucune compétence technique requise.</li>
             <li class="mb-2"><i class="bi bi-wifi-off text-primary"></i> <strong>Autonome</strong> : fonctionne sans connexion Internet une fois installé.</li>
             <li class="mb-2"><i class="bi bi-shield-check text-primary"></i> <strong>Sûr</strong> : vos données restent sur votre ordinateur et sont conservées à chaque mise à jour.</li>
-            <li><i class="bi bi-arrow-repeat text-primary"></i> <strong>Toujours à jour</strong> : relancez l’installateur pour profiter des dernières nouveautés.</li>
+            <li><i class="bi bi-arrow-repeat text-primary"></i> <strong>Toujours à jour</strong> : téléchargez et installez la nouvelle version par-dessus l’ancienne pour profiter des dernières nouveautés.</li>
           </ul>
 
           {% if version %}
             <div class="d-flex flex-wrap gap-2 my-3">
-              {% if installateur_disponible %}
-              <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg">
-                <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
-              </a>
-              {% endif %}
-              <a href="{% url 'presentation:fincompta_demo' %}"
-                 class="btn {% if installateur_disponible %}btn-outline-primary{% else %}btn-primary{% endif %} btn-lg">
-                <i class="bi bi-download"></i> Télécharger la version de démonstration
+              <a href="{% url 'presentation:fincompta_demo' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-windows"></i> Télécharger FinCompta {{ version.numero }}
                 <small>({{ version.taille|filesizeformat }})</small>
               </a>
             </div>
-            {% if installateur_disponible %}
             <p class="small mb-1">
-              « Installer » télécharge un petit assistant qui récupère FinCompta pendant l’installation ;
-              « Télécharger » vous donne directement le programme d’installation complet, à conserver
-              ou à copier sur un autre PC (utile aussi sans bonne connexion).
+              Vous obtenez le programme d’installation complet, <em>{{ version.fichier.name }}</em> :
+              conservez-le ou copiez-le sur une clé USB pour installer FinCompta sur d’autres PC,
+              même sans connexion Internet.
             </p>
-            {% endif %}
             <p class="small mb-0">
               Téléchargement gratuit : FinCompta démarre en version de démonstration.
               <a href="#licence">Obtenir la clé de la version complète</a>
@@ -80,7 +72,7 @@
             </p>
           {% else %}
             <div class="alert alert-info my-3">
-              L’installateur sera disponible très prochainement.
+              FinCompta sera disponible au téléchargement très prochainement.
               <a href="{% url 'presentation:accueil' %}#contact">Contactez-nous</a> pour être prévenu.
             </div>
           {% endif %}
@@ -89,14 +81,14 @@
             <h3 class="h5"><i class="bi bi-shield-exclamation"></i> Windows affiche « Windows a protégé votre ordinateur » ?</h3>
             <p class="mb-3">
               C’est normal : Windows SmartScreen affiche ce message pour les logiciels récemment publiés.
-              L’installateur provient bien de infos.fincompta.net et ne modifie rien sans votre accord.
+              Le programme d’installation provient bien de infos.fincompta.net et ne modifie rien sans votre accord.
               Pour continuer :
             </p>
             <div class="row g-3 align-items-center">
               <div class="col-md-6">
                 <ol class="mb-0 ps-3">
                   <li class="mb-2">Cliquez sur <strong>Informations complémentaires</strong>.</li>
-                  <li class="mb-2">Vérifiez que l’application est <em>FinCompta-Installateur.exe</em>.</li>
+                  <li class="mb-2">Vérifiez que l’application est bien <em>FinCompta-Setup-….exe</em>.</li>
                   <li>Cliquez sur <strong>Exécuter quand même</strong>, puis acceptez la demande d’autorisation de Windows.</li>
                 </ol>
               </div>
@@ -106,7 +98,7 @@
                   <div class="titre">Windows a protégé votre ordinateur</div>
                   <p>Microsoft Defender SmartScreen a empêché le démarrage d’une application non reconnue…</p>
                   <p class="lien">Informations complémentaires <span class="etape">1</span></p>
-                  <p class="detail">Application : FinCompta-Installateur.exe<br>Éditeur : Éditeur inconnu</p>
+                  <p class="detail">Application : {% if version %}{{ version.fichier.name }}{% else %}FinCompta-Setup.exe{% endif %}<br>Éditeur : Éditeur inconnu</p>
                   <div class="boutons">
                     <span class="bouton principal">Exécuter quand même <span class="etape">3</span></span>
                     <span class="bouton">Ne pas exécuter</span>
@@ -128,7 +120,7 @@
               <li class="mb-2">Vérifiez le réglage : <em>Paramètres › Confidentialité et sécurité › Sécurité Windows ›
                 Contrôle d’applications et de navigateurs › Paramètres du Contrôle intelligent des applications</em>.</li>
               <li class="mb-2">Sur un ordinateur d’entreprise, demandez à votre service informatique d’autoriser
-                <em>FinCompta-Installateur.exe</em> et <em>FinCompta-Setup.exe</em>.</li>
+                le programme d’installation <em>FinCompta-Setup-….exe</em>.</li>
               <li>Dans les autres cas, ne désactivez pas cette protection vous-même (Windows ne permet pas de la
                 réactiver ensuite) : <a href="{% url 'presentation:accueil' %}#contact">contactez-nous</a>
                 ou appelez le <strong>0708218574</strong>, nous vous aidons à installer FinCompta.</li>
@@ -141,8 +133,8 @@
               <div class="step-item">
                 <div class="step-number">01</div>
                 <div class="step-content">
-                  <h4 class="step-title">Lancez l’installateur</h4>
-                  <p>Ouvrez <em>FinCompta-Installateur</em> et acceptez la demande d’autorisation de Windows
+                  <h4 class="step-title">Téléchargez et lancez le programme d’installation</h4>
+                  <p>Ouvrez le fichier <em>FinCompta-Setup</em> téléchargé et acceptez la demande d’autorisation de Windows
                     (en cas d’avertissement, voir <a href="#avertissement-windows">ci-dessus</a>).</p>
                 </div>
               </div>
@@ -156,8 +148,8 @@
               <div class="step-item">
                 <div class="step-number">03</div>
                 <div class="step-content">
-                  <h4 class="step-title">Téléchargement et installation</h4>
-                  <p>La dernière version de FinCompta est téléchargée et installée automatiquement, en toute sécurité.</p>
+                  <h4 class="step-title">Installation</h4>
+                  <p>FinCompta s’installe automatiquement sur votre ordinateur, en quelques instants.</p>
                 </div>
               </div>
               <div class="step-item">
@@ -295,6 +287,27 @@
 
       <div class="col-lg-5">
         <div class="sidebar">
+          {% if stats_telechargements %}
+          <div class="service-card mb-4 compteur-telechargements">
+            <div class="card-header"><h4 class="card-title"><i class="bi bi-bar-chart"></i> Téléchargements</h4></div>
+            <div class="card-body">
+              <p class="small text-muted mb-2">Visible uniquement par les superadministrateurs.</p>
+              <ul class="list-unstyled mb-2">
+                <li class="mb-1">Total : <strong>{{ stats_telechargements.total }}</strong></li>
+                <li class="mb-1">30 derniers jours : <strong>{{ stats_telechargements.trente_jours }}</strong></li>
+                {% if version %}
+                <li>Version {{ version.numero }} : <strong>{{ stats_telechargements.version_courante }}</strong></li>
+                {% endif %}
+              </ul>
+              {% if stats_telechargements.par_version %}
+              <p class="small mb-0">Par version :
+                {% for ligne in stats_telechargements.par_version %}{{ ligne.version }} ({{ ligne.nombre }}){% if not forloop.last %}, {% endif %}{% endfor %}
+              </p>
+              {% endif %}
+            </div>
+          </div>
+          {% endif %}
+
           <div class="service-card mb-4">
             <div class="card-header"><h4 class="card-title">Version complète</h4></div>
             <div class="card-body">
@@ -317,7 +330,7 @@
               <ul class="list-unstyled mb-0">
                 <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Windows 10 ou 11, 64 bits</li>
                 <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Droits administrateur pour l’installation</li>
-                <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Connexion Internet pendant l’installation uniquement</li>
+                <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Connexion Internet pour le téléchargement uniquement</li>
                 <li><i class="bi bi-check-circle text-success"></i> Environ 500 Mo d’espace disque</li>
               </ul>
             </div>

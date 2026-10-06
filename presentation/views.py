@@ -86,16 +86,18 @@ def telecharger_fincompta(request):
                                     "ou contactez-nous au 0708218574.")
         return redirect(reverse("presentation:telecharger_fincompta") + "#licence")
 
+    version = telechargement.derniere_version()
     return render(request, "presentation/telecharger-fincompta.html", {
         "offre": offre_licence(),
-        "version": telechargement.derniere_version(),
-        "installateur_disponible": telechargement.installateur_en_ligne_disponible(),
+        "version": version,
         "script_url": _url_absolue(request, reverse("presentation:fincompta_script")),
+        "stats_telechargements": (telechargement.statistiques_telechargements(version)
+                                  if request.user.is_superuser else None),
     })
 
 
 def fincompta_manifeste(request):
-    """Manifeste lu par l'installateur en ligne et le script PowerShell."""
+    """Manifeste lu par le script PowerShell (et l'ancien installateur en ligne)."""
     version = telechargement.derniere_version()
     if version is None:
         raise Http404("Aucune version publiée")
@@ -123,10 +125,11 @@ def fincompta_script(request):
 
 
 def fincompta_demo(request):
-    """Installateur complet de la dernière version (démarre en démonstration sans clé)."""
+    """Programme d'installation de la dernière version (démarre en démonstration sans clé)."""
     version = telechargement.derniere_version()
     if version is None:
         raise Http404("Aucune version publiée")
+    telechargement.enregistrer_telechargement(request, version.fichier)
     return FileResponse(version.fichier.open("rb"), as_attachment=True, filename=version.fichier.name,
                         content_type="application/vnd.microsoft.portable-executable")
 
@@ -135,5 +138,6 @@ def fincompta_fichier(request, nom):
     chemin = telechargement.fichier_telechargeable(nom)
     if chemin is None:
         raise Http404("Fichier introuvable")
+    telechargement.enregistrer_telechargement(request, chemin)
     return FileResponse(chemin.open("rb"), as_attachment=True, filename=nom,
                         content_type="application/vnd.microsoft.portable-executable")
