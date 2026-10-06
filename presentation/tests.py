@@ -75,6 +75,10 @@ class LicenceFinComptaTests(TestCase):
         self.assertContains(reponse, "31 décembre 2026")
         self.assertContains(reponse, "Application › Licence")
 
+    def test_aide_blocage_windows(self):
+        # Ancre citée par le message d'erreur de FinCompta-Installateur.exe (fincompta_pc)
+        self.assertContains(self.client.get(self.url), 'id="blocage-windows"')
+
     def test_prix_normal_apres_la_promotion(self):
         with mock.patch("presentation.views.timezone.localdate", return_value=date(2027, 1, 1)):
             reponse = self.client.get(self.url)
