@@ -26,5 +26,7 @@ urlpatterns = [
     path("telecharger-fincompta", views.telecharger_fincompta, name="telecharger_fincompta"),
     path("telecharger/fincompta/derniere-version.ini", views.fincompta_manifeste, name="fincompta_manifeste"),
     path("telecharger/fincompta/installer.ps1", views.fincompta_script, name="fincompta_script"),
+    # Lien stable vers la dernière FinCompta-Setup-<version>.exe (avant <str:nom>)
+    path("telecharger/fincompta/demo", views.fincompta_demo, name="fincompta_demo"),
     path("telecharger/fincompta/<str:nom>", views.fincompta_fichier, name="fincompta_fichier"),
 ]

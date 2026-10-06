@@ -50,7 +50,23 @@ class InstallationFinComptaTests(TestCase):
         reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
         self.assertContains(reponse, "Installer FinCompta 1.2.3")
         self.assertContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
+        self.assertContains(reponse, "/telecharger/fincompta/demo")
         self.assertContains(reponse, "irm http://testserver/telecharger/fincompta/installer.ps1 | iex")
+
+    def test_lien_demo_derniere_version(self):
+        self.assertEqual(self.client.get(reverse("presentation:fincompta_demo")).status_code, 404)
+        self.deposer("FinCompta-Setup-1.1.0.exe", b"MZ ancienne")
+        self.deposer("FinCompta-Setup-1.1.1.exe", b"MZ derniere")
+        reponse = self.client.get("/telecharger/fincompta/demo")
+        self.assertEqual(b"".join(reponse.streaming_content), b"MZ derniere")
+        self.assertIn('filename="FinCompta-Setup-1.1.1.exe"', reponse["Content-Disposition"])
+
+    def test_page_sans_installateur_en_ligne(self):
+        self.deposer("FinCompta-Setup-1.1.1.exe")
+        reponse = self.client.get(reverse("presentation:telecharger_fincompta"))
+        self.assertContains(reponse, "/telecharger/fincompta/demo")
+        self.assertNotContains(reponse, "/telecharger/fincompta/FinCompta-Installateur.exe")
+        self.assertNotContains(reponse, "disponible très prochainement")
 
     def test_telechargement_fichiers(self):
         self.deposer("FinCompta-Installateur.exe", b"MZ installateur")
@@ -74,6 +90,10 @@ class LicenceFinComptaTests(TestCase):
         self.assertContains(reponse, "150\u202f000 FCFA")
         self.assertContains(reponse, "31 décembre 2026")
         self.assertContains(reponse, "Application › Licence")
+
+    def test_aide_blocage_windows(self):
+        # Ancre citée par le message d'erreur de FinCompta-Installateur.exe (fincompta_pc)
+        self.assertContains(self.client.get(self.url), 'id="blocage-windows"')
 
     def test_prix_normal_apres_la_promotion(self):
         with mock.patch("presentation.views.timezone.localdate", return_value=date(2027, 1, 1)):

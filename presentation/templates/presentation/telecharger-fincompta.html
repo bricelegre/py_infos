@@ -52,10 +52,26 @@
             <li><i class="bi bi-arrow-repeat text-primary"></i> <strong>Toujours à jour</strong> : relancez l’installateur pour profiter des dernières nouveautés.</li>
           </ul>
 
-          {% if installateur_disponible and version %}
-            <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg my-3">
-              <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
-            </a>
+          {% if version %}
+            <div class="d-flex flex-wrap gap-2 my-3">
+              {% if installateur_disponible %}
+              <a href="{% url 'presentation:fincompta_fichier' 'FinCompta-Installateur.exe' %}" class="btn btn-primary btn-lg">
+                <i class="bi bi-windows"></i> Installer FinCompta {{ version.numero }}
+              </a>
+              {% endif %}
+              <a href="{% url 'presentation:fincompta_demo' %}"
+                 class="btn {% if installateur_disponible %}btn-outline-primary{% else %}btn-primary{% endif %} btn-lg">
+                <i class="bi bi-download"></i> Télécharger la version de démonstration
+                <small>({{ version.taille|filesizeformat }})</small>
+              </a>
+            </div>
+            {% if installateur_disponible %}
+            <p class="small mb-1">
+              « Installer » télécharge un petit assistant qui récupère FinCompta pendant l’installation ;
+              « Télécharger » vous donne directement le programme d’installation complet, à conserver
+              ou à copier sur un autre PC (utile aussi sans bonne connexion).
+            </p>
+            {% endif %}
             <p class="small mb-0">
               Téléchargement gratuit : FinCompta démarre en version de démonstration.
               <a href="#licence">Obtenir la clé de la version complète</a>
@@ -98,6 +114,25 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="smartscreen-aide blocage-aide my-4" id="blocage-windows">
+            <h3 class="h5"><i class="bi bi-slash-circle"></i> Windows bloque l’installation (« Une stratégie de contrôle d’application a bloqué ce fichier ») ?</h3>
+            <p>
+              Ce message, sans bouton « Exécuter quand même », vient en général du
+              <strong>Contrôle intelligent des applications</strong> de Windows 11, qui empêche de lancer les
+              logiciels récemment publiés. Sur un ordinateur d’entreprise, il peut aussi s’agir d’une règle
+              définie par le service informatique. Vos données ne sont pas concernées.
+            </p>
+            <ol class="mb-3 ps-3">
+              <li class="mb-2">Vérifiez le réglage : <em>Paramètres › Confidentialité et sécurité › Sécurité Windows ›
+                Contrôle d’applications et de navigateurs › Paramètres du Contrôle intelligent des applications</em>.</li>
+              <li class="mb-2">Sur un ordinateur d’entreprise, demandez à votre service informatique d’autoriser
+                <em>FinCompta-Installateur.exe</em> et <em>FinCompta-Setup.exe</em>.</li>
+              <li>Dans les autres cas, ne désactivez pas cette protection vous-même (Windows ne permet pas de la
+                réactiver ensuite) : <a href="{% url 'presentation:accueil' %}#contact">contactez-nous</a>
+                ou appelez le <strong>0708218574</strong>, nous vous aidons à installer FinCompta.</li>
+            </ol>
           </div>
 
           <div class="process-section mt-4">
@@ -318,6 +353,7 @@
   .licence-form { border: 1px solid rgba(127, 127, 127, .35); border-radius: 8px; padding: 1.25rem; }
   .smartscreen-aide { border: 1px solid rgba(13, 110, 253, .35); border-left: 4px solid #0d6efd;
                       border-radius: 8px; padding: 1.25rem; background: rgba(13, 110, 253, .06); }
+  .blocage-aide { border-color: rgba(220, 53, 69, .35); border-left-color: #dc3545; background: rgba(220, 53, 69, .06); }
   .smartscreen-apercu { background: #0b5cad; color: #fff; border-radius: 4px; padding: 1rem;
                         font-family: "Segoe UI", system-ui, sans-serif; font-size: .82rem; line-height: 1.35; }
   .smartscreen-apercu .titre { font-size: 1.1rem; margin-bottom: .5rem; }
