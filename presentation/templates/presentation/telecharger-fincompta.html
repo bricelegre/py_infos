@@ -287,27 +287,6 @@
 
       <div class="col-lg-5">
         <div class="sidebar">
-          {% if stats_telechargements %}
-          <div class="service-card mb-4 compteur-telechargements">
-            <div class="card-header"><h4 class="card-title"><i class="bi bi-bar-chart"></i> Téléchargements</h4></div>
-            <div class="card-body">
-              <p class="small text-muted mb-2">Visible uniquement par les superadministrateurs.</p>
-              <ul class="list-unstyled mb-2">
-                <li class="mb-1">Total : <strong>{{ stats_telechargements.total }}</strong></li>
-                <li class="mb-1">30 derniers jours : <strong>{{ stats_telechargements.trente_jours }}</strong></li>
-                {% if version %}
-                <li>Version {{ version.numero }} : <strong>{{ stats_telechargements.version_courante }}</strong></li>
-                {% endif %}
-              </ul>
-              {% if stats_telechargements.par_version %}
-              <p class="small mb-0">Par version :
-                {% for ligne in stats_telechargements.par_version %}{{ ligne.version }} ({{ ligne.nombre }}){% if not forloop.last %}, {% endif %}{% endfor %}
-              </p>
-              {% endif %}
-            </div>
-          </div>
-          {% endif %}
-
           <div class="service-card mb-4">
             <div class="card-header"><h4 class="card-title">Version complète</h4></div>
             <div class="card-body">

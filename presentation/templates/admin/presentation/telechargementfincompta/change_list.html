@@ -1,0 +1,21 @@
+{% extends "admin/change_list.html" %}
+
+{% block result_list %}
+<div class="module compteur-telechargements" style="margin-bottom: 20px;">
+  <h2>Compteur de téléchargements</h2>
+  <table style="width: 100%;">
+    <tbody>
+      <tr><th>Total</th><td><strong>{{ stats_telechargements.total }}</strong></td></tr>
+      <tr><th>30 derniers jours</th><td><strong>{{ stats_telechargements.trente_jours }}</strong></td></tr>
+      {% if stats_telechargements.version_courante is not None %}
+      <tr><th>Version {{ stats_telechargements.version_numero }} (proposée sur le site)</th><td><strong>{{ stats_telechargements.version_courante }}</strong></td></tr>
+      {% endif %}
+      {% if stats_telechargements.par_version %}
+      <tr><th>Par version</th>
+        <td>{% for ligne in stats_telechargements.par_version %}{{ ligne.version }} ({{ ligne.nombre }}){% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{{ block.super }}
+{% endblock %}

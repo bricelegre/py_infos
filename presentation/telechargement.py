@@ -13,7 +13,8 @@ dans settings.FINCOMPTA_DOWNLOAD_DIR :
 La version la plus élevée est proposée au téléchargement et publiée dans le
 manifeste lu par le script PowerShell (et l'ancien installateur en ligne).
 Chaque téléchargement d'un FinCompta-Setup-<version>.exe est enregistré
-(TelechargementFinCompta), hors robots, pour le compteur des superusers.
+(TelechargementFinCompta), hors robots, pour le compteur de l'administration
+(/admin/, réservé aux superusers).
 """
 
 import hashlib
@@ -105,7 +106,7 @@ def enregistrer_telechargement(request, fichier):
 
 
 def statistiques_telechargements(version=None):
-    """Compteurs affichés aux superusers sur la page « Télécharger FinCompta »."""
+    """Compteurs affichés aux superusers dans l'administration (/admin/)."""
     telechargements = TelechargementFinCompta.objects.all()
     stats = {
         "total": telechargements.count(),
@@ -113,5 +114,6 @@ def statistiques_telechargements(version=None):
         "par_version": telechargements.values("version").annotate(nombre=Count("id")).order_by("-nombre")[:5],
     }
     if version is not None:
+        stats["version_numero"] = version.numero
         stats["version_courante"] = telechargements.filter(version=version.numero).count()
     return stats

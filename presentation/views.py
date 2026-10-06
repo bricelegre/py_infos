@@ -86,13 +86,10 @@ def telecharger_fincompta(request):
                                     "ou contactez-nous au 0708218574.")
         return redirect(reverse("presentation:telecharger_fincompta") + "#licence")
 
-    version = telechargement.derniere_version()
     return render(request, "presentation/telecharger-fincompta.html", {
         "offre": offre_licence(),
-        "version": version,
+        "version": telechargement.derniere_version(),
         "script_url": _url_absolue(request, reverse("presentation:fincompta_script")),
-        "stats_telechargements": (telechargement.statistiques_telechargements(version)
-                                  if request.user.is_superuser else None),
     })
 
 

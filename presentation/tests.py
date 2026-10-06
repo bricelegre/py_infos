@@ -90,21 +90,26 @@ class InstallationFinComptaTests(TestCase):
             ["1.0.0", "1.1.0", "1.1.0"],
         )
 
-    def test_compteur_visible_uniquement_par_les_superusers(self):
+    def test_compteur_dans_l_administration_reserve_aux_superusers(self):
         self.deposer("FinCompta-Setup-1.1.0.exe")
         self.client.get(reverse("presentation:fincompta_demo"))
-        url = reverse("presentation:telecharger_fincompta")
-        self.assertNotContains(self.client.get(url), "compteur-telechargements")
+        url = reverse("admin:presentation_telechargementfincompta_changelist")
+        self.assertNotContains(self.client.get(reverse("presentation:telecharger_fincompta")),
+                               "compteur-telechargements")
 
         User = get_user_model()
         self.client.force_login(User.objects.create_user("employe", password="x", is_staff=True))
-        self.assertNotContains(self.client.get(url), "compteur-telechargements")
+        self.assertEqual(self.client.get(url).status_code, 403)
+        self.assertNotContains(self.client.get(reverse("admin:index")), "téléchargements de FinCompta")
 
         self.client.force_login(User.objects.create_superuser("chef", password="x"))
+        self.assertContains(self.client.get(reverse("admin:index")), "Téléchargements de FinCompta")
         reponse = self.client.get(url)
         self.assertContains(reponse, "compteur-telechargements")
-        self.assertContains(reponse, "Total : <strong>1</strong>", html=False)
-        self.assertContains(reponse, "Version 1.1.0 : <strong>1</strong>", html=False)
+        self.assertContains(reponse, "<th>Total</th><td><strong>1</strong></td>", html=False)
+        self.assertContains(reponse, "Version 1.1.0 (proposée sur le site)")
+        self.assertNotContains(self.client.get(reverse("presentation:telecharger_fincompta")),
+                               "compteur-telechargements")
 
 
 @override_settings(EMAIL_BACKEND="django.core.mail.backends.locmem.EmailBackend")
